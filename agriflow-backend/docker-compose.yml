@@ -1,0 +1,81 @@
+version: '3.9'
+
+services:
+  # Infrastructure
+  postgres:
+    image: timescale/timescaledb:latest-pg15
+    environment:
+      POSTGRES_DB: agriflow
+      POSTGRES_USER: agri
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+
+  # Core Services
+  user-service:
+    build: ./services/user-service
+    environment:
+      DATABASE_URL: postgresql://agri:secret@postgres/agriflow
+      REDIS_URL: redis://redis
+    ports:
+      - '8001:8000'
+    depends_on:
+      - postgres
+      - redis
+
+  commodity-service:
+    build: ./services/commodity-service
+    environment:
+      DATABASE_URL: postgresql://agri:secret@postgres/agriflow
+      REDIS_URL: redis://redis
+    ports:
+      - '8002:8000'
+    depends_on:
+      - postgres
+      - redis
+
+  matching-service:
+    build: ./services/matching-service
+    ports:
+      - '8003:8000'
+    depends_on:
+      - redis
+
+  notification-service:
+    build: ./services/notification-service
+    ports:
+      - '8004:8000'
+    depends_on:
+      - redis
+
+  payment-service:
+    build: ./services/payment-service
+    environment:
+      MIDTRANS_SERVER_KEY: ${MIDTRANS_SERVER_KEY:-VT-server-fake-key}
+    ports:
+      - '8005:8000'
+
+  ai-service:
+    build: ./services/ai-service
+    ports:
+      - '8006:8000'
+
+  blockchain-service:
+    build: ./services/blockchain-service
+    ports:
+      - '8007:8000'
+
+  insurance-service:
+    build: ./services/insurance-service
+    ports:
+      - '8008:8000'
+
+volumes:
+  postgres_data:
