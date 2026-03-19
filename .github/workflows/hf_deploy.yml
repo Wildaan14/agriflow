@@ -1,0 +1,30 @@
+name: Sync to Hugging Face Space
+on:
+  push:
+    branches: [master] # Sesuaikan dengan branch Anda (misal: 'master' atau 'main')
+  force_push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # 1. Konfigurasi User
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          
+          # 2. Tambahkan Remote HF dengan Token menggunakan format wildan14 (user)
+          git remote add hf https://wildan14:$HF_TOKEN@huggingface.co/spaces/wildan14/agriflow
+          
+          # 3. Kirim folder backend ke root Hugging Face
+          # Gunakan subtree agar HF hanya menerima isi folder agriflow-backend di root-nya
+          git subtree push --prefix agriflow-backend hf master --force

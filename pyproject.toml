@@ -1,0 +1,25 @@
+[project]
+name = "agriflow"
+version = "0.1.0"
+description = "AgriFlow Integrated Platform"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pandas",
+    "scikit-learn",
+    "numpy",
+    "pydantic",
+    "sqlalchemy",
+    "psycopg2-binary",
+    "httpx",
+    "python-multipart",
+    "python-dotenv",
+    "alembic",
+    "pydantic-settings",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+]
+
+[tool.uv]
+managed = true
+package = false

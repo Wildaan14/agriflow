@@ -15,9 +15,12 @@ from services.blockchain_service import main as blockchain_service
 
 app = FastAPI(title="AgriFlow Master Monolith", version="1.0.0")
 
+# Configure CORS for Production (Vercel/Render)
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
