@@ -1,22 +1,24 @@
-# Master Dockerfile for AgriFlow Monolith (FastAPI)
-FROM python:3.11-slim
+# Master Dockerfile for AgriFlow Backend (Hugging Face Optimized)
+FROM python:3.10-slim
 
 WORKDIR /app
 
-# Install system dependencies if any (e.g., libpq for psycopg2)
+# 1. Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy root requirements and install
+# 2. Copy requirements and install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all codes
+# 3. Copy all backend files
 COPY . .
 
-# Run the Master Monolith
-# Port 8000 is standard, HF Spaces uses 7860 by default for Gradio/Docker but we can override.
-ENV PORT=10000
-CMD ["python", "main.py"]
+# 4. Expose the port (HF uses 7860 by default)
+ENV PORT=7860
+EXPOSE 7860
+
+# 5. Run the FastAPI application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
