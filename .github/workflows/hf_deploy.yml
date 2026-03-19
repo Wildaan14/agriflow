@@ -1,7 +1,7 @@
 name: Sync to Hugging Face Space
 on:
   push:
-    branches: [main] # Updated to main branch
+    branches: [main]
   force_push:
     branches: [main]
 
@@ -14,16 +14,12 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Push to Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          # Configure User
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          
-          # Add HF Remote
-          git remote add hf https://wildan14:$HF_TOKEN@huggingface.co/spaces/wildan14/agriflow
-          
-          # Push agriflow-backend folder contents to HF root (main branch)
-          git subtree push --prefix agriflow-backend hf main --force
+      - name: Push to Hub
+        # Menggunakan Action resmi dari Hugging Face untuk mengirim folder tertentu
+        uses: huggingface/github-action@v1
+        with:
+          hf_token: ${{ secrets.HF_TOKEN }}
+          repo_id: wildan14/agriflow
+          repo_type: space
+          # Folder yang isinya ingin kita jadikan "Halaman Utama" di HF
+          folder: agriflow-backend
