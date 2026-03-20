@@ -23,7 +23,7 @@ import {
   ClockCounterClockwise
 } from '@phosphor-icons/react';
 import Link from 'next/link';
-import { MapboxMap } from '@/components/map/MapboxMap';
+import MapboxMap from '@/components/MapboxMap';
 
 const DUMMY_PRODUCTS = [
   { id: 1, name: 'Cabai Keriting Gayo', farmer: 'Slamet R.', location: 'Kediri', price: 24500, volume: '250kg', grade: 'Emas', rating: 4.9, image: '🌶️', coldChain: true, co2: '12.4kg' },
@@ -254,7 +254,7 @@ export default function MarketplacePage() {
                                   className="flex-[2] bg-stripe-indigo text-white py-7 rounded-[32px] font-black text-xs uppercase tracking-widest shadow-[0_30px_60px_-12px_rgba(100,90,255,0.4)] hover:bg-black transition-all flex items-center justify-center space-x-4"
                                 >
                                   <span>Ajukan Tawaran & Review Kontrak</span>
-                                  <ArrowRight size={20} weight="black" />
+                                  <ArrowRight size={20} weight="bold" />
                                 </button>
                              </div>
                          </div>
@@ -317,7 +317,7 @@ export default function MarketplacePage() {
                             <Link href="/dashboard/logistics" className="flex-1">
                                <button className="w-full bg-stripe-emerald text-white py-7 rounded-[32px] font-black text-xs uppercase tracking-widest shadow-[0_30px_60px_-12px_rgba(16,185,129,0.4)] hover:bg-black transition-all flex items-center justify-center space-x-4">
                                   <span>Confirm Trade & Book Fleet</span>
-                                  <ArrowRight size={22} weight="black" />
+                                  <ArrowRight size={22} weight="bold" />
                                </button>
                             </Link>
                           </div>
