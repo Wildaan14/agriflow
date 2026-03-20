@@ -1,0 +1,279 @@
+{
+  "system": "AgriFlow Early Warning System (EWS)",
+  "generated_date": "2025-03-19",
+  "context_iklim": {
+    "fenomena": "La Niña Lemah",
+    "periode": "Jan-Mar 2025, kemudian netral",
+    "dampak": "Curah hujan di atas normal, risiko banjir meningkat di Jawa, Sumatera, Kalimantan",
+    "source": "BMKG - Dampak Fenomena Iklim Global Feb 2025"
+  },
+  "statistik": {
+    "Kritis": 3,
+    "Tinggi": 3,
+    "Sedang": 3,
+    "Aman": 2,
+    "total_wilayah": 11,
+    "total_lahan_berisiko_ha": 103278
+  },
+  "catatan_penting": [
+    "Sumatera Utara: 38.878 ha sawah puso akibat banjir Des 2025 (BNPB & Dinas Pertanian Sumut)",
+    "Jawa Tengah: Status Siaga Darurat Banjir 2025/2026 aktif per BNPB",
+    "Purbalingga: GKP Rp5.033/kg = 22,56% di bawah HPP (Bapanas Jan 2025)",
+    "BNPB: 2010-2024, >2,26 juta ha sawah rusak akibat bencana, 90% karena banjir"
+  ],
+  "regions": [
+    {
+      "region_id": "RGN-001",
+      "region": "Purbalingga",
+      "province": "Jawa Tengah",
+      "status": "Kritis",
+      "risk_type": [
+        "Harga di bawah HPP",
+        "Kekeringan"
+      ],
+      "risk_score": 88,
+      "affected_area_ha": 12500,
+      "description": "GKP petani Rp5.033/kg = 22,56% di bawah HPP Rp6.500/kg. Terendah nasional per Jan 2025.",
+      "data_source": "Bapanas Januari 2025 - monitoring harga GKP per kabupaten",
+      "indicators": {
+        "gkp_price_idr": 5033,
+        "hpp_idr": 6500,
+        "selisih_pct": -22.56,
+        "risk_banjir": "Rendah",
+        "risk_kekeringan": "Tinggi"
+      },
+      "recommended_action": "Aktivasi dana AUTP, pompanisasi segera, intervensi harga Bulog",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-002",
+      "region": "Brebes",
+      "province": "Jawa Tengah",
+      "status": "Tinggi",
+      "risk_type": [
+        "Banjir",
+        "Gagal Panen"
+      ],
+      "risk_score": 76,
+      "affected_area_ha": 8700,
+      "description": "Banjir pasang melanda Brebes Nov-Des 2025. Status Siaga Darurat Jawa Tengah 2025/2026 aktif (BNPB).",
+      "data_source": "BNPB - Perkembangan Situasi Bencana 22 Des 2025",
+      "indicators": {
+        "gkp_price_idr": 6200,
+        "hpp_idr": 6500,
+        "selisih_pct": -4.6,
+        "risk_banjir": "Tinggi",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Klaim AUTP untuk lahan rusak, pompanisasi pasca banjir",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-003",
+      "region": "Banyumas",
+      "province": "Jawa Tengah",
+      "status": "Tinggi",
+      "risk_type": [
+        "Banjir Pasang",
+        "Cuaca Ekstrem"
+      ],
+      "risk_score": 74,
+      "affected_area_ha": 6200,
+      "description": "Banjir pasang Nov-Des 2025. Status Siaga Darurat Jawa Tengah 2025/2026 aktif (BNPB).",
+      "data_source": "BNPB - Buletin Info Bencana Des 2025",
+      "indicators": {
+        "gkp_price_idr": 6350,
+        "hpp_idr": 6500,
+        "selisih_pct": -2.3,
+        "risk_banjir": "Tinggi",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Monitoring intensif, siapkan klaim AUTP",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-004",
+      "region": "Cilacap",
+      "province": "Jawa Tengah",
+      "status": "Sedang",
+      "risk_type": [
+        "Tanah Longsor",
+        "Cuaca Ekstrem"
+      ],
+      "risk_score": 58,
+      "affected_area_ha": 3800,
+      "description": "Tanah longsor & cuaca ekstrem Kec. Sawangan Des 2025. BPBD aktif koordinasi (BNPB).",
+      "data_source": "BNPB - Perkembangan Situasi Bencana 22 Des 2025",
+      "indicators": {
+        "gkp_price_idr": 6420,
+        "hpp_idr": 6500,
+        "selisih_pct": -1.2,
+        "risk_banjir": "Sedang",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Monitoring BPBD, sosialisasi AUTP ke petani di lereng",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-005",
+      "region": "Sragen",
+      "province": "Jawa Tengah",
+      "status": "Aman",
+      "risk_type": [
+        "Normal"
+      ],
+      "risk_score": 22,
+      "affected_area_ha": 500,
+      "description": "Lokasi SPP Bulog Jateng. Kondisi aman, produksi berjalan normal.",
+      "data_source": "Pantauan AgriFlow + data SPP Bulog Jateng",
+      "indicators": {
+        "gkp_price_idr": 6550,
+        "hpp_idr": 6500,
+        "selisih_pct": 0.77,
+        "risk_banjir": "Rendah",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Tidak ada tindakan mendesak",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-006",
+      "region": "Deli Serdang",
+      "province": "Sumatera Utara",
+      "status": "Kritis",
+      "risk_type": [
+        "Banjir Besar",
+        "Puso"
+      ],
+      "risk_score": 92,
+      "affected_area_ha": 38878,
+      "description": "38.878 ha sawah puso akibat banjir Sumatera Utara Des 2025. 112 korban jiwa (BNPB).",
+      "data_source": "BNPB & Dinas Pertanian Sumut - Banjir Desember 2025 (Kompas/MajalahIndonesia.online)",
+      "indicators": {
+        "gkp_price_idr": 6100,
+        "hpp_idr": 6500,
+        "selisih_pct": -6.2,
+        "risk_banjir": "Sangat Tinggi",
+        "risk_kekeringan": "Rendah",
+        "puso_ha": 38878
+      },
+      "recommended_action": "DARURAT: Klaim AUTP segera, koordinasi Kementan, pompanisasi, replanting",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-007",
+      "region": "Langkat",
+      "province": "Sumatera Utara",
+      "status": "Kritis",
+      "risk_type": [
+        "Banjir Besar",
+        "Tanah Longsor"
+      ],
+      "risk_score": 85,
+      "affected_area_ha": 15000,
+      "description": "Termasuk wilayah terdampak banjir Des 2025 Sumatera Utara. Status Tanggap Darurat.",
+      "data_source": "BNPB & Pemprov Sumut - Status Tanggap Darurat Desember 2025",
+      "indicators": {
+        "gkp_price_idr": 6000,
+        "hpp_idr": 6500,
+        "selisih_pct": -7.7,
+        "risk_banjir": "Sangat Tinggi",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "DARURAT: Evakuasi, klaim AUTP, bantuan benih pasca bencana",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-008",
+      "region": "Kutai Kartanegara",
+      "province": "Kalimantan Timur",
+      "status": "Tinggi",
+      "risk_type": [
+        "Karhutla",
+        "Kekeringan"
+      ],
+      "risk_score": 79,
+      "affected_area_ha": 22000,
+      "description": "Risiko karhutla tinggi musim kemarau. BMKG: Kaltim masuk zona rawan gambut karhutla.",
+      "data_source": "BMKG FAQ Iklim 2023: 'kewaspadaan karhutla utama pada wilayah gambut Kalimantan'",
+      "indicators": {
+        "gkp_price_idr": 7200,
+        "hpp_idr": 6500,
+        "selisih_pct": 10.8,
+        "risk_banjir": "Rendah",
+        "risk_kekeringan": "Tinggi",
+        "risk_karhutla": "Tinggi"
+      },
+      "recommended_action": "Larangan buka lahan dengan bakar, siagakan tim pemadam, pompanisasi gambut",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-009",
+      "region": "Penajam Paser Utara",
+      "province": "Kalimantan Timur",
+      "status": "Sedang",
+      "risk_type": [
+        "Kekeringan",
+        "OPT"
+      ],
+      "risk_score": 52,
+      "affected_area_ha": 8500,
+      "description": "Wilayah IKN, tekanan lahan pertanian dari pembangunan. Risiko kekeringan sedang.",
+      "data_source": "Pantauan kondisi umum Kaltim + BMKG pola kemarau Kalimantan",
+      "indicators": {
+        "gkp_price_idr": 7100,
+        "hpp_idr": 6500,
+        "selisih_pct": 9.2,
+        "risk_banjir": "Rendah",
+        "risk_kekeringan": "Sedang"
+      },
+      "recommended_action": "Monitoring rutin, pastikan irigasi berfungsi",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-010",
+      "region": "Bojonegoro",
+      "province": "Jawa Timur",
+      "status": "Aman",
+      "risk_type": [
+        "Normal"
+      ],
+      "risk_score": 18,
+      "affected_area_ha": 200,
+      "description": "Lokasi SPP Bulog Jatim. Produksi padi GKP Rp6.589/kg, di atas HPP. Kondisi baik.",
+      "data_source": "BPS Des 2024: GKP Jawa Timur Rp6.589/kg. Jasindo AUTP 2024 aktif.",
+      "indicators": {
+        "gkp_price_idr": 6589,
+        "hpp_idr": 6500,
+        "selisih_pct": 1.4,
+        "risk_banjir": "Rendah",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Tidak ada tindakan mendesak. Pertahankan AUTP aktif.",
+      "last_updated": "2025-03-19"
+    },
+    {
+      "region_id": "RGN-011",
+      "region": "Lamongan",
+      "province": "Jawa Timur",
+      "status": "Sedang",
+      "risk_type": [
+        "Banjir Musiman",
+        "OPT Wereng"
+      ],
+      "risk_score": 55,
+      "affected_area_ha": 7800,
+      "description": "Banjir musiman tahunan. Risiko OPT wereng coklat meningkat pada MT I.",
+      "data_source": "Pola historis banjir Lamongan + data AUTP Jasindo area Jatim",
+      "indicators": {
+        "gkp_price_idr": 6450,
+        "hpp_idr": 6500,
+        "selisih_pct": -0.8,
+        "risk_banjir": "Sedang",
+        "risk_kekeringan": "Rendah"
+      },
+      "recommended_action": "Intensifikasi pengawasan OPT, siapkan AUTP klaim banjir",
+      "last_updated": "2025-03-19"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "chain_id": "agriflow-mainnet-v1",
+  "batch_id": "EB19E865",
+  "commodity_chain": "Padi Inpari 32 → GKP → Beras Medium → Konsumen",
+  "total_tx": 8,
+  "farm_to_table_days": 3,
+  "price_references": {
+    "gkp_petani_idr": 7034,
+    "hpp_gkp_idr": 6500,
+    "beras_medium_eceran_bapanas_mar2026": 13647,
+    "beras_premium_eceran_bapanas_mar2026": 15575,
+    "source": "BPS Des2024 & Bapanas Panel Harga Mar 2026"
+  },
+  "ledger": [
+    {
+      "tx_id": "8957122d-4c71-49f5-b04b-aeb541879213",
+      "sequence": 1,
+      "actor": "USR-08",
+      "actor_role": "Petani",
+      "actor_location": "Desa Blimbing, Kec. Mojo, Kediri, Jawa Timur",
+      "action": "STOCK_DECLARE",
+      "timestamp": "2025-02-01T06:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity": "Rice",
+        "commodity_indo": "Padi Inpari 32",
+        "weight_kg": 5200,
+        "grade": "A",
+        "lahan_ha": 0.8,
+        "gkp_price_per_kg": 7034,
+        "hpp_reference_idr": 6500,
+        "hpp_note": "GKP Kediri Rp7.034/kg > HPP Rp6.500/kg (Kepka Bapanas No.14/2025)",
+        "harvest_date": "2025-01-28",
+        "varietas": "Inpari 32",
+        "koordinat": {
+          "lat": -7.8014,
+          "lng": 111.9794
+        }
+      },
+      "signature": "39764b3a2c4526611f17ba3ce9fd0d97858996e8615fc8ef8c7e3dd2edc04335"
+    },
+    {
+      "tx_id": "0cde866f-8205-45ba-bd75-9ca7d1c27c01",
+      "sequence": 2,
+      "actor": "PPL-KEDIRI-07",
+      "actor_role": "Penyuluh Pertanian Lapangan (PPL)",
+      "actor_location": "BPP Kec. Mojo, Kediri",
+      "action": "QUALITY_VERIFY",
+      "timestamp": "2025-02-01T10:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "kadar_air_pct": 14.2,
+        "kadar_hampa_pct": 2.1,
+        "grade_verified": "A",
+        "metode_verifikasi": "Moisture Meter + Visual Inspection",
+        "standar": "SNI 0224-1987",
+        "hasil": "LULUS",
+        "catatan": "GKP memenuhi standar Bulog, kadar air di bawah 14,5%"
+      },
+      "signature": "12b10372458c7a34492d39165e2a0fb52b46235945bbae09ad47f82d8153072a"
+    },
+    {
+      "tx_id": "b813e61a-e421-44e0-a97e-f9aebdf51300",
+      "sequence": 3,
+      "actor": "MILL-KEDIRI-02",
+      "actor_role": "Penggilingan Padi",
+      "actor_location": "UD. Sumber Rejeki, Kediri, Jawa Timur",
+      "action": "TRANSACTION_CONFIRM",
+      "timestamp": "2025-02-01T14:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity_in": "GKP Padi Inpari 32",
+        "weight_in_kg": 5200,
+        "price_gkp_per_kg": 7034,
+        "total_value_idr": 36576800,
+        "commodity_out": "Beras Medium",
+        "weight_out_kg": 3380,
+        "rendemen_pct": 65.0,
+        "processing_fee_per_kg": 250,
+        "catatan": "Rendemen 65% sesuai standar. Dedak 18%, sekam 17%."
+      },
+      "signature": "ddd67ec2d479fc1c74a894f4fee3f32c942014fff04d8fb15e8fdbc46cf45b1b"
+    },
+    {
+      "tx_id": "e86797e1-6535-4c9d-9e46-e5f3bd55d36b",
+      "sequence": 4,
+      "actor": "BULOG-SPP-KEDIRI",
+      "actor_role": "Gudang Bulog / SPP",
+      "actor_location": "Gudang Bulog Kediri, Jawa Timur",
+      "action": "DELIVERY_CONFIRM",
+      "timestamp": "2025-02-01T22:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity": "Beras Medium",
+        "weight_received_kg": 3380,
+        "beras_medium_price_per_kg": 11000,
+        "beras_medium_ref_eceran": 13647,
+        "total_value_idr": 37180000,
+        "vehicle": "Truck L300 B 1234 XY",
+        "driver": "Pak Haryono",
+        "temperature_c": 28,
+        "kelembaban_pct": 72,
+        "catatan": "Diterima gudang Bulog. Harga beras medium eceran nasional Mar 2026: Rp13.647/kg (Bapanas)."
+      },
+      "signature": "703c358a2596d458c777ee4fafff3b5d0c5542dc5ea605ba82a5bdd55e3fb618"
+    },
+    {
+      "tx_id": "328ba1dd-99f0-4fb8-bc64-71fcf7093947",
+      "sequence": 5,
+      "actor": "BULOG-DKI-01",
+      "actor_role": "Gudang Bulog DKI Jakarta",
+      "actor_location": "Gudang Bulog, Cakung, Jakarta Timur",
+      "action": "DELIVERY_CONFIRM",
+      "timestamp": "2025-02-03T12:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity": "Beras Medium",
+        "weight_received_kg": 3375,
+        "susut_jalan_kg": 5,
+        "origin": "Gudang Bulog Kediri",
+        "vehicle": "Truk Engkel B 5678 AB",
+        "jarak_km": 340,
+        "catatan": "Tiba Jakarta, susut 5 kg dalam batas toleransi 0,15%"
+      },
+      "signature": "f6b35dd676b4b8d8e599130715c256dbc6622f0bb16d0474f76ea29357051e18"
+    },
+    {
+      "tx_id": "4c1485de-7dc0-4304-9d8c-1633867953c5",
+      "sequence": 6,
+      "actor": "RETAIL-KRAMAT-JATI",
+      "actor_role": "Distributor / Pasar Induk",
+      "actor_location": "Pasar Induk Kramat Jati, Jakarta Timur",
+      "action": "TRANSACTION_CONFIRM",
+      "timestamp": "2025-02-03T18:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity": "Beras Medium",
+        "weight_kg": 3375,
+        "buy_price_per_kg": 11000,
+        "sell_price_per_kg": 13000,
+        "margin_pct": 18.2,
+        "buyer": "Supermarket & Warung Jabodetabek",
+        "catatan": "Harga grosir beras medium Kramat Jati. Eceran konsumen Rp13.647/kg (Bapanas Mar 2026)."
+      },
+      "signature": "ee4527a34d1800557005fa5cdbda7c94fe3bae276a3b6f3ed3639398dc0ea210"
+    },
+    {
+      "tx_id": "517e5c66-2cbe-4b7d-9229-bdbdee57455a",
+      "sequence": 7,
+      "actor": "RETAIL-JAKSEL-TRANSMART",
+      "actor_role": "Retail Modern",
+      "actor_location": "Transmart, Jakarta Selatan",
+      "action": "TRANSACTION_CONFIRM",
+      "timestamp": "2025-02-04T15:00:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "commodity": "Beras Medium - kemasan 5kg",
+        "weight_kg": 500,
+        "qty_kemasan_5kg": 100,
+        "buy_price_per_kg": 13000,
+        "sell_price_per_kg": 13647,
+        "sell_price_5kg_pack": 68235,
+        "ref_harga_eceran_bapanas": 13647,
+        "catatan": "Dijual sesuai HET beras medium Bapanas Mar 2026: Rp13.647/kg"
+      },
+      "signature": "0cabd01aa48ad1ad9b8c1aafdcb2d7695f1c4b02070f2d870d58dc25f816b769"
+    },
+    {
+      "tx_id": "3e19da35-b9af-4b81-8a6b-962b7ebed7cf",
+      "sequence": 8,
+      "actor": "CONSUMER-END-USER",
+      "actor_role": "Konsumen Akhir",
+      "actor_location": "Jakarta Selatan",
+      "action": "QR_SCAN_CONSUMER",
+      "timestamp": "2025-02-04T20:27:00Z",
+      "payload": {
+        "batch_id": "EB19E865",
+        "scan_location": "Transmart Jakarta Selatan",
+        "device": "Mobile App AgriFlow",
+        "traceability_complete": true,
+        "farm_to_table_days": 3,
+        "origin_farm": "Desa Blimbing, Kediri, Jawa Timur",
+        "petani": "USR-08",
+        "verified_by_blockchain": true,
+        "consumer_rating": null,
+        "message": "Produk ini bisa dilacak dari lahan petani Kediri hingga tangan Anda dalam 3 hari."
+      },
+      "signature": "1a56e425383f808a1a327c3906dfa5c8ff44465095b70801e2773e59cd0b7a8e"
+    }
+  ]
+}

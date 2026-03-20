@@ -1,0 +1,128 @@
+{
+  "commodities": [
+    {
+      "id": "CMD-001",
+      "name": "Padi Ciherang",
+      "category": "Pangan Pokok",
+      "origin": "Karawang, Jawa Barat",
+      "grade": "A",
+      "stock_kg": 75000,
+      "price_per_kg": 7268,
+      "unit": "kg",
+      "min_order_kg": 1000,
+      "description": "Padi varietas Ciherang unggulan Jawa Barat. GKP grade A.",
+      "data_source": "BPS Feb 2024 - harga GKP tertinggi Rp7.268/kg",
+      "hpp_reference_idr": 6500,
+      "hpp_note": "HPP GKP berlaku sejak 15 Jan 2025 (Kepka Bapanas No.14/2025)",
+      "available": true,
+      "farmer_id": "USR-04",
+      "harvest_date": "2025-03-10",
+      "certification": [
+        "SOP Kementan",
+        "Benih Bersertifikat"
+      ]
+    },
+    {
+      "id": "CMD-002",
+      "name": "Kopi Arabika Gayo",
+      "category": "Perkebunan",
+      "origin": "Aceh Tengah & Bener Meriah, Aceh",
+      "grade": "A",
+      "stock_kg": 8500,
+      "price_per_kg": 130000,
+      "unit": "kg",
+      "min_order_kg": 50,
+      "description": "Green bean Arabika Gayo specialty grade. 40% produksi arabika nasional.",
+      "data_source": "Kompas/TribunGayo Jan 2025: green bean Rp130.000-135.000/kg",
+      "available": true,
+      "farmer_id": "USR-21",
+      "harvest_date": "2025-01-15",
+      "certification": [
+        "Rainforest Alliance",
+        "Organik LSPO",
+        "Fair Trade"
+      ]
+    },
+    {
+      "id": "CMD-003",
+      "name": "Kopi Robusta Gayo",
+      "category": "Perkebunan",
+      "origin": "Bener Meriah, Aceh",
+      "grade": "A",
+      "stock_kg": 4200,
+      "price_per_kg": 60000,
+      "unit": "kg",
+      "min_order_kg": 50,
+      "description": "Green bean Robusta Gayo. Harga tertinggi dalam sejarah karena kelangkaan.",
+      "data_source": "TribunGayo Jan 2025: green bean Rp60.000/kg (Des2024 sempat Rp67.000)",
+      "available": true,
+      "farmer_id": "USR-22",
+      "harvest_date": "2025-01-20",
+      "certification": [
+        "SNI 01-2907-2008"
+      ]
+    },
+    {
+      "id": "CMD-004",
+      "name": "Bawang Merah Brebes",
+      "category": "Hortikultura",
+      "origin": "Brebes, Jawa Tengah",
+      "grade": "A",
+      "stock_kg": 12000,
+      "price_per_kg": 29000,
+      "unit": "kg",
+      "min_order_kg": 100,
+      "description": "Bawang merah sentra nasional Brebes. Eceran nasional Mar 2026: Rp42.876/kg.",
+      "data_source": "Bapanas Panel Harga Mar 2026: eceran Rp42.876/kg; harga petani estimasi 60-70%",
+      "eceran_reference_idr": 42876,
+      "available": true,
+      "farmer_id": "USR-27",
+      "harvest_date": "2025-02-28",
+      "certification": [
+        "GAP Hortikultura"
+      ]
+    },
+    {
+      "id": "CMD-005",
+      "name": "Cabai Rawit Merah",
+      "category": "Hortikultura",
+      "origin": "Malang, Jawa Timur",
+      "grade": "A",
+      "stock_kg": 5500,
+      "price_per_kg": 45000,
+      "unit": "kg",
+      "min_order_kg": 50,
+      "description": "Cabai rawit merah segar. Eceran nasional Mar 2026: Rp79.371/kg (Bapanas).",
+      "data_source": "Bapanas Panel Harga Mar 2026: eceran Rp79.371/kg; harga petani estimasi ~50%",
+      "eceran_reference_idr": 79371,
+      "available": true,
+      "farmer_id": "USR-36",
+      "harvest_date": "2025-03-05",
+      "certification": [
+        "GAP Hortikultura"
+      ]
+    },
+    {
+      "id": "CMD-006",
+      "name": "Jagung Hibrida",
+      "category": "Pangan Pokok",
+      "origin": "Jember, Jawa Timur",
+      "grade": "A",
+      "stock_kg": 95000,
+      "price_per_kg": 5939,
+      "unit": "kg",
+      "min_order_kg": 5000,
+      "description": "Jagung hibrida untuk pakan ternak & industri. Harga referensi Bapanas.",
+      "data_source": "Bapanas Panel Harga Mar 2026: jagung tk.peternak Rp5.939/kg",
+      "available": true,
+      "farmer_id": "USR-10",
+      "harvest_date": "2025-03-01",
+      "certification": [
+        "Benih Bersertifikat Kementan"
+      ]
+    }
+  ],
+  "total": 6,
+  "last_updated": "2025-03-19",
+  "price_source": "Bapanas Panel Harga Mar 2026 & BPS 2024-2025"
+}

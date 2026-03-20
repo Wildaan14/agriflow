@@ -1,0 +1,169 @@
+{
+  "modul": "AI Matchmaking - Rekomendasi Buyer",
+  "generated": "2025-03-19",
+  "price_context": {
+    "beras_premium_eceran_bapanas": 15575,
+    "beras_medium_eceran_bapanas": 13647,
+    "jagung_peternak_bapanas": 5939,
+    "kedelai_impor_bapanas": 10681,
+    "bawang_merah_eceran_bapanas": 42876,
+    "cabai_rawit_merah_bapanas": 79371,
+    "kopi_arabika_gayo_greenbean": 130000,
+    "hpp_gkp_idr": 6500,
+    "source": "Bapanas Panel Harga Mar 2026 & BPS/sumber lain"
+  },
+  "total_buyers": 6,
+  "buyers": [
+    {
+      "buyer_id": "BYR-004",
+      "name": "PPID Bulog (Perum Bulog)",
+      "type": "BUMN Pangan",
+      "scale": "Nasional",
+      "headquarters": "Jakarta",
+      "kebutuhan_bulanan_ton": 50000,
+      "komoditas": [
+        "Beras Medium",
+        "GKP Padi",
+        "Jagung"
+      ],
+      "harga_beli_gkp_idr": 6500,
+      "hpp_gkp_idr": 6500,
+      "hpp_note": "Bulog wajib beli di HPP: Rp6.500/kg GKP (Kepka Bapanas No.14/2025)",
+      "min_order_ton": 10,
+      "sertifikasi_required": [
+        "SNI"
+      ],
+      "match_score": 97,
+      "match_reason": "Jaminan harga HPP, volume sangat besar, BUMN terpercaya, prioritas saat harga jatuh",
+      "contact_type": "SPP Bulog (via PPL/Poktan)",
+      "data_source": "HPP GKP Bapanas No.14/2025 berlaku 15 Jan 2025"
+    },
+    {
+      "buyer_id": "BYR-001",
+      "name": "Transmart Carrefour",
+      "type": "Retail Modern",
+      "scale": "Nasional",
+      "headquarters": "Jakarta",
+      "kebutuhan_bulanan_ton": 850,
+      "komoditas": [
+        "Beras Premium",
+        "Beras Medium",
+        "Bawang Merah",
+        "Cabai"
+      ],
+      "harga_beli_beras_medium_idr": 13000,
+      "harga_beli_beras_premium_idr": 15000,
+      "harga_eceran_ref_bapanas_medium": 13647,
+      "harga_eceran_ref_bapanas_premium": 15575,
+      "min_order_ton": 10,
+      "sertifikasi_required": [
+        "BPOM",
+        "Halal MUI"
+      ],
+      "match_score": 94,
+      "match_reason": "Volume besar, harga kompetitif mendekati HET Bapanas, distribusi nasional",
+      "contact_type": "B2B Portal",
+      "data_source": "Harga eceran ref: Bapanas Panel Harga Mar 2026"
+    },
+    {
+      "buyer_id": "BYR-002",
+      "name": "JW Marriott Jakarta",
+      "type": "Hotel Bintang 5",
+      "scale": "Premium",
+      "headquarters": "Jakarta Selatan",
+      "kebutuhan_bulanan_ton": 12,
+      "komoditas": [
+        "Beras Premium",
+        "Kopi Arabika Gayo",
+        "Cabai Rawit",
+        "Bawang Merah"
+      ],
+      "harga_beli_beras_premium_idr": 18000,
+      "harga_beli_kopi_arabika_idr": 150000,
+      "harga_beli_ref_bapanas_beras_premium": 15575,
+      "harga_beli_ref_kopi_gayo_jan2025": 130000,
+      "min_order_ton": 0.5,
+      "sertifikasi_required": [
+        "Organik",
+        "Halal MUI",
+        "GAP"
+      ],
+      "match_score": 91,
+      "match_reason": "Harga premium, butuh kualitas A, kopi specialty Gayo sangat dicari hotel bintang 5",
+      "contact_type": "Direct Procurement",
+      "data_source": "Harga kopi ref: Kompas/TribunGayo Jan 2025 Rp130.000-135.000/kg"
+    },
+    {
+      "buyer_id": "BYR-003",
+      "name": "Indofood CBP Sukses Makmur",
+      "type": "Industri Pangan",
+      "scale": "Nasional",
+      "headquarters": "Jakarta",
+      "kebutuhan_bulanan_ton": 5000,
+      "komoditas": [
+        "Jagung Hibrida",
+        "Kedelai",
+        "Tepung Terigu (mitra)"
+      ],
+      "harga_beli_jagung_idr": 5939,
+      "harga_ref_bapanas_jagung_peternak": 5939,
+      "min_order_ton": 100,
+      "sertifikasi_required": [
+        "BPOM",
+        "ISO 22000",
+        "Halal MUI"
+      ],
+      "match_score": 88,
+      "match_reason": "Buyer jagung terbesar, harga sesuai panel Bapanas, kontrak tahunan tersedia",
+      "contact_type": "Tender Procurement",
+      "data_source": "Harga jagung ref: Bapanas Panel Harga Mar 2026 Rp5.939/kg"
+    },
+    {
+      "buyer_id": "BYR-005",
+      "name": "Starbucks Indonesia (PT MAP Boga Adiperkasa)",
+      "type": "F&B Premium",
+      "scale": "Nasional",
+      "headquarters": "Jakarta",
+      "kebutuhan_bulanan_ton": 8,
+      "komoditas": [
+        "Kopi Arabika Gayo",
+        "Kopi Specialty"
+      ],
+      "harga_beli_kopi_arabika_idr": 145000,
+      "harga_ref_jan2025": 130000,
+      "min_order_ton": 0.2,
+      "sertifikasi_required": [
+        "Rainforest Alliance",
+        "Fair Trade",
+        "C.A.F.E. Practices"
+      ],
+      "match_score": 86,
+      "match_reason": "Premium coffee buyer, Gayo sudah masuk jaringan Starbucks global, harga kompetitif",
+      "contact_type": "Coffee Procurement",
+      "data_source": "Harga kopi arabika Gayo Jan 2025: Rp130.000-135.000/kg (Kompas.com)"
+    },
+    {
+      "buyer_id": "BYR-006",
+      "name": "PT Charoen Pokphand Indonesia (CPI)",
+      "type": "Industri Pakan Ternak",
+      "scale": "Nasional",
+      "headquarters": "Jakarta",
+      "kebutuhan_bulanan_ton": 12000,
+      "komoditas": [
+        "Jagung Hibrida",
+        "Kedelai"
+      ],
+      "harga_beli_jagung_idr": 5800,
+      "harga_ref_bapanas_jagung": 5939,
+      "min_order_ton": 500,
+      "sertifikasi_required": [
+        "SNI",
+        "ISO"
+      ],
+      "match_score": 85,
+      "match_reason": "Buyer jagung terbesar untuk pakan ayam, volume masif, kontrak multi-musim",
+      "contact_type": "Direct Procurement",
+      "data_source": "Harga jagung ref: Bapanas Panel Harga Mar 2026"
+    }
+  ]
+}

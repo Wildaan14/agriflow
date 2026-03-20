@@ -1,0 +1,705 @@
+{
+  "chain_id": "agriflow-mainnet-v1",
+  "hpp_reference": {
+    "GKP_petani_idr_per_kg": 6500,
+    "berlaku_sejak": "2025-01-15",
+    "dasar_hukum": "Kepka Bapanas No.14 Tahun 2025"
+  },
+  "total_tx": 50,
+  "ledger": [
+    {
+      "tx_id": "1d5bff00-6039-4c4d-bd81-3ddb0a46d1bd",
+      "actor": "USR-11",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 5277.3,
+        "grade": "A",
+        "timestamp": "2025-01-15T08:52:00Z",
+        "price_per_kg": 9500,
+        "hpp_reference_idr": 9500
+      },
+      "signature": "03149988bad046da19c85437ea3c29425a50551557e834caac4ba78cb8d1d300"
+    },
+    {
+      "tx_id": "235df29c-4ee4-462e-86cf-e99bef9e2a25",
+      "actor": "USR-18",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 4745.7,
+        "grade": "C",
+        "timestamp": "2025-01-15T15:13:00Z"
+      },
+      "signature": "5fc350c4720e96b07a8e3468175c307e20cb88ff768862832f426e802cadb19b"
+    },
+    {
+      "tx_id": "ec6003d3-bb62-4ca4-a2ed-9989d0cea38d",
+      "actor": "USR-02",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 3461.7,
+        "grade": "A",
+        "timestamp": "2025-01-15T22:05:00Z"
+      },
+      "signature": "4cd43cf3a0dadc7db56fd9fb81db32ee4a07ca87034da786112cfb3d6566e987"
+    },
+    {
+      "tx_id": "5e3edae9-8f8d-4cc7-bd29-4bab427a0b70",
+      "actor": "USR-18",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 6649.4,
+        "grade": "A",
+        "timestamp": "2025-01-16T05:14:00Z"
+      },
+      "signature": "4fe7c5d5ae1a4a0c3f5849d9601c6534d73b80ab4155f99ed8661e3e482c6072"
+    },
+    {
+      "tx_id": "9290a1c0-b5b4-4bd1-bad1-8cba56f47622",
+      "actor": "USR-19",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 4767.2,
+        "grade": "A",
+        "timestamp": "2025-01-16T12:14:00Z"
+      },
+      "signature": "d9fe84831bc5821857b6c8969b0f3409ca608fa70af5339893cd3ed45aa2e4f0"
+    },
+    {
+      "tx_id": "1ad03bb1-7e8d-49c1-b77f-dd353b53c0dd",
+      "actor": "USR-02",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 2459.0,
+        "grade": "A",
+        "timestamp": "2025-01-16T19:34:00Z",
+        "destination": "Pasar Induk Kramat Jati Jakarta"
+      },
+      "signature": "afa54d6e46a317356446c74f7e15160ba55c637e037966ac096de8fecf6ea457"
+    },
+    {
+      "tx_id": "4cb30d82-a5d0-4af6-b420-08ded3476858",
+      "actor": "USR-19",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 6565.8,
+        "grade": "A",
+        "timestamp": "2025-01-17T02:06:00Z",
+        "price_per_kg": 29000,
+        "hpp_reference_idr": 29000
+      },
+      "signature": "08d7ab3fc5fb072021000d1389f1bb81bb5df83ee10a7e17072216a264c0b788"
+    },
+    {
+      "tx_id": "bb273b01-cd82-43cc-b927-50e081fd7b0f",
+      "actor": "USR-19",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 1665.4,
+        "grade": "A",
+        "timestamp": "2025-01-17T09:35:00Z",
+        "destination": "Gudang Bulog SPP Bojonegoro"
+      },
+      "signature": "9c2d37d6ca6ba3996332a433b1900232243de88125b6cfac33ed557b5be9c845"
+    },
+    {
+      "tx_id": "86a15c70-3a95-4267-85b3-6597b325a56a",
+      "actor": "USR-03",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 5028.3,
+        "grade": "B",
+        "timestamp": "2025-01-17T16:43:00Z",
+        "destination": "Cold Storage Surabaya"
+      },
+      "signature": "140362046da9dc6ea4875e3eb2c0dd3d92b72a7456523e18accacac3195fd233"
+    },
+    {
+      "tx_id": "042c14dc-5125-4acc-b063-4cb148a5a5f0",
+      "actor": "USR-14",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 4767.4,
+        "grade": "B",
+        "timestamp": "2025-01-17T23:23:00Z",
+        "price_per_kg": 8835,
+        "hpp_reference_idr": 9500
+      },
+      "signature": "f0d8850da950383a8c08bc2c146ce327e54ea832ab28ce42ce42be4159135931"
+    },
+    {
+      "tx_id": "43a458b3-1355-465f-b0c9-6ff575a85251",
+      "actor": "USR-10",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 5652.2,
+        "grade": "A",
+        "timestamp": "2025-01-18T06:05:00Z",
+        "price_per_kg": 6500,
+        "hpp_reference_idr": 6500
+      },
+      "signature": "d81352992fb56b80618d08604a8e201a4e61d904bd38a2df75ca730438e493c1"
+    },
+    {
+      "tx_id": "8891c4d4-064b-4f9d-b727-fb9dd279ca86",
+      "actor": "USR-19",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 4061.9,
+        "grade": "B",
+        "timestamp": "2025-01-18T13:46:00Z",
+        "price_per_kg": 26970,
+        "hpp_reference_idr": 29000
+      },
+      "signature": "121a86a01e887680e22390ce71d3539316c444211d5ca92066e1b35203902e74"
+    },
+    {
+      "tx_id": "a9c310b0-8d80-44ce-8023-007a3562c2da",
+      "actor": "USR-15",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 7845.4,
+        "grade": "A",
+        "timestamp": "2025-01-18T20:32:00Z",
+        "price_per_kg": 29000,
+        "hpp_reference_idr": 29000
+      },
+      "signature": "00771bea91d48f05bf3bca6a44d3d9982e5ffb595a4041b2507b86cb629459fb"
+    },
+    {
+      "tx_id": "8869239b-0d37-475b-9d49-345b69aef0b2",
+      "actor": "USR-14",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 1385.5,
+        "grade": "B",
+        "timestamp": "2025-01-19T03:26:00Z",
+        "price_per_kg": 5523,
+        "hpp_reference_idr": 5939
+      },
+      "signature": "965ecaaf67aeb03e5f940e456446027f47b332413b96a9a22c9814b4d02bad5c"
+    },
+    {
+      "tx_id": "32bfe53b-cdc2-4700-b830-2824b5cb7b4b",
+      "actor": "USR-02",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 4669.6,
+        "grade": "B",
+        "timestamp": "2025-01-19T10:21:00Z"
+      },
+      "signature": "86d3ce456e1348819f4563438558b9ae0212389e725bb0e8b1c909a0d582e210"
+    },
+    {
+      "tx_id": "6d1c9d83-38a9-4599-bf77-0b65f40e097b",
+      "actor": "USR-12",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 4723.2,
+        "grade": "B",
+        "timestamp": "2025-01-19T17:04:00Z",
+        "destination": "Pasar Induk Kramat Jati Jakarta"
+      },
+      "signature": "78e31fbf996b425ea9592f330740d4b3887cbb193e40a554f458affd1a60901c"
+    },
+    {
+      "tx_id": "4ef63862-e03a-405a-a8c0-b40fe00ac6f9",
+      "actor": "USR-09",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 5380.4,
+        "grade": "A",
+        "timestamp": "2025-01-20T00:46:00Z"
+      },
+      "signature": "5f468170df6eb8820700029867d1d67ad9588bb6f7627ad9f278864a462070e9"
+    },
+    {
+      "tx_id": "ce36a132-abdf-465e-b342-26f0aec6fcb5",
+      "actor": "USR-10",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 6611.0,
+        "grade": "B",
+        "timestamp": "2025-01-20T07:45:00Z",
+        "destination": "Pasar Johar Semarang"
+      },
+      "signature": "cb37b5802428936dd15cca476bc88feaf9d55ea065ea40760f42ecf82259c777"
+    },
+    {
+      "tx_id": "f1b6b865-f301-4ca0-bc0b-64efec89b1f9",
+      "actor": "USR-12",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 2972.6,
+        "grade": "C",
+        "timestamp": "2025-01-20T14:07:00Z"
+      },
+      "signature": "2d6e6832fe240b63de523376d28c09f89cfd4b6451d11cae4b5bcd83971c5704"
+    },
+    {
+      "tx_id": "f19e55ec-a3cf-4b3a-9f48-217beedc9d5d",
+      "actor": "USR-16",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 6192.2,
+        "grade": "A",
+        "timestamp": "2025-01-20T21:47:00Z"
+      },
+      "signature": "04926bfdfdcf761b954804510158f788286682c624d44061f6e9a09ef462c5d4"
+    },
+    {
+      "tx_id": "a0881c22-0ecb-4f5e-a88c-df2a1674d539",
+      "actor": "USR-08",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 7351.2,
+        "grade": "B",
+        "timestamp": "2025-01-21T04:05:00Z"
+      },
+      "signature": "cd7922473fb696a47c0a3e392ac5265ae2473a2886d67dfd3c09bf11df319e5b"
+    },
+    {
+      "tx_id": "fe6c6fbd-4143-4f81-8c40-f45d801d676c",
+      "actor": "USR-06",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 4485.6,
+        "grade": "A",
+        "timestamp": "2025-01-21T11:52:00Z"
+      },
+      "signature": "a80221d27668710b55d0ce6d610f1cf1f0450f78073a5ccc4db953358968b8e1"
+    },
+    {
+      "tx_id": "f851838b-ad75-4607-9210-14fa36b32601",
+      "actor": "USR-14",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 5709.9,
+        "grade": "B",
+        "timestamp": "2025-01-21T18:43:00Z",
+        "destination": "Pasar Johar Semarang"
+      },
+      "signature": "54d29e92d69236efeef3d6097e989dafbb9395fec7003a59b49aaf7aa46aa575"
+    },
+    {
+      "tx_id": "2634b5a6-e856-448a-ae46-167c7ba3d1d5",
+      "actor": "USR-08",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 1574.5,
+        "grade": "A",
+        "timestamp": "2025-01-22T01:42:00Z",
+        "price_per_kg": 6357,
+        "hpp_reference_idr": 6357
+      },
+      "signature": "8d31273286dee3e0a7ea8183fc1fd6a62eaeb650e80876e5dfabb870eb4cad38"
+    },
+    {
+      "tx_id": "2c24ea5f-2e5b-47c2-88c9-dd43c56fc235",
+      "actor": "USR-08",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 6682.5,
+        "grade": "A",
+        "timestamp": "2025-01-22T08:16:00Z"
+      },
+      "signature": "d8ad5c89fc963dad37f2534efec92c7c7dd514c0f71294f1a55f999d5ce9e189"
+    },
+    {
+      "tx_id": "36c216b8-ad6b-4b5e-ba73-397bc7610945",
+      "actor": "USR-10",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 3467.8,
+        "grade": "B",
+        "timestamp": "2025-01-22T15:39:00Z"
+      },
+      "signature": "b51db82128e9381d35f84ce0460f7186d360d85551b421356ab2fdc8204968aa"
+    },
+    {
+      "tx_id": "943ec949-8a9d-4262-80b4-e7e63bbeb96a",
+      "actor": "USR-19",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 5585.9,
+        "grade": "C",
+        "timestamp": "2025-01-22T22:39:00Z",
+        "price_per_kg": 5525,
+        "hpp_reference_idr": 6500
+      },
+      "signature": "df227e47fb641d60645b401517969ed557bcf65e3671964485c58a0f2b97abaa"
+    },
+    {
+      "tx_id": "5dbfaf05-3d62-4e07-b1ca-adb2f249d6c7",
+      "actor": "USR-02",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 6423.4,
+        "grade": "B",
+        "timestamp": "2025-01-23T05:25:00Z"
+      },
+      "signature": "e9daadad03f66d40220b4a637ea06c8052db3096334f0dcde2b8654ea2a41cf9"
+    },
+    {
+      "tx_id": "f7fd5dbc-51ec-40bd-ad17-9da9ef4635e1",
+      "actor": "USR-13",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 3955.9,
+        "grade": "B",
+        "timestamp": "2025-01-23T12:03:00Z"
+      },
+      "signature": "e8128ac6c3e97d0c6f9c651e925c5e006f14b4e60174c4980bf418544312cf93"
+    },
+    {
+      "tx_id": "e156cf0a-bf1e-4c14-a76f-46d541ce12a6",
+      "actor": "USR-07",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 3636.9,
+        "grade": "A",
+        "timestamp": "2025-01-23T19:21:00Z"
+      },
+      "signature": "01fc58b930c38363b3148ee4110fba2db2161a347f2d52c34f5e55ce438c9c75"
+    },
+    {
+      "tx_id": "2fae602d-8135-49bb-a5b7-abc57a3b1a31",
+      "actor": "USR-20",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 201.8,
+        "grade": "A",
+        "timestamp": "2025-01-24T02:34:00Z"
+      },
+      "signature": "4cda360826138a8a89980f6bc7963278b49829198521a98526bded387227ec09"
+    },
+    {
+      "tx_id": "c129d706-90cc-449e-8c37-86ccf27aa6f7",
+      "actor": "USR-04",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 398.9,
+        "grade": "A",
+        "timestamp": "2025-01-24T09:39:00Z",
+        "price_per_kg": 29000,
+        "hpp_reference_idr": 29000
+      },
+      "signature": "362af24e5ca31b14ba1ca3e6558ee7e625259bec0c6d33b4cb1a45c8e0b7edbe"
+    },
+    {
+      "tx_id": "c1d13cbd-291e-4fa6-ba48-0d82b689e4d1",
+      "actor": "USR-13",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 2167.6,
+        "grade": "B",
+        "timestamp": "2025-01-24T16:38:00Z",
+        "price_per_kg": 41850,
+        "hpp_reference_idr": 45000
+      },
+      "signature": "b8981ec83167e590c60f2a416c23109b165c34a35a8c96855ed3941df14f5ebb"
+    },
+    {
+      "tx_id": "4c058f3e-3ce5-4a24-8a46-ad101843228f",
+      "actor": "USR-12",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 1099.8,
+        "grade": "B",
+        "timestamp": "2025-01-24T23:29:00Z"
+      },
+      "signature": "66e8409070f0c17375df600dfa44c2d23f3b7ed4ef0df7ae6272d486f5c2a649"
+    },
+    {
+      "tx_id": "f096f80e-cf59-4625-8789-860fe7a26402",
+      "actor": "USR-16",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 869.9,
+        "grade": "A",
+        "timestamp": "2025-01-25T06:47:00Z"
+      },
+      "signature": "6a81dce7b7e27497ecd365e9bd53f3fde48b9cac9fd2e6aa848cb8205ce724f6"
+    },
+    {
+      "tx_id": "9901e3f8-04db-4909-a85b-6a7facafc007",
+      "actor": "USR-11",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 6665.1,
+        "grade": "A",
+        "timestamp": "2025-01-25T13:33:00Z",
+        "price_per_kg": 9500,
+        "hpp_reference_idr": 9500
+      },
+      "signature": "8b10a62c4f6a906060dc20336cee41e57eab9c58e1a81056ad6555e03d8d3981"
+    },
+    {
+      "tx_id": "a0ce7b0f-0114-4b11-a502-8f89cb30e7fa",
+      "actor": "USR-01",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Shallot",
+        "commodity_indo": "Bawang Merah",
+        "weight_kg": 3021.7,
+        "grade": "C",
+        "timestamp": "2025-01-25T20:34:00Z",
+        "price_per_kg": 24650,
+        "hpp_reference_idr": 29000
+      },
+      "signature": "33f69130c214c9ba5357003544b937ace28ad5ef28d0bd3c57aaa7297c32cec6"
+    },
+    {
+      "tx_id": "e58997bf-86a9-4e76-ab47-9bfa2c4ffcc3",
+      "actor": "USR-01",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 7832.3,
+        "grade": "A",
+        "timestamp": "2025-01-26T03:44:00Z",
+        "destination": "Gudang Bulog SPP Sragen"
+      },
+      "signature": "28d88ea8705273db7254e33b83919c34d885b1119ba2b5e1e14523f781f2f581"
+    },
+    {
+      "tx_id": "1776411d-9712-48b1-b5a7-c709545e6451",
+      "actor": "USR-17",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi Ciherang",
+        "weight_kg": 2974.4,
+        "grade": "A",
+        "timestamp": "2025-01-26T10:34:00Z",
+        "price_per_kg": 6500,
+        "hpp_reference_idr": 6500
+      },
+      "signature": "823c01c5a5635b763da87eca53c5545e1b41fa30cef8bfe4905b6331b5fe5a04"
+    },
+    {
+      "tx_id": "3406021f-d2e5-41ef-a244-40845f21f135",
+      "actor": "USR-18",
+      "action": "DELIVERY_CONFIRM",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 5164.2,
+        "grade": "C",
+        "timestamp": "2025-01-26T17:51:00Z",
+        "destination": "Gudang Bulog SPP Karawang"
+      },
+      "signature": "8f8b86b46b5e97519e80f3434eebb32b76a01b628ab134ac85f778ed39930e40"
+    },
+    {
+      "tx_id": "2939620d-e557-4d70-b806-9725cf6e3c8e",
+      "actor": "USR-08",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 6465.9,
+        "grade": "A",
+        "timestamp": "2025-01-27T00:33:00Z"
+      },
+      "signature": "d78cdfa12eb5fad8a62b571006659b7ff2e66fbf4546a25302c4994c74cc9a6e"
+    },
+    {
+      "tx_id": "b77b0b55-ad43-4f22-93f8-05beb1884971",
+      "actor": "USR-16",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 426.0,
+        "grade": "A",
+        "timestamp": "2025-01-27T07:50:00Z",
+        "price_per_kg": 45000,
+        "hpp_reference_idr": 45000
+      },
+      "signature": "9f565dead771bff4121fd0b8384aae67d67ff88158489dcb1f99f38c9fc0c834"
+    },
+    {
+      "tx_id": "eda20e1b-75d5-4c4a-bd51-7348df6dfd18",
+      "actor": "USR-09",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 1710.4,
+        "grade": "C",
+        "timestamp": "2025-01-27T14:22:00Z"
+      },
+      "signature": "b1a9083ac10d625d12ad5cf1d8ead41da63a0a625864e115af2782ec6074da18"
+    },
+    {
+      "tx_id": "d08bfa2d-f291-40f5-9111-e07fb68f7ae1",
+      "actor": "USR-15",
+      "action": "TRANSACTION_CONFIRM",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 828.2,
+        "grade": "A",
+        "timestamp": "2025-01-27T21:14:00Z",
+        "price_per_kg": 5939,
+        "hpp_reference_idr": 5939
+      },
+      "signature": "c199947d90aa33028a3b6d82215352230393da970f5db9cd7e084235ad869896"
+    },
+    {
+      "tx_id": "951b56e3-d587-459d-bbf0-99f3179d6bde",
+      "actor": "USR-16",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Corn",
+        "commodity_indo": "Jagung Hibrida",
+        "weight_kg": 1794.1,
+        "grade": "C",
+        "timestamp": "2025-01-28T04:57:00Z",
+        "price_per_kg": 5048,
+        "hpp_reference_idr": 5939
+      },
+      "signature": "1f6f8350e2be4864108b8ad60d5cfb0d8305e522d08aa1ffd6c7ac583a87c27f"
+    },
+    {
+      "tx_id": "326c9578-005c-43c5-b00f-28d8b24fdb9b",
+      "actor": "USR-20",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 7291.8,
+        "grade": "B",
+        "timestamp": "2025-01-28T11:51:00Z"
+      },
+      "signature": "f7065973ccffde0a8a69b4faf7efd90ff790ad85828a7f156ebc8129b62e7dff"
+    },
+    {
+      "tx_id": "68d99a97-c4dd-45e8-9085-9210d904b2c8",
+      "actor": "USR-03",
+      "action": "STOCK_DECLARE",
+      "payload": {
+        "commodity": "Soybean",
+        "commodity_indo": "Kedelai Anjasmoro",
+        "weight_kg": 6302.0,
+        "grade": "A",
+        "timestamp": "2025-01-28T18:30:00Z"
+      },
+      "signature": "37e2b2cec7a43c6fe23765b752dcce21f87f347eca65dc3c7d18739d8e81e657"
+    },
+    {
+      "tx_id": "78b97f73-0bbf-43d4-a59a-78bb0e47a118",
+      "actor": "USR-06",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 2793.6,
+        "grade": "C",
+        "timestamp": "2025-01-29T01:25:00Z"
+      },
+      "signature": "694e927857290316de23780418f51a62ce41d1629807f5d55fe5d5be54ccc34c"
+    },
+    {
+      "tx_id": "5e2f3a82-9db5-4111-8fe3-acc3743de2dc",
+      "actor": "USR-15",
+      "action": "QUALITY_VERIFY",
+      "payload": {
+        "commodity": "Chili",
+        "commodity_indo": "Cabai Rawit Merah",
+        "weight_kg": 7585.0,
+        "grade": "C",
+        "timestamp": "2025-01-29T08:10:00Z"
+      },
+      "signature": "a2583329f17c02023f53157d7203d4ac152da15a0f6c1c280aa54b60a6d74721"
+    },
+    {
+      "tx_id": "776d1fd4-54c0-4342-a6d8-38e5ca96b72a",
+      "actor": "USR-06",
+      "action": "PRICE_UPDATE",
+      "payload": {
+        "commodity": "Rice",
+        "commodity_indo": "Padi IR64",
+        "weight_kg": 1379.0,
+        "grade": "B",
+        "timestamp": "2025-01-29T15:51:00Z",
+        "price_per_kg": 5912,
+        "hpp_reference_idr": 6357
+      },
+      "signature": "403a2b37d7c756f24ea58c46db08924b4208e04425413f5223b73fee6885fc52"
+    }
+  ]
+}

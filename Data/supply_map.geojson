@@ -1,0 +1,210 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "AgriFlow Supply Intelligence - berbasis data produksi BPS 2024 & lokasi SPP Bulog",
+    "generated": "2025-03-19",
+    "catatan": "Volume produksi riil dari BPS 2024 (ton GKG per tahun). Status surplus/deficit dari data Bapanas Jan 2025."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [107.4667, -6.5667] },
+      "properties": {
+        "name": "Karawang", "province": "Jawa Barat",
+        "status": "surplus", "volume": 1050000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "Sentra padi Jawa Barat, lokasi SPP Bulog. Jabar produksi 8,5 juta ton GKG 2024 (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [107.5200, -6.2300] },
+      "properties": {
+        "name": "Subang", "province": "Jawa Barat",
+        "status": "surplus", "volume": 820000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "Lokasi SPP Bulog Jawa Barat ke-2. Sentra GKP kualitas A."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [108.3167, -6.3333] },
+      "properties": {
+        "name": "Indramayu", "province": "Jawa Barat",
+        "status": "surplus", "volume": 1200000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "Salah satu kabupaten surplus terbesar Jawa Barat. Lahan bera potensial 800rb ha."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [107.7333, -6.9000] },
+      "properties": {
+        "name": "Kota Bandung", "province": "Jawa Barat",
+        "status": "deficit", "volume": 85000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "Pusat urban, kebutuhan tinggi, lahan terbatas. Harga GKP di bawah HPP Jan 2025."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [108.9833, -7.4500] },
+      "properties": {
+        "name": "Purbalingga", "province": "Jawa Tengah",
+        "status": "deficit", "volume": 95000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "GKP petani Rp5.033/kg per Jan 2025 - terendah nasional, 22,56% di bawah HPP (Bapanas)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [110.8333, -7.5333] },
+      "properties": {
+        "name": "Sragen", "province": "Jawa Tengah",
+        "status": "surplus", "volume": 780000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "Lokasi SPP Bulog Jawa Tengah. Jateng produksi 8,8 juta ton GKG 2024 (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [109.1333, -7.3000] },
+      "properties": {
+        "name": "Banyumas", "province": "Jawa Tengah",
+        "status": "balanced", "volume": 310000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "Produksi stabil, pasokan ke Purwokerto & sekitar. 1 unit SPP Jateng ke-2."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [111.4500, -7.1667] },
+      "properties": {
+        "name": "Bojonegoro", "province": "Jawa Timur",
+        "status": "surplus", "volume": 950000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 dari 4 SPP Bulog Jawa Timur. Jatim produksi 9,2 juta ton GKG 2024 - terbesar (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [111.4600, -7.6333] },
+      "properties": {
+        "name": "Magetan", "province": "Jawa Timur",
+        "status": "surplus", "volume": 610000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 dari 4 SPP Bulog Jawa Timur. GKP petani tertinggi Rp7.750/kg di Ponorogo (BPS Des2024)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [113.6667, -8.1667] },
+      "properties": {
+        "name": "Jember", "province": "Jawa Timur",
+        "status": "surplus", "volume": 880000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 dari 4 SPP Bulog Jawa Timur. Sentra padi dan jagung. Harga GKP Des2024: Rp6.589/kg."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.3667, -8.2167] },
+      "properties": {
+        "name": "Banyuwangi", "province": "Jawa Timur",
+        "status": "surplus", "volume": 800000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 dari 4 SPP Bulog Jawa Timur. Sentra ekspor beras premium."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [112.7500, -7.2500] },
+      "properties": {
+        "name": "Lamongan", "province": "Jawa Timur",
+        "status": "surplus", "volume": 720000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "GKP terendah Rp5.650/kg (BPS Probolinggo Des2024 sbg referensi wilayah Jatim bawah HPP)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [105.3167, -5.4167] },
+      "properties": {
+        "name": "Lampung Tengah", "province": "Lampung",
+        "status": "surplus", "volume": 550000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 SPP Bulog Lampung. Produksi Lampung 2,7 juta ton GKG 2024 (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [116.1167, -8.6333] },
+      "properties": {
+        "name": "Lombok Tengah", "province": "Nusa Tenggara Barat",
+        "status": "balanced", "volume": 290000,
+        "commodity": "Padi", "spp_bulog": true,
+        "note": "1 SPP Bulog NTB. Produksi NTB 1,4 juta ton GKG 2024 (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [119.4167, -5.1500] },
+      "properties": {
+        "name": "Bone", "province": "Sulawesi Selatan",
+        "status": "surplus", "volume": 650000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "Sentra padi terbesar Sulawesi. GKG tertinggi Rp11.900/kg di Kalimantan Selatan (BPS Des2024)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [109.0333, -6.8667] },
+      "properties": {
+        "name": "Brebes", "province": "Jawa Tengah",
+        "status": "surplus", "volume": 420000,
+        "commodity": "Bawang Merah", "spp_bulog": false,
+        "note": "Sentra bawang merah nasional. Eceran nasional Mar 2026: Rp42.876/kg (Bapanas)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [112.2333, -7.9833] },
+      "properties": {
+        "name": "Malang", "province": "Jawa Timur",
+        "status": "surplus", "volume": 380000,
+        "commodity": "Cabai & Sayuran", "spp_bulog": false,
+        "note": "Sentra cabai rawit & tomat. Cabai rawit eceran nasional Mar 2026: Rp79.371/kg (Bapanas)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [107.6098, -6.9175] },
+      "properties": {
+        "name": "Bandung Barat", "province": "Jawa Barat",
+        "status": "balanced", "volume": 200000,
+        "commodity": "Sayuran Dataran Tinggi", "spp_bulog": false,
+        "note": "Sentra hortikultura (kentang, bawang daun, wortel). Pasokan Jabodetabek & Bandung."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.5833, -3.3333] },
+      "properties": {
+        "name": "Barito Kuala", "province": "Kalimantan Selatan",
+        "status": "deficit", "volume": 140000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "Lahan bera potensial 800rb ha (Bapanas). GKG Rp11.900/kg tertinggi nasional Des2024 (BPS)."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [80.3667, -8.7833] },
+      "properties": {
+        "name": "Gianyar", "province": "Bali",
+        "status": "deficit", "volume": 95000,
+        "commodity": "Padi", "spp_bulog": false,
+        "note": "GKP 18,46% di bawah HPP per Januari 2025 (Bapanas). Kebutuhan pariwisata tinggi."
+      }
+    }
+  ]
+}
