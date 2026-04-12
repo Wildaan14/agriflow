@@ -7,7 +7,7 @@
     "strict": true,
     "lib": ["DOM", "ESNext"],
     "jsx": "react-native",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowJs": true,
     "noImplicitAny": false,
     "target": "ESNext",
