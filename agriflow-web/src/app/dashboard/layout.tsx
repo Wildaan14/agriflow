@@ -103,6 +103,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   
   // Local state for role - defaulting to 'ADMIN' if cookie is set or 'FARMER'
   const [userRole, setUserRole] = useState<UserRole>('FARMER');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     // Client-side cookie reading
@@ -177,12 +178,29 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex-1 flex flex-col overflow-hidden relative">
         <header className="h-24 bg-transparent flex items-center justify-between px-14 z-50 shrink-0">
           <div className="relative w-[500px] group">
-            <MagnifyingGlass className="absolute left-8 top-1/2 -translate-y-1/2 text-stripe-slate opacity-40 group-focus-within:opacity-100 group-focus-within:text-stripe-violet transition-all" size={24} />
+            <MagnifyingGlass className="absolute left-8 top-1/2 -translate-y-1/2 text-stripe-slate opacity-40 group-focus-within:opacity-100 group-focus-within:text-stripe-violet transition-all z-10" size={24} />
             <input 
               type="text" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search data, farmers, or markets..."
-              className="w-full bg-white/40 backdrop-blur-3xl border border-white/60 group-hover:bg-white/60 rounded-[28px] py-4 pl-20 pr-10 focus:outline-none focus:ring-4 focus:ring-stripe-violet/5 transition-all shadow-sm focus:shadow-2xl font-bold text-[16px] text-stripe-indigo placeholder:text-stripe-slate/40"
+              className="w-full bg-white/40 backdrop-blur-3xl border border-white/60 group-hover:bg-white/60 rounded-[28px] py-4 pl-20 pr-10 focus:outline-none focus:ring-4 focus:ring-stripe-violet/5 transition-all shadow-sm focus:shadow-2xl font-bold text-[16px] text-stripe-indigo placeholder:text-stripe-slate/40 relative"
             />
+            {searchQuery && (
+              <div className="absolute top-16 left-0 w-full bg-white/80 backdrop-blur-xl border border-white/60 rounded-[24px] shadow-2xl p-4 overflow-hidden z-20 animate-in fade-in slide-in-from-top-2">
+                <p className="text-[12px] font-bold text-stripe-slate px-4 py-2 uppercase tracking-wider">Search Results</p>
+                <div className="flex flex-col space-y-1 mt-1">
+                   <div className="px-4 py-3 hover:bg-stripe-indigo/5 rounded-xl cursor-pointer text-[14px] font-bold text-stripe-indigo transition-colors flex items-center space-x-3">
+                     <ChartLineUp size={20} className="text-stripe-emerald"/>
+                     <span>Market Data: <span className="text-stripe-slate font-medium">{searchQuery}</span></span>
+                   </div>
+                   <div className="px-4 py-3 hover:bg-stripe-indigo/5 rounded-xl cursor-pointer text-[14px] font-bold text-stripe-indigo transition-colors flex items-center space-x-3">
+                     <Users size={20} className="text-stripe-violet"/>
+                     <span>Farmer Network: <span className="text-stripe-slate font-medium">{searchQuery}</span></span>
+                   </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center space-x-8">
@@ -192,13 +210,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </button>
             
             {(isSignedIn || userRole) && (
-              <div 
-                onClick={handleLogout}
-                className="flex items-center space-x-5 bg-white/40 backdrop-blur-xl p-2.5 pr-8 rounded-[30px] border border-white/60 shadow-sm hover:shadow-2xl hover:bg-white transition-all cursor-pointer group"
-              >
-                <PremiumUserButton />
-                <div className="text-left hidden xl:block">
-                  <p className="text-[14px] font-black text-stripe-indigo tracking-tight mb-0.5">Control Panel</p>
+              <div className="flex items-center space-x-5 bg-white/40 backdrop-blur-xl p-2.5 pr-8 rounded-[30px] border border-white/60 shadow-sm hover:shadow-2xl hover:bg-white transition-all group">
+                {isSignedIn ? (
+                    <PremiumUserButton />
+                ) : (
+                    <div className="w-10 h-10 rounded-full bg-stripe-violet/10 border-2 border-stripe-violet/20 flex items-center justify-center group-hover:border-stripe-violet/50 transition-all font-black text-stripe-violet">
+                      {userRole.charAt(0)}
+                    </div>
+                )}
+                <div className="text-left hidden xl:block cursor-pointer" onClick={handleLogout}>
+                  <p className="text-[14px] font-black text-stripe-indigo tracking-tight mb-0.5 hover:text-red-500 transition-colors">Control Panel</p>
                   <p className="text-[9px] font-black text-stripe-indigo uppercase opacity-50 tracking-widest leading-none">{userRole.replace('_', ' ')}</p>
                 </div>
               </div>
