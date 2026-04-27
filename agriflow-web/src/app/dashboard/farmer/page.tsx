@@ -34,27 +34,36 @@ export default function FarmerDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>('BERANDA');
 
   return (
-    <div className="min-h-screen bg-[#0A0D14] pb-32 flex justify-center text-white">
-      {/* Mobile-Style Container */}
-      <div className="w-full max-w-md min-h-screen bg-[#0A0D14] shadow-2xl relative overflow-hidden flex flex-col border-x border-white/[0.05]">
-        
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto no-scrollbar">
+    <div className="space-y-12 py-8 animate-in slide-in-from-bottom-4 duration-700 text-white">
+      {/* Header Section */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/[0.02] backdrop-blur-3xl p-10 rounded-[32px] border border-white/[0.05]">
+        <div>
+           <div className="flex items-center space-x-3 mb-4">
+              <span className="bg-[#14b850]/20 text-[#14b850] px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(20,184,80,0.2)] border border-[#14b850]/30">Farmer Command Center — ONLINE</span>
+           </div>
+           <h1 className="text-3xl lg:text-5xl font-semibold tracking-tight mb-3 lg:mb-4 leading-none text-white">Selamat Datang, <span className="text-[#14b850]">Pak Slamet!</span> 👋</h1>
+           <p className="text-white/50 font-light text-sm lg:text-base leading-relaxed">Kelola stok panen, pantau harga pasar, dan akses asuransi dalam satu pusat kendali.</p>
+        </div>
+        <div className="flex bg-[#0A0D14] p-1.5 rounded-2xl border border-white/[0.05] overflow-x-auto w-full lg:w-auto shrink-0">
+           {(['BERANDA', 'JUAL', 'DETEKSI', 'DOMPET', 'PROFIL'] as const).map((t) => (
+             <button 
+               key={t}
+               onClick={() => setActiveTab(t as Tab)}
+               className={`flex-1 lg:flex-none px-6 lg:px-8 py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === t ? 'bg-[#14b850] text-[#0A0D14] shadow-[0_0_15px_rgba(20,184,80,0.3)]' : 'text-white/40 hover:text-white'}`}
+             >
+               {t === 'DETEKSI' ? 'AI DETECT' : t}
+             </button>
+           ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="w-full">
           {activeTab === 'BERANDA' && <BerandaTab setActiveTab={setActiveTab} />}
           {activeTab === 'JUAL' && <JualTab setActiveTab={setActiveTab} />}
           {activeTab === 'DETEKSI' && <DeteksiTab />}
           {activeTab === 'DOMPET' && <DompetTab />}
           {activeTab === 'PROFIL' && <ProfilTab />}
-        </div>
-
-        {/* Bottom Navigation Tab Bar */}
-        <div className="fixed bottom-0 left-0 right-0 bg-[#0A0D14]/80 backdrop-blur-2xl border-t border-white/[0.05] px-6 py-4 flex justify-between items-center z-50 w-full max-w-md mx-auto shadow-[0_-10px_40px_rgba(0,0,0,0.5)] rounded-t-[32px]">
-           <TabButton active={activeTab === 'BERANDA'} onClick={() => setActiveTab('BERANDA')} icon={House} label="Beranda" />
-           <TabButton active={activeTab === 'JUAL'} onClick={() => setActiveTab('JUAL')} icon={Handshake} label="Jual" />
-           <TabButton active={activeTab === 'DETEKSI'} onClick={() => setActiveTab('DETEKSI')} icon={Scan} label="AI" />
-           <TabButton active={activeTab === 'DOMPET'} onClick={() => setActiveTab('DOMPET')} icon={Wallet} label="Dompet" />
-           <TabButton active={activeTab === 'PROFIL'} onClick={() => setActiveTab('PROFIL')} icon={User} label="Profil" />
-        </div>
       </div>
     </div>
   );
