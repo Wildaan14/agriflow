@@ -50,14 +50,14 @@ export default function FarmerRegistration() {
   };
 
   return (
-    <div className="min-h-screen mesh-gradient flex items-center justify-center p-6 lg:p-12 font-sans selection:bg-stripe-violet selection:text-white">
-      <div className="w-full max-w-xl bg-white/80 backdrop-blur-3xl rounded-[48px] shadow-[0_50px_100px_-20px_rgba(30,30,80,0.15)] border border-white overflow-hidden relative">
+    <div className="min-h-screen bg-[#0A0D14] mesh-gradient flex items-center justify-center p-6 lg:p-12 font-sans selection:bg-[#14b850]/30 selection:text-white text-white">
+      <div className="w-full max-w-xl bg-white/[0.02] backdrop-blur-3xl rounded-[48px] shadow-[0_0_50px_rgba(20,184,80,0.1)] border border-white/[0.05] overflow-hidden relative">
         
         {/* Progress Bar */}
         {step !== 'SUCCESS' && (
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-100">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-white/[0.05]">
              <div 
-               className="h-full bg-stripe-emerald transition-all duration-700" 
+               className="h-full bg-[#14b850] transition-all duration-700 shadow-[0_0_10px_rgba(20,184,80,0.8)]" 
                style={{ width: `${(Object.keys(stepMap).indexOf(step) + 1) / Object.keys(stepMap).length * 100}%` }}
              ></div>
           </div>
@@ -65,26 +65,26 @@ export default function FarmerRegistration() {
 
         <div className="p-10 lg:p-16">
           {step !== 'SUCCESS' && step !== 'PHONE' && (
-            <button onClick={() => setStep(prevStep(step))} className="mb-10 flex items-center text-stripe-slate hover:text-stripe-indigo font-bold transition-colors">
+            <button onClick={() => setStep(prevStep(step))} className="mb-10 flex items-center text-white/50 hover:text-white font-bold transition-colors">
                <CaretLeft size={16} weight="bold" className="mr-2" /> Kembali
             </button>
           )}
 
           {step === 'PHONE' && (
             <div className="animate-in slide-in-from-bottom-8 duration-500">
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Daftar Petani</h2>
-               <p className="text-stripe-slate font-bold mb-12 opacity-70">Masukkan nomor handphone Anda untuk memulai.</p>
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Daftar Petani</h2>
+               <p className="text-white/60 font-bold mb-12">Masukkan nomor handphone Anda untuk memulai.</p>
                <div className="relative mb-10">
-                  <Phone size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-stripe-indigo opacity-40" />
+                  <Phone size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" />
                   <input 
                     type="tel" 
                     placeholder="Contoh: 08123456789"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 focus:border-stripe-indigo/20 transition-all font-bold text-lg"
+                    className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 focus:border-[#14b850]/50 transition-all font-bold text-lg text-white placeholder-white/20"
                   />
                </div>
-               <button onClick={handleNext} className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xl shadow-2xl shadow-stripe-indigo/20 hover:bg-black transition-all flex items-center justify-center group">
+               <button onClick={handleNext} className="w-full bg-[#14b850] text-[#0A0D14] py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all flex items-center justify-center group btn-premium">
                   Kirim OTP <ArrowRight size={24} className="ml-4 group-hover:translate-x-2 transition-transform" />
                </button>
             </div>
@@ -92,23 +92,23 @@ export default function FarmerRegistration() {
 
           {step === 'OTP' && (
             <div className="animate-in slide-in-from-right-8 duration-500">
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Verifikasi OTP</h2>
-               <p className="text-stripe-slate font-bold mb-12 opacity-70">Kami telah mengirim kode ke <span className="text-stripe-indigo">{phone}</span>.</p>
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Verifikasi OTP</h2>
+               <p className="text-white/60 font-bold mb-12">Kami telah mengirim kode ke <span className="text-[#14b850]">{phone}</span>.</p>
                <div className="relative mb-8">
-                  <ChatCircleDots size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-stripe-indigo opacity-40" />
+                  <ChatCircleDots size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" />
                   <input 
                     type="text" 
                     maxLength={6}
                     placeholder="Kode 6 Digit"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 focus:border-stripe-indigo/20 transition-all font-bold text-2xl tracking-[0.5em] text-center"
+                    className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 focus:border-[#14b850]/50 transition-all font-bold text-2xl tracking-[0.5em] text-center text-white placeholder-white/20"
                   />
                </div>
-               <p className="text-center text-sm font-bold text-stripe-slate opacity-60 mb-10">
-                  Tidak menerima kode? <button className="text-stripe-indigo underline">Kirim Ulang (59s)</button>
+               <p className="text-center text-sm font-bold text-white/40 mb-10">
+                  Tidak menerima kode? <button className="text-[#14b850] hover:text-[#14b850]/80 transition-colors underline">Kirim Ulang (59s)</button>
                </p>
-               <button onClick={handleNext} className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xl shadow-2xl hover:bg-black transition-all flex items-center justify-center">
+               <button onClick={handleNext} className="w-full bg-[#14b850] text-[#0A0D14] py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all flex items-center justify-center btn-premium">
                   Verifikasi & Lanjut
                </button>
             </div>
@@ -116,17 +116,17 @@ export default function FarmerRegistration() {
 
           {step === 'PROFILE_NAME' && (
             <div className="animate-in slide-in-from-right-8 duration-500">
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Siapa Nama Anda?</h2>
-               <p className="text-stripe-slate font-bold mb-12 opacity-70">Langkah 1/3: Informasi Dasar</p>
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Siapa Nama Anda?</h2>
+               <p className="text-white/60 font-bold mb-12">Langkah 1/3: Informasi Dasar</p>
                <div className="space-y-6 mb-12">
                   <div className="relative">
-                    <User size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-stripe-indigo opacity-40" />
+                    <User size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" />
                     <input 
                       type="text" 
                       placeholder="Nama Lengkap"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 transition-all font-bold text-lg"
+                      className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 pl-16 pr-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 transition-all font-bold text-lg text-white placeholder-white/20"
                     />
                   </div>
                   <div className="relative">
@@ -135,11 +135,11 @@ export default function FarmerRegistration() {
                       placeholder="Nama Panggilan"
                       value={nickname}
                       onChange={(e) => setNickname(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 px-8 focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 transition-all font-bold text-lg"
+                      className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 px-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 transition-all font-bold text-lg text-white placeholder-white/20"
                     />
                   </div>
                </div>
-               <button onClick={handleNext} className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xl shadow-2xl hover:bg-black transition-all">
+               <button onClick={handleNext} className="w-full bg-[#14b850] text-[#0A0D14] py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all btn-premium">
                   Lanjut ke Lokasi
                </button>
             </div>
@@ -147,24 +147,24 @@ export default function FarmerRegistration() {
 
           {step === 'PROFILE_LOCATION' && (
             <div className="animate-in slide-in-from-right-8 duration-500">
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Dimana Lokasi Lahan?</h2>
-               <p className="text-stripe-slate font-bold mb-12 opacity-70">Langkah 2/3: Pemetaan Wilayah</p>
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Dimana Lokasi Lahan?</h2>
+               <p className="text-white/60 font-bold mb-12">Langkah 2/3: Pemetaan Wilayah</p>
                
-               <button onClick={handleNext} className="w-full bg-stripe-emerald/10 border border-stripe-emerald/20 text-stripe-emerald py-6 rounded-3xl font-black text-lg mb-8 flex items-center justify-center space-x-4 hover:bg-stripe-emerald/20 transition-all">
+               <button onClick={handleNext} className="w-full bg-[#14b850]/10 border border-[#14b850]/30 text-[#14b850] py-6 rounded-3xl font-black text-lg mb-8 flex items-center justify-center space-x-4 hover:bg-[#14b850]/20 transition-all">
                   <Gps size={28} weight="fill" />
                   <span>Gunakan GPS (Otomatis)</span>
                </button>
 
                <div className="relative mb-6 text-center">
-                  <div className="absolute top-1/2 left-0 w-full h-px bg-slate-100 -z-10"></div>
-                  <span className="bg-white px-4 text-xs font-black text-stripe-slate uppercase tracking-widest opacity-40">Atau Pilih Manual</span>
+                  <div className="absolute top-1/2 left-0 w-full h-px bg-white/[0.1] -z-10"></div>
+                  <span className="bg-[#0A0D14] px-4 text-xs font-black text-white/40 uppercase tracking-widest">Atau Pilih Manual</span>
                </div>
 
                <div className="space-y-6 mb-12">
                   <select 
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 px-8 focus:outline-none transition-all font-bold text-lg appearance-none"
+                    className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 px-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 transition-all font-bold text-lg appearance-none text-white"
                   >
                     <option value="">Pilih Provinsi</option>
                     <option value="jatim">Jawa Timur</option>
@@ -173,14 +173,14 @@ export default function FarmerRegistration() {
                   <select 
                     value={regency}
                     onChange={(e) => setRegency(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-3xl py-6 px-8 focus:outline-none transition-all font-bold text-lg appearance-none"
+                    className="w-full bg-[#0A0D14]/50 border border-white/[0.1] rounded-3xl py-6 px-8 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 transition-all font-bold text-lg appearance-none text-white"
                   >
                     <option value="">Pilih Kabupaten</option>
                     <option value="kediri">Kediri</option>
                     <option value="nganjuk">Nganjuk</option>
                   </select>
                </div>
-               <button onClick={handleNext} className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xl shadow-2xl hover:bg-black transition-all">
+               <button onClick={handleNext} className="w-full bg-[#14b850] text-[#0A0D14] py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all btn-premium">
                   Lanjut ke Info Tanam
                </button>
             </div>
@@ -188,17 +188,17 @@ export default function FarmerRegistration() {
 
           {step === 'PROFILE_AGRI' && (
             <div className="animate-in slide-in-from-right-8 duration-500">
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Apa yang Anda Tanam?</h2>
-               <p className="text-stripe-slate font-bold mb-10 opacity-70">Langkah Terakhir: Detail Pertanian</p>
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Apa yang Anda Tanam?</h2>
+               <p className="text-white/60 font-bold mb-10">Langkah Terakhir: Detail Pertanian</p>
                
                <div className="mb-10">
-                  <p className="text-xs font-black text-stripe-indigo uppercase tracking-widest mb-4 opacity-60">Komoditas Utama (Bisa Pilih Banyak)</p>
+                  <p className="text-xs font-black text-[#14b850] uppercase tracking-widest mb-4 opacity-80">Komoditas Utama (Bisa Pilih Banyak)</p>
                   <div className="flex flex-wrap gap-4">
                      {availableCrops.map(crop => (
                         <button 
                           key={crop.id}
                           onClick={() => toggleCrop(crop.id)}
-                          className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border flex items-center space-x-2 ${crops.includes(crop.id) ? 'bg-stripe-indigo text-white border-stripe-indigo shadow-lg' : 'bg-white text-stripe-slate border-slate-200 hover:border-stripe-indigo/40'}`}
+                          className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border flex items-center space-x-2 ${crops.includes(crop.id) ? 'bg-[#14b850]/20 text-[#14b850] border-[#14b850] shadow-[0_0_15px_rgba(20,184,80,0.2)]' : 'bg-white/[0.02] text-white/60 border-white/[0.1] hover:border-white/[0.2] hover:text-white'}`}
                         >
                            <span>{crop.emoji}</span>
                            <span>{crop.name}</span>
@@ -209,8 +209,8 @@ export default function FarmerRegistration() {
 
                <div className="mb-12">
                   <div className="flex justify-between items-end mb-4">
-                     <p className="text-xs font-black text-stripe-indigo uppercase tracking-widest opacity-60">Luas Lahan Total</p>
-                     <p className="text-2xl font-black text-stripe-indigo">{landSize} <span className="text-sm opacity-40">Hektar</span></p>
+                     <p className="text-xs font-black text-[#14b850] uppercase tracking-widest opacity-80">Luas Lahan Total</p>
+                     <p className="text-2xl font-black text-[#14b850]">{landSize} <span className="text-sm opacity-60">Hektar</span></p>
                   </div>
                   <input 
                     type="range" 
@@ -219,27 +219,27 @@ export default function FarmerRegistration() {
                     step="0.5"
                     value={landSize}
                     onChange={(e) => setLandSize(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-stripe-indigo"
+                    className="w-full h-2 bg-white/[0.1] rounded-lg appearance-none cursor-pointer accent-[#14b850]"
                   />
-                  <div className="flex justify-between mt-2 text-[10px] font-black text-stripe-slate uppercase tracking-widest opacity-30">
+                  <div className="flex justify-between mt-2 text-[10px] font-black text-white/40 uppercase tracking-widest">
                      <span>0.5 Ha</span>
                      <span>20 Ha</span>
                   </div>
                </div>
 
-               <div className="flex items-center space-x-4 p-6 bg-stripe-indigo/5 rounded-3xl border border-stripe-indigo/10 mb-12">
-                  <div className="w-10 h-10 bg-stripe-indigo/10 rounded-xl flex items-center justify-center text-stripe-indigo">
+               <div className="flex items-center space-x-4 p-6 bg-white/[0.02] rounded-3xl border border-white/[0.1] mb-12">
+                  <div className="w-10 h-10 bg-[#14b850]/20 rounded-xl flex items-center justify-center text-[#14b850]">
                      <Plant size={24} weight="fill" />
                   </div>
-                  <p className="text-sm font-bold text-stripe-indigo">Terdaftar di Kelompok Tani / BUMDes?</p>
+                  <p className="text-sm font-bold text-white">Terdaftar di Kelompok Tani / BUMDes?</p>
                   <div className="ml-auto">
-                     <div className="w-12 h-6 bg-stripe-indigo rounded-full relative">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+                     <div className="w-12 h-6 bg-[#14b850] rounded-full relative shadow-[0_0_10px_rgba(20,184,80,0.5)]">
+                        <div className="absolute right-1 top-1 w-4 h-4 bg-[#0A0D14] rounded-full"></div>
                      </div>
                   </div>
                </div>
 
-               <button onClick={handleNext} className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xl shadow-2xl hover:bg-black transition-all">
+               <button onClick={handleNext} className="w-full bg-[#14b850] text-[#0A0D14] py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all btn-premium">
                   Selesaikan Pendaftaran
                </button>
             </div>
@@ -247,14 +247,14 @@ export default function FarmerRegistration() {
 
           {step === 'SUCCESS' && (
             <div className="text-center py-10 animate-in zoom-in-95 duration-700">
-               <div className="w-24 h-24 bg-stripe-emerald/10 rounded-full flex items-center justify-center text-stripe-emerald mx-auto mb-10">
+               <div className="w-24 h-24 bg-[#14b850]/20 rounded-full flex items-center justify-center text-[#14b850] mx-auto mb-10 shadow-[0_0_30px_rgba(20,184,80,0.2)]">
                   <CheckCircle size={64} weight="fill" />
                </div>
-               <h2 className="text-4xl font-black text-stripe-indigo tracking-tight mb-4">Pendaftaran Berhasil!</h2>
-               <p className="text-stripe-slate font-bold mb-12 opacity-70 leading-relaxed px-8">
+               <h2 className="text-4xl font-black text-white tracking-tight mb-4">Pendaftaran Berhasil!</h2>
+               <p className="text-white/60 font-bold mb-12 leading-relaxed px-8">
                   Selamat Pak {nickname || name}, akun Anda telah aktif. Anda kini terhubung ke ekosistem AgriFlow Nasional.
                </p>
-               <Link href="/dashboard" className="inline-flex items-center justify-center bg-stripe-indigo text-white px-12 py-6 rounded-3xl font-black text-xl shadow-2xl hover:bg-black transition-all group">
+               <Link href="/dashboard" className="inline-flex items-center justify-center bg-[#14b850] text-[#0A0D14] px-12 py-6 rounded-3xl font-black text-xl shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all group btn-premium">
                   Masuk ke Dashboard <ArrowRight size={24} className="ml-4 group-hover:translate-x-2 transition-transform" />
                </Link>
             </div>

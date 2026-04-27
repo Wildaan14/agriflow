@@ -42,17 +42,17 @@ interface SidebarItemProps {
 const SidebarItem = ({ icon: Icon, label, href, active = false }: SidebarItemProps) => (
   <Link 
     href={href}
-    className={`flex items-center justify-between px-6 py-2.5 rounded-[18px] transition-all duration-300 group ${
+    className={`flex items-center justify-between px-6 py-3 rounded-[18px] transition-all duration-300 group ${
       active 
-      ? 'bg-stripe-indigo text-white shadow-xl shadow-stripe-indigo/20' 
-      : 'text-[#2D3748] hover:bg-white/60 hover:text-stripe-indigo hover:shadow-sm'
+      ? 'bg-[#14b850]/10 text-[#14b850] border border-[#14b850]/30 shadow-[0_0_15px_rgba(20,184,80,0.15)]' 
+      : 'text-white/60 border border-transparent hover:bg-white/[0.05] hover:text-white hover:border-white/[0.1]'
     }`}
   >
     <div className="flex items-center space-x-3">
-      <Icon size={20} weight={active ? "fill" : "bold"} className={active ? "text-stripe-emerald" : "opacity-50 group-hover:opacity-100 transition-opacity"} />
+      <Icon size={20} weight={active ? "fill" : "bold"} className={active ? "text-[#14b850]" : "opacity-50 group-hover:opacity-100 transition-opacity"} />
       <span className="font-bold text-[13px] tracking-tight">{label}</span>
     </div>
-    {active && <CaretRight size={12} weight="bold" className="text-white/40" />}
+    {active && <CaretRight size={12} weight="bold" className="text-[#14b850]/50" />}
   </Link>
 );
 
@@ -95,23 +95,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="flex h-screen mesh-gradient font-sans overflow-hidden selection:bg-stripe-violet selection:text-white">
+    <div className="flex h-screen bg-[#0A0D14] mesh-gradient font-sans overflow-hidden selection:bg-[#14b850]/30 selection:text-white text-white">
       {/* Premium Sidebar */}
-      <aside className="w-[320px] glass-card-premium m-6 rounded-[40px] p-8 flex flex-col h-[calc(100vh-48px)] z-50">
-        <div className="flex items-center space-x-4 mb-16 px-4 group cursor-pointer">
-          <div className="w-14 h-14 bg-stripe-indigo rounded-[22px] flex items-center justify-center shadow-2xl shadow-stripe-indigo/40 group-hover:rotate-[10deg] transition-all duration-500">
-            <span className="text-white font-black text-[28px] tracking-tighter">A</span>
+      <aside className="w-[320px] bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] m-6 rounded-[40px] p-8 flex flex-col h-[calc(100vh-48px)] z-50 shadow-[0_0_50px_rgba(20,184,80,0.05)]">
+        <div className="flex items-center space-x-4 mb-10 px-4 group cursor-pointer">
+          <div className="w-14 h-14 bg-[#14b850]/20 rounded-[22px] flex items-center justify-center border border-[#14b850]/30 shadow-[0_0_20px_rgba(20,184,80,0.3)] group-hover:rotate-[10deg] transition-all duration-500">
+            <span className="text-[#14b850] font-black text-[28px] tracking-tighter">A</span>
           </div>
           <div>
-            <span className="text-[24px] font-black text-stripe-indigo tracking-tighter block leading-none">AgriFlow</span>
-            <span className="text-[10px] font-black text-stripe-emerald uppercase tracking-[0.3em]">Command Center</span>
+            <span className="text-[24px] font-black text-white tracking-tighter block leading-none">AgriFlow</span>
+            <span className="text-[10px] font-black text-[#14b850] uppercase tracking-[0.3em] mt-1 block">Command Center</span>
           </div>
         </div>
 
-        <nav className="flex-1 space-y-1 px-2 overflow-y-auto no-scrollbar scroll-smooth">
+        <nav className="flex-1 space-y-2 px-2 overflow-y-auto no-scrollbar scroll-smooth">
           {filteredSidebarItems.map((item, index) => (
             'category' in item ? (
-              <p key={`cat-${index}`} className="text-[10px] font-black text-stripe-slate/40 uppercase tracking-[0.2em] px-6 pt-5 pb-1 mt-2 border-t border-stripe-indigo/5 first:border-0 first:mt-0">
+              <p key={`cat-${index}`} className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] px-4 pt-5 pb-2 mt-2 border-t border-white/[0.05] first:border-0 first:mt-0">
                 {item.category}
               </p>
             ) : (
@@ -126,14 +126,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-stripe-indigo/5 space-y-4">
-           <div className="bg-stripe-violet/5 p-6 rounded-[28px] border border-stripe-violet/10 relative overflow-hidden group/upgrade cursor-pointer hover:bg-stripe-violet/10 transition-all">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-stripe-emerald/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+        <div className="mt-auto pt-6 border-t border-white/[0.05] space-y-4">
+           <div className="bg-amber-500/10 p-6 rounded-[28px] border border-amber-500/20 relative overflow-hidden group/upgrade cursor-pointer hover:bg-amber-500/20 transition-all">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-amber-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
               <div className="flex items-center space-x-2 mb-3">
-                  <Sparkle size={14} weight="fill" className="text-stripe-violet" />
-                  <p className="text-[10px] font-black text-stripe-violet uppercase tracking-[0.2em]">Scale Up</p>
+                  <Sparkle size={14} weight="fill" className="text-amber-400" />
+                  <p className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em]">Scale Up</p>
               </div>
-              <p className="text-[12px] font-bold text-stripe-slate leading-relaxed">Early Access: Quantum AI Analysis.</p>
+              <p className="text-[12px] font-bold text-amber-100/70 leading-relaxed">Early Access: Quantum AI Analysis.</p>
            </div>
           <SidebarItem icon={UserCircle} label="Profile" href="/dashboard/profile" active={pathname === '/dashboard/profile'} />
         </div>
@@ -142,36 +142,36 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content Viewport */}
       <div className="flex-1 flex flex-col overflow-hidden relative">
         {/* Top Header Bar */}
-        <header className="h-24 bg-transparent flex items-center justify-between px-14 z-50 shrink-0">
+        <header className="h-24 bg-transparent flex items-center justify-between px-14 z-50 shrink-0 mt-6">
           <div className="relative w-[560px] group">
-            <MagnifyingGlass className="absolute left-8 top-1/2 -translate-y-1/2 text-stripe-slate opacity-40 group-focus-within:opacity-100 group-focus-within:text-stripe-violet transition-all" size={24} />
+            <MagnifyingGlass className="absolute left-8 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:opacity-100 group-focus-within:text-[#14b850] transition-all" size={24} />
             <input 
               type="text" 
               placeholder="Search farmers, regions, or commodities..."
-              className="w-full bg-white/40 backdrop-blur-3xl border border-white/60 group-hover:bg-white/60 rounded-[28px] py-5 pl-20 pr-10 focus:outline-none focus:ring-4 focus:ring-stripe-violet/5 transition-all shadow-sm focus:shadow-2xl focus:border-stripe-violet/20 font-bold text-[16px] placeholder:text-stripe-slate/40 text-stripe-indigo"
+              className="w-full bg-[#0A0D14]/50 backdrop-blur-xl border border-white/[0.1] group-hover:bg-[#0A0D14]/80 rounded-[28px] py-5 pl-20 pr-10 focus:outline-none focus:ring-2 focus:ring-[#14b850]/50 transition-all focus:border-[#14b850]/50 font-bold text-[16px] placeholder:text-white/30 text-white"
             />
           </div>
 
-          <div className="flex items-center space-x-12">
-            <button className="relative p-4 bg-white/40 backdrop-blur-xl rounded-[22px] border border-white/60 hover:bg-white hover:shadow-2xl transition-all text-stripe-indigo group">
-              <Bell size={28} weight="bold" className="opacity-70 group-hover:opacity-100" />
-              <span className="absolute top-4 right-4 w-3.5 h-3.5 bg-red-500 rounded-full border-[3px] border-white shadow-lg animate-pulse"></span>
+          <div className="flex items-center space-x-6">
+            <button className="relative p-4 bg-[#0A0D14]/50 backdrop-blur-xl rounded-[22px] border border-white/[0.1] hover:bg-white/[0.05] hover:border-white/[0.2] transition-all text-white/70 hover:text-white group">
+              <Bell size={28} weight="bold" className="group-hover:scale-110 transition-transform" />
+              <span className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0A0D14] shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse"></span>
             </button>
             
             {isSignedIn ? (
-              <div className="flex items-center space-x-5 bg-white/40 backdrop-blur-xl p-3 pr-8 rounded-[30px] border border-white/60 shadow-sm hover:shadow-2xl hover:bg-white transition-all cursor-pointer group">
+              <div className="flex items-center space-x-5 bg-[#0A0D14]/50 backdrop-blur-xl p-3 pr-8 rounded-[30px] border border-white/[0.1] hover:bg-white/[0.05] transition-all cursor-pointer group">
                 <PremiumUserButton />
                 <div className="text-left hidden xl:block">
-                  <p className="text-[15px] font-black text-stripe-indigo tracking-tight mb-0.5 whitespace-nowrap">Wildan (Admin)</p>
+                  <p className="text-[15px] font-black text-white tracking-tight mb-0.5 whitespace-nowrap">Wildan (Admin)</p>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-stripe-indigo rounded-full mr-2 shadow-[0_0_10px_rgba(99,91,255,0.5)]"></div>
-                    <p className="text-[10px] font-black text-stripe-indigo uppercase tracking-widest leading-none">Superuser Access</p>
+                    <div className="w-2 h-2 bg-[#14b850] rounded-full mr-2 shadow-[0_0_10px_rgba(20,184,80,0.5)]"></div>
+                    <p className="text-[10px] font-black text-[#14b850] uppercase tracking-widest leading-none opacity-80">Superuser Access</p>
                   </div>
                 </div>
               </div>
             ) : (
               <SignInButton mode="modal">
-                <button className="px-10 py-4 bg-stripe-violet text-white rounded-[22px] font-black shadow-2xl shadow-stripe-violet/20 hover:scale-105 active:scale-95 transition-all btn-premium">
+                <button className="px-10 py-4 bg-[#14b850] text-[#0A0D14] rounded-[22px] font-black shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:bg-[#14b850]/90 transition-all btn-premium">
                   Secure Sign In
                 </button>
               </SignInButton>
@@ -180,8 +180,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </header>
 
         {/* Dynamic Scrollable Content */}
-        <main className="flex-1 overflow-y-auto px-14 pb-14 mt-4 scroll-smooth">
-          <div className="max-w-[1600px] mx-auto pt-8">
+        <main className="flex-1 overflow-y-auto px-14 pb-14 pt-4 scroll-smooth">
+          <div className="max-w-[1600px] mx-auto">
             {children}
           </div>
         </main>

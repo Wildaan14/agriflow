@@ -5,90 +5,90 @@ import { Leaf, Camera, ArrowRight, ShieldCheck, WhatsappLogo, ChartLineUp, FileT
 
 export default function DiseasePage() {
   return (
-    <div className="space-y-16 py-8 animate-in">
+    <div className="space-y-12 py-8 animate-in slide-in-from-bottom-4 duration-700 text-white">
       {/* Refined Header Section */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/40 backdrop-blur-3xl p-10 rounded-[48px] border border-white/60">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/[0.02] backdrop-blur-3xl p-8 lg:p-10 rounded-[32px] border border-white/[0.05]">
         <div>
            <div className="flex items-center space-x-3 mb-4">
-              <span className="bg-stripe-emerald text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-lg shadow-stripe-emerald/20">Pre-Harvest AI — ACTIVE</span>
+              <span className="bg-[#14b850]/20 text-[#14b850] px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(20,184,80,0.2)] border border-[#14b850]/30">Pre-Harvest AI — ACTIVE</span>
            </div>
-           <h1 className="text-5xl font-black text-stripe-indigo tracking-tight mb-4 leading-none italic">Crop Disease & Smart Planting</h1>
-           <p className="text-stripe-slate font-bold text-lg opacity-70 italic font-serif leading-none">Diagnosis penyakit otomatis dan intelijen masa tanam berbasis data.</p>
+           <h1 className="text-3xl lg:text-5xl font-semibold tracking-tight mb-3 lg:mb-4 leading-none text-white">Crop Disease & <span className="text-[#14b850]">Smart Planting</span></h1>
+           <p className="text-white/50 font-light text-sm lg:text-base leading-relaxed">Diagnosis penyakit otomatis dan intelijen masa tanam berbasis data.</p>
         </div>
-        <div className="flex space-x-6">
-           <button className="bg-stripe-indigo text-white px-10 py-5 rounded-[22px] font-black text-[11px] uppercase tracking-widest shadow-2xl shadow-stripe-indigo/20 hover:bg-black transition-all">
+        <div className="flex space-x-4 w-full lg:w-auto">
+           <button className="flex-1 lg:flex-none bg-[#14b850] text-[#0A0D14] px-8 py-4 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:shadow-[0_0_30px_rgba(20,184,80,0.5)] transition-all">
               Scan Penyakit Baru
            </button>
         </div>
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Status - The Detection Result */}
-        <div className="lg:col-span-2 space-y-10">
+        <div className="lg:col-span-2 space-y-8">
            {/* Disease Prediction Card */}
-           <div className="glass-card rounded-[56px] p-12 shadow-xl border-t-8 border-t-stripe-emerald relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-stripe-emerald/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-              <div className="flex justify-between items-center mb-12 relative z-10">
-                 <h2 className="text-2xl font-black text-stripe-indigo tracking-tight">Hasil Analisis On-Device AI</h2>
-                 <div className="flex items-center space-x-3 bg-stripe-emerald/10 px-4 py-2 rounded-full">
-                    <span className="text-[10px] font-black text-stripe-emerald uppercase tracking-widest animate-pulse">Inference complete (1.2s)</span>
+           <div className="bg-white/[0.02] p-10 rounded-[32px] shadow-2xl border-t border-white/[0.05] border-x border-x-white/[0.05] border-b border-b-[#14b850]/50 relative overflow-hidden backdrop-blur-xl">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#14b850]/5 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b border-white/[0.05] pb-6 relative z-10">
+                 <h2 className="text-xl font-semibold text-white tracking-tight">Hasil Analisis On-Device AI</h2>
+                 <div className="flex items-center space-x-2 bg-[#0A0D14] border border-white/[0.1] px-4 py-2 rounded-lg mt-4 md:mt-0">
+                    <span className="text-[9px] font-bold text-[#14b850] uppercase tracking-widest animate-pulse">Inference complete (1.2s)</span>
                  </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-                 <div className="p-8 bg-slate-50 rounded-[40px] border border-slate-100 flex items-center justify-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-stripe-violet/10 via-transparent to-stripe-emerald/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <Leaf size={120} className="text-stripe-emerald opacity-10 group-hover:scale-125 transition-transform" />
-                    <div className="absolute top-6 right-6 w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg border border-slate-100 text-stripe-emerald">
-                       <Camera size={24} weight="bold" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                 <div className="p-8 bg-[#0A0D14] rounded-3xl border border-white/[0.05] flex items-center justify-center relative overflow-hidden group hover:border-[#14b850]/20 transition-colors">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6]/5 via-transparent to-[#14b850]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Leaf size={100} className="text-[#14b850]/20 group-hover:text-[#14b850]/40 group-hover:scale-110 transition-all duration-500" />
+                    <div className="absolute top-6 right-6 w-10 h-10 bg-white/[0.05] border border-white/[0.1] rounded-xl flex items-center justify-center shadow-lg text-[#14b850] group-hover:bg-[#14b850] group-hover:text-[#0A0D14] transition-colors">
+                       <Camera size={20} weight="bold" />
                     </div>
                  </div>
                  <div className="space-y-8">
                     <div>
-                       <p className="text-[11px] font-black text-stripe-slate uppercase tracking-widest mb-2 opacity-40">Identifikasi Penyakit</p>
-                       <p className="text-3xl font-black text-stripe-indigo tracking-tight">Antraknosa</p>
-                       <div className="flex items-center space-x-2 mt-2">
-                          <span className="text-xs font-black text-stripe-emerald">Tingkat Keyakinan: 94%</span>
-                          <span className="w-1 h-1 bg-slate-200 rounded-full"></span>
-                          <span className="text-xs font-black text-stripe-slate uppercase tracking-widest opacity-40">On-Device AI</span>
+                       <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Identifikasi Penyakit</p>
+                       <p className="text-3xl font-semibold text-white tracking-tight">Antraknosa</p>
+                       <div className="flex items-center space-x-3 mt-3">
+                          <span className="text-[11px] font-bold text-[#14b850] bg-[#14b850]/10 px-2 py-1 rounded">Keyakinan: 94%</span>
+                          <span className="w-1 h-1 bg-white/20 rounded-full"></span>
+                          <span className="text-[10px] font-medium text-white/50 uppercase tracking-widest">On-Device AI</span>
                        </div>
                     </div>
                     
-                    <div className="space-y-6">
-                       <p className="text-[11px] font-black text-stripe-slate uppercase tracking-widest mb-4 opacity-40">Rekomendasi Penanganan</p>
-                       <TreatmentItem label="Organik: Larutan Bawang Putih" priority="Rekomendasi Utama" icon={Sparkle} />
-                       <TreatmentItem label="Kimiawi: Fungisida X (Dosis 2ml/L)" priority="Opsi Lanjut" icon={Microscope} />
+                    <div className="space-y-4">
+                       <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Rekomendasi Penanganan</p>
+                       <TreatmentItem label="Organik: Larutan Bawang Putih" priority="Rekomendasi Utama" icon={Sparkle} color="text-[#14b850]" bg="bg-[#14b850]/10" border="border-[#14b850]/20" />
+                       <TreatmentItem label="Kimiawi: Fungisida X (Dosis 2ml/L)" priority="Opsi Lanjut" icon={Microscope} color="text-[#0ea5e9]" bg="bg-[#0ea5e9]/10" border="border-[#0ea5e9]/20" />
                     </div>
                  </div>
               </div>
               
-              <div className="mt-12 bg-stripe-violet/5 p-8 rounded-[32px] border border-dashed border-stripe-violet/20 flex flex-col space-y-6">
-                 <div className="flex items-center space-x-6">
-                    <MagicWand size={54} className="text-stripe-violet" weight="fill" />
-                    <div>
-                       <p className="font-black text-stripe-indigo text-xl">Rekomendasi Tanam Cerdas</p>
-                       <p className="text-sm font-bold text-stripe-slate opacity-60 max-w-md">
-                          "Berdasarkan prakiraan BMKG 90 hari ke depan & proyeksi harga, kami rekomendasikan menanam BAWANG MERAH musim depan."
-                       </p>
-                    </div>
+              <div className="mt-8 bg-[#8b5cf6]/5 p-8 rounded-2xl border border-[#8b5cf6]/20 flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 items-start md:items-center relative z-10 group hover:border-[#8b5cf6]/40 transition-colors">
+                 <div className="w-16 h-16 bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 rounded-xl flex items-center justify-center text-[#8b5cf6] group-hover:scale-110 transition-transform">
+                    <MagicWand size={32} weight="fill" />
+                 </div>
+                 <div>
+                    <p className="font-semibold text-white text-lg mb-2 tracking-tight">Rekomendasi Tanam Cerdas</p>
+                    <p className="text-sm font-light text-white/70 max-w-lg leading-relaxed">
+                       "Berdasarkan prakiraan BMKG 90 hari ke depan & proyeksi harga, kami rekomendasikan menanam BAWANG MERAH musim depan."
+                    </p>
                  </div>
               </div>
            </div>
 
            {/* Explanation Card */}
-           <div className="glass-card rounded-[48px] p-10 shadow-sm border border-white bg-white/40 backdrop-blur-3xl">
-               <h3 className="text-xl font-black text-stripe-indigo mb-6 tracking-tight">Logika Proteksi Tanaman</h3>
-              <div className="grid grid-cols-2 gap-8">
+           <div className="bg-[#14b850]/5 rounded-[32px] p-10 shadow-sm border border-[#14b850]/20 relative overflow-hidden">
+               <h3 className="text-lg font-semibold text-white mb-6 tracking-tight relative z-10">Logika Proteksi Tanaman</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                  <div>
-                    <p className="text-[11px] font-black text-stripe-slate uppercase tracking-widest mb-2 opacity-40">Disease Detection</p>
-                     <p className="text-sm font-bold text-stripe-slate leading-relaxed">
+                    <p className="text-[10px] font-bold text-[#14b850] uppercase tracking-widest mb-2">Disease Detection</p>
+                     <p className="text-sm font-light text-white/70 leading-relaxed">
                         Sistem deteksi penyakit berjalan langsung di perangkat. Sangat krusial untuk petani di daerah yang minim koneksi internet.
                      </p>
                  </div>
                  <div>
-                    <p className="text-[11px] font-black text-stripe-slate uppercase tracking-widest mb-2 opacity-40">Smart Tanam</p>
-                    <p className="text-sm font-bold text-stripe-slate leading-relaxed">
+                    <p className="text-[10px] font-bold text-[#14b850] uppercase tracking-widest mb-2">Smart Tanam</p>
+                    <p className="text-sm font-light text-white/70 leading-relaxed">
                        Multi-objective optimization menyeimbangkan proyeksi harga, kesesuaian cuaca BMKG, dan permintaan pasar aktif.
                     </p>
                  </div>
@@ -97,36 +97,36 @@ export default function DiseasePage() {
         </div>
 
         {/* Right Sidebar - Social Insight Preview & Simulation */}
-        <div className="space-y-10">
-           <div className="bg-stripe-emerald rounded-[48px] p-10 text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 opacity-10 rotate-12 transition-transform group-hover:rotate-0 duration-1000">
-                 <Microscope size={180} weight="fill" />
+        <div className="space-y-8">
+           <div className="bg-[#14b850]/5 border border-[#14b850]/20 rounded-[32px] p-8 text-white shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-1000 pointer-events-none">
+                 <Microscope size={180} weight="fill" className="text-[#14b850]" />
               </div>
-              <h3 className="text-xl font-black mb-10 relative z-10 flex items-center space-x-3">
-                 <Camera size={28} weight="bold" />
+              <h3 className="text-sm font-semibold mb-8 relative z-10 flex items-center space-x-3 uppercase tracking-wide text-white/80">
+                 <Camera size={20} className="text-[#14b850]" weight="bold" />
                  <span>Scanning History</span>
               </h3>
-              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 relative z-10">
-                 <div className="flex items-center justify-between mb-8">
-                    <span className="text-[10px] font-black uppercase tracking-widest">Dataset Epidemologi</span>
+              <div className="bg-[#0A0D14] border border-white/[0.05] rounded-2xl p-6 relative z-10">
+                 <div className="flex items-center justify-between mb-4">
+                    <span className="bg-[#14b850]/10 text-[#14b850] px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest">Dataset Epidemologi</span>
                  </div>
-                 <p className="text-sm font-bold leading-relaxed">
+                 <p className="text-[13px] font-light text-white/80 leading-relaxed">
                     Data scanning Anda berkontribusi pada pemetaan penyebaran penyakit tanaman nasional oleh Kementan & BRIN.
                  </p>
               </div>
            </div>
 
-           <div className="glass-card rounded-[48px] p-10 shadow-xl flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-amber-400/10 rounded-full flex items-center justify-center text-amber-500 mb-8">
-                 <Warning size={36} weight="bold" />
+           <div className="bg-white/[0.02] p-8 rounded-[32px] border border-white/[0.05] flex flex-col items-center text-center shadow-2xl relative overflow-hidden">
+              <div className="w-16 h-16 bg-[#f59e0b]/10 rounded-xl flex items-center justify-center text-[#f59e0b] mb-6">
+                 <Warning size={32} weight="bold" />
               </div>
-              <h4 className="text-xl font-black text-stripe-indigo mb-4 tracking-tight">Kesehatan Lahan</h4>
-              <p className="text-sm font-bold text-stripe-slate opacity-60 max-w-xs leading-relaxed mb-8">
+              <h4 className="text-xl font-semibold text-white mb-3 tracking-tight">Kesehatan Lahan</h4>
+              <p className="text-xs font-light text-white/50 leading-relaxed mb-8 max-w-xs">
                  Pantau pola penyakit di wilayah Anda secara kolektif untuk mitigasi penyebaran dini.
               </p>
-              <button className="w-full bg-stripe-indigo text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:translate-y-[-2px] transition-all flex items-center justify-center space-x-3">
+              <button className="w-full bg-white/[0.05] border border-white/[0.1] text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-[#14b850] hover:text-[#0A0D14] hover:border-[#14b850] transition-all flex items-center justify-center space-x-2">
                  <span>Dapatkan Konsultasi Ahli</span>
-                 <ArrowRight size={16} weight="bold" />
+                 <ArrowRight size={14} weight="bold" />
               </button>
            </div>
         </div>
@@ -135,15 +135,15 @@ export default function DiseasePage() {
   );
 }
 
-function TreatmentItem({ label, priority, icon: Icon }: any) {
+function TreatmentItem({ label, priority, icon: Icon, color, bg, border }: any) {
   return (
-    <div className="p-4 bg-white/40 rounded-2xl border border-white flex items-center space-x-4 hover:bg-white hover:shadow-md transition-all group">
-       <div className="w-8 h-8 bg-stripe-indigo/5 rounded-lg flex items-center justify-center text-stripe-indigo group-hover:bg-stripe-indigo group-hover:text-white transition-all">
-          <Icon size={16} weight="bold" />
+    <div className={`p-4 bg-[#0A0D14] rounded-2xl border border-white/[0.05] flex items-center space-x-4 hover:border-white/[0.15] hover:bg-white/[0.02] transition-all group cursor-pointer`}>
+       <div className={`w-10 h-10 ${bg} ${border} border rounded-xl flex items-center justify-center ${color} transition-all`}>
+          <Icon size={20} weight="fill" />
        </div>
        <div>
-          <p className="text-[10px] font-black text-stripe-slate uppercase tracking-widest opacity-40 group-hover:text-stripe-indigo transition-colors">{priority}</p>
-          <p className="text-sm font-bold text-stripe-indigo">{label}</p>
+          <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 group-hover:text-white/60 transition-colors">{priority}</p>
+          <p className={`text-sm font-semibold text-white group-hover:${color} transition-colors`}>{label}</p>
        </div>
     </div>
   );

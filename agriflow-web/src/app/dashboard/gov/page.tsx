@@ -18,10 +18,10 @@ import {
 const MapboxMap = dynamic(() => import('@/components/MapboxMap'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full bg-slate-50 flex items-center justify-center rounded-[64px]">
+    <div className="w-full h-full bg-[#0A0D14] flex items-center justify-center rounded-[32px] border border-white/[0.05]">
       <div className="text-center">
-        <Globe size={48} weight="thin" className="text-stripe-indigo opacity-20 mx-auto mb-4 animate-pulse" />
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Loading Command Map…</p>
+        <Globe size={48} weight="thin" className="text-[#14b850] opacity-20 mx-auto mb-4 animate-pulse" />
+        <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Loading Command Map…</p>
       </div>
     </div>
   ),
@@ -37,9 +37,9 @@ const NATIONAL_HOTSPOTS = [
 ];
 
 const LEVEL_COLOR: Record<string, { dot: string; glow: string; popup: string; text: string }> = {
-  CRITICAL: { dot: '#f43f5e', glow: 'rgba(244,63,94,0.2)', popup: '#fff1f2', text: '#be123c' },
-  WARNING:  { dot: '#f59e0b', glow: 'rgba(245,158,11,0.2)', popup: '#fffbeb', text: '#b45309' },
-  AMAN:     { dot: '#10b981', glow: 'rgba(16,185,129,0.2)', popup: '#f0fdf4', text: '#065f46' },
+  CRITICAL: { dot: '#f43f5e', glow: 'rgba(244,63,94,0.2)', popup: '#0A0D14', text: '#f43f5e' },
+  WARNING:  { dot: '#f59e0b', glow: 'rgba(245,158,11,0.2)', popup: '#0A0D14', text: '#f59e0b' },
+  AMAN:     { dot: '#14b850', glow: 'rgba(20,184,80,0.2)', popup: '#0A0D14', text: '#14b850' },
 };
 
 const ALERTS = [
@@ -49,7 +49,7 @@ const ALERTS = [
 
 export default function GovDashboard() {
   const [activeTab, setActiveTab] = useState<'COMMAND' | 'INFLATION' | 'POLICY'>('COMMAND');
-  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/light-v11');
+  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/dark-v11');
   const [selectedSpot, setSelectedSpot] = useState<any>(null);
 
   const handleMapLoad = useCallback((map: mapboxgl.Map) => {
@@ -93,7 +93,7 @@ export default function GovDashboard() {
               'circle-color': colors.dot,
               'circle-opacity': 0.95,
               'circle-stroke-width': 3,
-              'circle-stroke-color': '#ffffff',
+              'circle-stroke-color': '#0A0D14',
             },
           });
         }
@@ -112,7 +112,7 @@ export default function GovDashboard() {
             },
             paint: {
               'text-color': colors.text,
-              'text-halo-color': '#ffffff',
+              'text-halo-color': '#0A0D14',
               'text-halo-width': 2,
             },
           });
@@ -136,22 +136,22 @@ export default function GovDashboard() {
   }, []);
 
   return (
-    <div className="space-y-12 py-8 animate-in mt-12">
+    <div className="space-y-8 py-8 animate-in slide-in-from-bottom-4 duration-700 mt-8 text-white">
       {/* SaaS Header - Refined */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/40 backdrop-blur-3xl p-10 rounded-[48px] border border-white/60">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/[0.02] backdrop-blur-3xl p-8 lg:p-10 rounded-[32px] border border-white/[0.05]">
         <div>
            <div className="flex items-center space-x-3 mb-4">
-              <span className="bg-rose-500 text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-lg shadow-rose-500/20">Status Keamanan Pangan: TERJAGA</span>
+              <span className="bg-[#14b850]/20 text-[#14b850] px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(20,184,80,0.2)] border border-[#14b850]/30">Status Keamanan Pangan: TERJAGA</span>
            </div>
-           <h1 className="text-5xl font-black text-stripe-indigo tracking-tight mb-4 leading-none italic">National Food Command Center</h1>
-           <p className="text-stripe-slate font-bold text-lg opacity-70 italic font-serif">Monitoring strategis dan intervensi real-time untuk stabilitas harga pangan nasional.</p>
+           <h1 className="text-3xl lg:text-5xl font-semibold tracking-tight mb-3 lg:mb-4 leading-none text-white">National <span className="text-[#14b850]">Command Center</span></h1>
+           <p className="text-white/50 font-light text-sm lg:text-base">Monitoring strategis dan intervensi real-time untuk stabilitas harga pangan nasional.</p>
         </div>
-        <div className="flex bg-slate-100/50 p-1.5 rounded-[22px] border border-slate-200 backdrop-blur-md">
+        <div className="flex bg-[#0A0D14] p-1.5 rounded-2xl border border-white/[0.05] overflow-x-auto w-full lg:w-auto">
            {(['COMMAND', 'INFLATION', 'POLICY'] as const).map((tab) => (
              <button 
                key={tab}
                onClick={() => setActiveTab(tab)}
-               className={`px-8 py-3.5 rounded-[18px] font-black text-[10px] uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-stripe-indigo shadow-[0_10px_30px_-5px_rgba(100,90,255,0.2)]' : 'text-slate-400 hover:text-stripe-indigo'}`}
+               className={`flex-1 lg:flex-none px-6 lg:px-8 py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === tab ? 'bg-[#14b850] text-[#0A0D14] shadow-[0_0_15px_rgba(20,184,80,0.3)]' : 'text-white/40 hover:text-white'}`}
              >
                {tab}
              </button>
@@ -160,9 +160,9 @@ export default function GovDashboard() {
       </div>
 
       {/* Main Layout: Map Top, Grid Bottom */}
-      <div className="space-y-10">
+      <div className="space-y-8">
          {/* Top Section: Full Width Map */}
-         <div className="h-[600px] rounded-[64px] overflow-hidden border border-white shadow-[0_40px_100px_-20px_rgba(10,37,64,0.1)] relative group">
+         <div className="h-[500px] lg:h-[600px] rounded-[32px] overflow-hidden border border-white/[0.05] relative group shadow-2xl">
             {activeTab === 'COMMAND' ? (
                <>
                   <MapboxMap
@@ -173,16 +173,15 @@ export default function GovDashboard() {
                   />
                   
                   {/* Floating Style Switcher */}
-                  <div className="absolute top-8 right-8 z-20 flex bg-white/80 backdrop-blur-2xl p-1.5 rounded-[24px] border border-white shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-6 right-6 z-20 flex bg-[#0A0D14]/80 backdrop-blur-xl p-1.5 rounded-xl border border-white/[0.1] shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity">
                      {[
-                       { id: 'mapbox://styles/mapbox/light-v11', label: 'STREET' },
                        { id: 'mapbox://styles/mapbox/dark-v11', label: 'DARK' },
                        { id: 'mapbox://styles/mapbox/satellite-v9', label: 'SAT' }
                      ].map(s => (
                        <button
                          key={s.id}
                          onClick={() => setMapStyle(s.id)}
-                         className={`px-4 py-2 rounded-[18px] transition-all text-[9px] font-black uppercase tracking-widest ${mapStyle === s.id ? 'bg-stripe-indigo text-white shadow-md' : 'text-slate-400 hover:text-stripe-indigo'}`}
+                         className={`px-4 py-2 rounded-lg transition-all text-[9px] font-bold uppercase tracking-widest ${mapStyle === s.id ? 'bg-[#14b850] text-[#0A0D14]' : 'text-white/40 hover:text-white'}`}
                        >
                          {s.label}
                        </button>
@@ -190,65 +189,65 @@ export default function GovDashboard() {
                   </div>
                </>
             ) : (
-               <div className="w-full h-full bg-slate-50 flex items-center justify-center animate-in zoom-in-95 duration-700">
+               <div className="w-full h-full bg-white/[0.02] flex items-center justify-center animate-in zoom-in-95 duration-700">
                   <div className="text-center group-hover:scale-110 transition-transform">
-                     <Globe size={180} className="text-stripe-indigo/5 animate-pulse" weight="thin" />
-                     <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.5em] mt-8">System Analysis Active</p>
+                     <Globe size={120} className="text-[#14b850]/20 animate-pulse mx-auto" weight="thin" />
+                     <p className="text-[10px] font-bold text-white/30 uppercase tracking-[0.5em] mt-8">System Analysis Active</p>
                   </div>
                </div>
             )}
          </div>
 
          {/* Bottom Section: Dynamic Content Based on Tabs */}
-         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {activeTab === 'COMMAND' && (
                <>
                   {/* Selection Intelligence */}
                   <div className="lg:col-span-1">
-                     <div className="glass-card-premium p-10 rounded-[48px] shadow-2xl min-h-[500px] flex flex-col border border-white bg-white/40 backdrop-blur-3xl overflow-hidden relative">
+                     <div className="bg-white/[0.02] p-8 lg:p-10 rounded-[32px] shadow-2xl h-full flex flex-col border border-white/[0.05] backdrop-blur-xl overflow-hidden relative">
                         {selectedSpot ? (
                            <div className="animate-in slide-in-from-left duration-500 h-full flex flex-col">
                               <button 
                                 onClick={() => setSelectedSpot(null)}
-                                className="mb-8 text-[10px] font-black text-stripe-indigo uppercase tracking-widest flex items-center space-x-2 opacity-50 hover:opacity-100 transition-opacity"
+                                className="mb-8 text-[9px] font-bold text-[#14b850] uppercase tracking-widest flex items-center space-x-2 opacity-70 hover:opacity-100 transition-opacity"
                               >
                                  <ArrowRight size={14} className="rotate-180" />
                                  <span>Back to Alerts</span>
                               </button>
                               
-                              <div className="mb-10">
-                                 <span className={`text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.2em] text-white mb-4 inline-block shadow-lg ${LEVEL_COLOR[selectedSpot.level].dot === '#f43f5e' ? 'bg-rose-500' : 'bg-amber-500'}`}>
+                              <div className="mb-8">
+                                 <span className={`text-[9px] font-bold px-3 py-1 rounded border uppercase tracking-[0.2em] mb-4 inline-block shadow-lg ${selectedSpot.level === 'CRITICAL' ? 'bg-[#f43f5e]/10 text-[#f43f5e] border-[#f43f5e]/20' : selectedSpot.level === 'WARNING' ? 'bg-[#f59e0b]/10 text-[#f59e0b] border-[#f59e0b]/20' : 'bg-[#14b850]/10 text-[#14b850] border-[#14b850]/20'}`}>
                                     {selectedSpot.level} PRIORITY
                                  </span>
-                                 <h3 className="text-4xl font-black text-stripe-indigo tracking-tighter mb-2 italic">{selectedSpot.name}</h3>
-                                 <div className="w-full h-1.5 bg-slate-100/50 rounded-full overflow-hidden mb-6 mt-4">
-                                    <div className="h-full bg-stripe-indigo animate-pulse" style={{ width: `${selectedSpot.risk * 100}%` }}></div>
+                                 <h3 className="text-3xl font-semibold text-white tracking-tight mb-2">{selectedSpot.name}</h3>
+                                 <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-6 mt-4">
+                                    <div className="h-full bg-[#14b850] animate-pulse shadow-[0_0_10px_rgba(20,184,80,0.5)]" style={{ width: `${selectedSpot.risk * 100}%` }}></div>
                                  </div>
-                                 <p className="text-xs font-bold text-stripe-slate opacity-60 leading-relaxed italic">{selectedSpot.detail}</p>
+                                 <p className="text-sm font-light text-white/60 leading-relaxed">{selectedSpot.detail}</p>
                               </div>
 
                               <div className="grid grid-cols-2 gap-4 mb-auto">
-                                 <div className="bg-white/60 p-6 rounded-[32px] border border-white shadow-inner flex flex-col justify-center">
-                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest mb-1">Risk Factor</p>
-                                    <p className="text-3xl font-black text-stripe-indigo tracking-tighter italic">{selectedSpot.risk}</p>
+                                 <div className="bg-[#0A0D14] p-5 rounded-2xl border border-white/[0.05] flex flex-col justify-center text-center">
+                                    <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1">Risk Factor</p>
+                                    <p className="text-2xl font-semibold text-white tracking-tight">{selectedSpot.risk}</p>
                                  </div>
-                                 <div className="bg-white/60 p-6 rounded-[32px] border border-white shadow-inner flex flex-col justify-center">
-                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest mb-1">Status</p>
-                                    <p className={`text-xl font-black italic ${selectedSpot.level === 'CRITICAL' ? 'text-rose-500' : 'text-amber-500'}`}>ACTIVE</p>
+                                 <div className="bg-[#0A0D14] p-5 rounded-2xl border border-white/[0.05] flex flex-col justify-center text-center">
+                                    <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1">Status</p>
+                                    <p className={`text-lg font-semibold tracking-wide ${selectedSpot.level === 'CRITICAL' ? 'text-[#f43f5e]' : selectedSpot.level === 'WARNING' ? 'text-[#f59e0b]' : 'text-[#14b850]'}`}>ACTIVE</p>
                                  </div>
                               </div>
 
-                              <button className="w-full bg-stripe-indigo text-white py-6 rounded-3xl font-black text-xs uppercase tracking-widest shadow-[0_20px_40px_-10px_rgba(100,90,255,0.4)] hover:bg-black transition-all mt-10">
+                              <button className="w-full bg-[#14b850]/10 border border-[#14b850]/20 text-[#14b850] py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-[#14b850] hover:text-[#0A0D14] transition-all mt-8">
                                  Authorize Intervention
                               </button>
                            </div>
                         ) : (
                            <div className="animate-in fade-in duration-500 flex flex-col h-full">
-                              <h3 className="text-sm font-black text-stripe-indigo uppercase tracking-[0.3em] mb-10 flex items-center">
-                                 <div className="w-2 h-2 rounded-full bg-rose-500 animate-ping mr-3"></div>
+                              <h3 className="text-xs font-bold text-white uppercase tracking-[0.2em] mb-8 flex items-center">
+                                 <div className="w-2 h-2 rounded-full bg-[#14b850] animate-ping mr-3 shadow-[0_0_10px_rgba(20,184,80,0.5)]"></div>
                                  Live Security Alerts
                               </h3>
-                              <div className="space-y-6 flex-1 overflow-y-auto no-scrollbar pr-2">
+                              <div className="space-y-4 flex-1 overflow-y-auto no-scrollbar pr-2">
                                  {ALERTS.map(alert => (
                                     <div 
                                        key={alert.id} 
@@ -256,14 +255,14 @@ export default function GovDashboard() {
                                           const spot = NATIONAL_HOTSPOTS.find(s => s.name === alert.region);
                                           if (spot) setSelectedSpot(spot);
                                        }}
-                                       className="p-8 rounded-[40px] bg-white/60 border border-white hover:border-stripe-indigo/20 transition-all cursor-pointer group shadow-sm hover:shadow-2xl"
+                                       className="p-6 rounded-2xl bg-[#0A0D14] border border-white/[0.05] hover:border-[#14b850]/30 hover:bg-white/[0.02] transition-all cursor-pointer group shadow-sm hover:shadow-xl"
                                     >
-                                       <div className="flex justify-between items-center mb-4">
-                                          <span className={`text-[8px] font-black px-3 py-1.5 rounded-xl uppercase tracking-widest shadow-sm ${alert.type === 'CRITICAL' ? 'bg-rose-50 text-rose-500 border border-rose-100' : 'bg-amber-50 text-amber-500 border border-amber-100'}`}>{alert.type}</span>
-                                          <BellRinging size={18} weight="fill" className={alert.type === 'CRITICAL' ? 'text-rose-500' : 'text-amber-500'} />
+                                       <div className="flex justify-between items-center mb-3">
+                                          <span className={`text-[8px] font-bold px-2.5 py-1 rounded border uppercase tracking-widest ${alert.type === 'CRITICAL' ? 'bg-[#f43f5e]/10 text-[#f43f5e] border-[#f43f5e]/20' : 'bg-[#f59e0b]/10 text-[#f59e0b] border-[#f59e0b]/20'}`}>{alert.type}</span>
+                                          <BellRinging size={16} weight="fill" className={alert.type === 'CRITICAL' ? 'text-[#f43f5e]' : 'text-[#f59e0b]'} />
                                        </div>
-                                       <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">{alert.region}</h4>
-                                       <p className="text-sm font-bold text-stripe-indigo leading-relaxed line-clamp-2 italic font-serif opacity-80">{alert.msg}</p>
+                                       <h4 className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-2 group-hover:text-white transition-colors">{alert.region}</h4>
+                                       <p className="text-sm font-light text-white/80 leading-relaxed line-clamp-2">{alert.msg}</p>
                                     </div>
                                  ))}
                               </div>
@@ -274,49 +273,49 @@ export default function GovDashboard() {
 
                   {/* Strategic Overview Metrics */}
                   <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 h-fit">
-                     <div className="glass-card-premium p-10 rounded-[56px] border border-white shadow-xl bg-white/40 group hover:bg-white transition-all flex flex-col justify-between min-h-[300px]">
-                        <div className="flex justify-between items-start mb-10">
-                           <div className="w-14 h-14 bg-stripe-indigo/5 rounded-2xl flex items-center justify-center text-stripe-indigo group-hover:bg-stripe-indigo group-hover:text-white transition-all">
-                              <Scales size={28} weight="fill" />
+                     <div className="bg-white/[0.02] p-8 lg:p-10 rounded-[32px] border border-white/[0.05] shadow-xl hover:border-[#14b850]/20 transition-all flex flex-col justify-between min-h-[250px] backdrop-blur-sm">
+                        <div className="flex justify-between items-start mb-8">
+                           <div className="w-12 h-12 bg-[#14b850]/10 border border-[#14b850]/20 rounded-xl flex items-center justify-center text-[#14b850]">
+                              <Scales size={24} weight="fill" />
                            </div>
-                           <span className="text-[10px] font-black text-stripe-indigo/40 uppercase tracking-[0.2em] italic">Impact Index</span>
+                           <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Impact Index</span>
                         </div>
                         <div>
-                           <div className="flex items-baseline space-x-3 mb-2">
-                              <p className="text-5xl font-black text-stripe-indigo tracking-tighter italic">92.4%</p>
-                              <span className="text-[10px] font-black text-stripe-emerald uppercase tracking-widest">+4.2%</span>
+                           <div className="flex items-baseline space-x-3 mb-1">
+                              <p className="text-4xl lg:text-5xl font-semibold text-white tracking-tight">92.4%</p>
+                              <span className="text-[10px] font-bold text-[#14b850] uppercase tracking-widest">+4.2%</span>
                            </div>
-                           <p className="text-[11px] font-bold text-stripe-slate opacity-40 uppercase tracking-widest">National Supply Stability Score</p>
+                           <p className="text-[10px] font-medium text-white/50 uppercase tracking-widest mt-2">National Supply Stability Score</p>
                         </div>
                      </div>
 
-                     <div className="glass-card-premium p-10 rounded-[56px] border border-white shadow-xl bg-white/40 group hover:bg-white transition-all transition-all flex flex-col justify-between min-h-[300px]">
-                        <div className="flex justify-between items-start mb-10">
-                           <div className="w-14 h-14 bg-stripe-indigo/5 rounded-2xl flex items-center justify-center text-stripe-indigo group-hover:bg-stripe-indigo group-hover:text-white transition-all">
-                              <ChartLineUp size={28} weight="fill" />
+                     <div className="bg-white/[0.02] p-8 lg:p-10 rounded-[32px] border border-white/[0.05] shadow-xl hover:border-[#14b850]/20 transition-all flex flex-col justify-between min-h-[250px] backdrop-blur-sm">
+                        <div className="flex justify-between items-start mb-8">
+                           <div className="w-12 h-12 bg-[#f43f5e]/10 border border-[#f43f5e]/20 rounded-xl flex items-center justify-center text-[#f43f5e]">
+                              <ChartLineUp size={24} weight="fill" />
                            </div>
-                           <span className="text-[10px] font-black text-stripe-indigo/40 uppercase tracking-[0.2em] italic">Risk Analytics</span>
+                           <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Risk Analytics</span>
                         </div>
                         <div>
-                           <div className="flex items-baseline space-x-3 mb-2">
-                              <p className="text-5xl font-black text-stripe-indigo tracking-tighter italic">0.24</p>
-                              <span className="text-[10px] font-black text-rose-500 uppercase tracking-widest">Low Risk</span>
+                           <div className="flex items-baseline space-x-3 mb-1">
+                              <p className="text-4xl lg:text-5xl font-semibold text-white tracking-tight">0.24</p>
+                              <span className="text-[10px] font-bold text-[#f43f5e] uppercase tracking-widest">Low Risk</span>
                            </div>
-                           <p className="text-[11px] font-bold text-stripe-slate opacity-40 uppercase tracking-widest">Aggregate National Inflation Risk</p>
+                           <p className="text-[10px] font-medium text-white/50 uppercase tracking-widest mt-2">Aggregate National Inflation Risk</p>
                         </div>
                      </div>
 
                      {/* Strategic Insight Item */}
-                     <div className="glass-card-premium p-12 rounded-[56px] border border-white shadow-2xl bg-white/40 lg:col-span-2 relative overflow-hidden group/box">
-                        <div className="absolute top-0 right-0 opacity-5 rotate-12 group-hover/box:rotate-0 transition-transform duration-1000">
-                           <ShieldCheck size={280} weight="fill" className="text-stripe-indigo" />
+                     <div className="bg-[#14b850]/5 p-8 lg:p-10 rounded-[32px] border border-[#14b850]/20 shadow-2xl lg:col-span-2 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 opacity-5 rotate-12 group-hover:rotate-0 transition-transform duration-1000 pointer-events-none">
+                           <ShieldCheck size={240} weight="fill" className="text-[#14b850]" />
                         </div>
                         <div className="relative z-10">
-                           <p className="text-[10px] font-black text-stripe-indigo uppercase tracking-[0.3em] mb-6 italic">Wawasan Strategis Pusat Komando</p>
-                           <h4 className="text-3xl font-black text-stripe-indigo tracking-tighter lg:w-2/3 italic leading-none mb-10">Optimasi Distribusi Surplus di Jawa Timur Direkomendasikan</h4>
-                           <div className="p-8 rounded-[40px] bg-white border border-dashed border-slate-200 shadow-sm group-hover/box:shadow-xl transition-all">
-                              <p className="text-xs font-bold text-stripe-slate leading-relaxed italic opacity-80">
-                                 "Berdasarkan data surplus beras di Jawa Timur sebesar **420 Ton**, sistem merekomendasikan pengalihan 20% stok ke wilayah DKI Jakarta guna menekan probabilitas gejolak harga yang kini mencapai **92%**."
+                           <p className="text-[9px] font-bold text-[#14b850] uppercase tracking-[0.2em] mb-4">Wawasan Strategis Pusat Komando</p>
+                           <h4 className="text-2xl lg:text-3xl font-semibold text-white tracking-tight lg:w-3/4 mb-6">Optimasi Distribusi Surplus di Jawa Timur Direkomendasikan</h4>
+                           <div className="p-6 rounded-2xl bg-[#0A0D14] border border-white/[0.05] group-hover:border-[#14b850]/30 transition-colors">
+                              <p className="text-sm font-light text-white/70 leading-relaxed">
+                                 "Berdasarkan data surplus beras di Jawa Timur sebesar <span className="font-semibold text-white">420 Ton</span>, sistem merekomendasikan pengalihan 20% stok ke wilayah DKI Jakarta guna menekan probabilitas gejolak harga yang kini mencapai <span className="font-semibold text-[#f43f5e]">92%</span>."
                               </p>
                            </div>
                         </div>
@@ -327,33 +326,33 @@ export default function GovDashboard() {
 
             {/* Other Tabs content - kept clean and consistent */}
             {activeTab === 'INFLATION' && (
-               <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <div className="glass-card-premium p-16 rounded-[64px] border border-white shadow-2xl bg-white/40 min-h-[500px] flex flex-col justify-between group hover:bg-white transition-all">
+               <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="bg-white/[0.02] p-10 lg:p-12 rounded-[32px] border border-white/[0.05] shadow-2xl flex flex-col justify-between group hover:border-[#14b850]/20 transition-all min-h-[450px]">
                      <div>
-                        <div className="w-20 h-20 bg-rose-50 rounded-[32px] flex items-center justify-center text-rose-500 mb-12 shadow-inner">
-                           <CurrencyCircleDollar size={44} weight="fill" />
+                        <div className="w-16 h-16 bg-[#f43f5e]/10 border border-[#f43f5e]/20 rounded-2xl flex items-center justify-center text-[#f43f5e] mb-10">
+                           <CurrencyCircleDollar size={32} weight="fill" />
                         </div>
-                        <h4 className="text-5xl font-black text-stripe-indigo tracking-tighter mb-8 italic leading-none">Inflation Sensitivity <br />Deep-Analysis</h4>
-                        <div className="space-y-6">
+                        <h4 className="text-3xl lg:text-4xl font-semibold text-white tracking-tight mb-8">Inflation Sensitivity <br />Deep-Analysis</h4>
+                        <div className="space-y-4">
                            <MetricRow label="Target CPI" value="2.5%" />
                            <MetricRow label="Current CPI (Food)" value="3.1%" active />
                            <MetricRow label="Forecasting (2w)" value="2.9%" />
                         </div>
                      </div>
-                     <button className="w-full bg-stripe-indigo text-white py-8 rounded-[36px] font-black text-sm uppercase tracking-widest shadow-2xl hover:bg-black transition-all mt-12">Generate Executive Report</button>
+                     <button className="w-full bg-[#14b850] text-[#0A0D14] py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:shadow-[0_0_30px_rgba(20,184,80,0.5)] transition-all mt-10">Generate Executive Report</button>
                   </div>
-                  <div className="glass-card-premium p-16 rounded-[64px] border border-white shadow-2xl bg-white/40 min-h-[500px] flex flex-col justify-between group hover:bg-white transition-all">
+                  <div className="bg-white/[0.02] p-10 lg:p-12 rounded-[32px] border border-white/[0.05] shadow-2xl flex flex-col justify-between group hover:border-[#14b850]/20 transition-all min-h-[450px]">
                       <div>
-                         <div className="w-20 h-20 bg-stripe-indigo/5 rounded-[32px] flex items-center justify-center text-stripe-indigo mb-12 shadow-inner">
-                            <Scales size={44} weight="fill" />
+                         <div className="w-16 h-16 bg-[#14b850]/10 border border-[#14b850]/20 rounded-2xl flex items-center justify-center text-[#14b850] mb-10">
+                            <Scales size={32} weight="fill" />
                          </div>
-                         <h4 className="text-5xl font-black text-stripe-indigo tracking-tighter mb-8 italic leading-none">Redirection Node <br />Authorization</h4>
-                         <div className="p-10 bg-slate-50/50 rounded-[44px] border border-slate-100 italic">
-                             <p className="text-[10px] font-black text-stripe-indigo uppercase tracking-widest mb-6 opacity-40 italic">Kontrol Logika Distribusi</p>
-                            <p className="text-sm font-bold text-stripe-slate leading-relaxed opacity-60">"Authorize logistics nodes to offset 15% price increase in metropolitan clusters via direct redistribution."</p>
+                         <h4 className="text-3xl lg:text-4xl font-semibold text-white tracking-tight mb-8">Redirection Node <br />Authorization</h4>
+                         <div className="p-8 bg-[#0A0D14] rounded-2xl border border-white/[0.05]">
+                             <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-4">Kontrol Logika Distribusi</p>
+                            <p className="text-sm font-light text-white/70 leading-relaxed">"Authorize logistics nodes to offset 15% price increase in metropolitan clusters via direct redistribution."</p>
                          </div>
                       </div>
-                      <button className="w-full border-4 border-slate-200 py-8 rounded-[36px] font-black text-sm uppercase tracking-widest hover:border-stripe-indigo/40 transition-all mt-12">Authorize High-Impact Decision</button>
+                      <button className="w-full border border-[#14b850]/50 text-[#14b850] py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-[#14b850] hover:text-[#0A0D14] transition-all mt-10">Authorize High-Impact Decision</button>
                   </div>
                </div>
             )}
@@ -373,26 +372,30 @@ export default function GovDashboard() {
 
 function MetricRow({ label, value, active }: { label: string, value: string, active?: boolean }) {
   return (
-    <div className={`flex justify-between items-center p-8 rounded-[32px] border-2 transition-all ${active ? 'bg-rose-50 border-rose-100 shadow-md' : 'bg-slate-50/50 border-slate-100 group-hover:bg-white'}`}>
-       <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest italic">{label}</span>
-       <span className={`text-xl font-black italic tracking-tight ${active ? 'text-rose-600' : 'text-stripe-indigo'}`}>{value}</span>
+    <div className={`flex justify-between items-center p-6 rounded-2xl border transition-all ${active ? 'bg-[#f43f5e]/10 border-[#f43f5e]/20 shadow-md' : 'bg-[#0A0D14] border-white/[0.05] hover:border-white/[0.1]'}`}>
+       <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{label}</span>
+       <span className={`text-lg font-semibold tracking-tight ${active ? 'text-[#f43f5e]' : 'text-white'}`}>{value}</span>
     </div>
   );
 }
 
 function PolicyCard({ title, impact, desc }: { title: string, impact: string, desc: string }) {
+  const impactColor = impact === 'CRITICAL' ? 'text-[#f43f5e] border-[#f43f5e]/20 bg-[#f43f5e]/10' : 
+                      impact === 'HIGH' ? 'text-[#f59e0b] border-[#f59e0b]/20 bg-[#f59e0b]/10' : 
+                      'text-[#14b850] border-[#14b850]/20 bg-[#14b850]/10';
+
   return (
-    <div className="p-16 rounded-[64px] bg-white/40 border-[3px] border-white flex flex-col justify-between hover:bg-white hover:shadow-[0_50px_100px_-20px_rgba(10,37,64,0.15)] transition-all group min-h-[500px]">
+    <div className="p-8 lg:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.05] flex flex-col justify-between hover:border-[#14b850]/30 hover:bg-white/[0.05] transition-all group min-h-[350px]">
        <div>
-          <div className="flex justify-between items-center mb-10">
-             <span className={`text-[9px] font-black px-5 py-2.5 rounded-2xl uppercase tracking-widest shadow-sm ${impact === 'CRITICAL' ? 'bg-rose-500 text-white shadow-rose-500/20' : 'bg-stripe-indigo text-white shadow-stripe-indigo/20'}`}>{impact} IMPACT</span>
+          <div className="flex justify-between items-center mb-8">
+             <span className={`text-[8px] font-bold px-3 py-1.5 rounded-lg border uppercase tracking-widest ${impactColor}`}>{impact} IMPACT</span>
           </div>
-          <h5 className="text-3xl font-black text-stripe-indigo mb-8 tracking-tighter leading-none italic">{title}</h5>
-          <p className="text-sm font-bold text-stripe-slate opacity-60 leading-relaxed mb-8 italic font-serif leading-relaxed">{desc}</p>
+          <h5 className="text-2xl font-semibold text-white mb-6 tracking-tight group-hover:text-[#14b850] transition-colors">{title}</h5>
+          <p className="text-sm font-light text-white/60 leading-relaxed mb-6">{desc}</p>
        </div>
-       <div className="flex items-center space-x-4 text-stripe-indigo text-[11px] font-black uppercase tracking-widest opacity-30 group-hover:opacity-100 transition-all group-hover:translate-x-2">
+       <div className="flex items-center space-x-3 text-[#14b850] text-[10px] font-bold uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-all group-hover:translate-x-2 cursor-pointer w-fit">
           <span>Explore Policy Analysis</span>
-          <ArrowRight size={18} weight="bold" />
+          <ArrowRight size={16} weight="bold" />
        </div>
     </div>
   );

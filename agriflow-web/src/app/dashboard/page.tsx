@@ -30,18 +30,16 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-[80vh] flex items-center justify-center bg-transparent">
         <div className="text-center">
-           <div className="w-16 h-16 border-4 border-stripe-indigo border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-           <p className="text-stripe-indigo font-black uppercase tracking-[0.3em] text-xs">Synchronizing Intelligence Hub...</p>
+           <div className="w-16 h-16 border-4 border-[#14b850]/20 border-t-[#14b850] rounded-full animate-spin mx-auto mb-6 shadow-[0_0_30px_rgba(20,184,80,0.3)]"></div>
+           <p className="text-[#14b850] font-bold uppercase tracking-[0.3em] text-xs animate-pulse">Menghubungkan ke Command Center...</p>
         </div>
       </div>
     );
   }
 
   // Render role-specific content
-  // Note: For BUYER roles, we show the Marketplace as their primary dashboard as per Alur.
-  // For GOVERNMENT/ADMIN, we show the National Command Center.
   switch (userRole) {
     case 'FARMER':
       return <FarmerDashboard />;

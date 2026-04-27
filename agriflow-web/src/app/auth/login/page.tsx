@@ -6,12 +6,13 @@ import {
   Leaf, 
   ArrowRight, 
   ShieldCheck, 
-  LockKey, 
-  EnvelopeSimple,
   Fingerprint,
   Eye,
   EyeSlash,
-  UserCircle
+  UserCircle,
+  Scan,
+  Cpu,
+  Checks
 } from '@phosphor-icons/react';
 
 type UserRole = 
@@ -24,13 +25,11 @@ type UserRole =
   | 'ADMIN';
 
 const DEMO_CREDENTIALS = [
-  { email: 'admin@agriflow.com', pass: 'admin2026', role: 'ADMIN' },
-  { email: 'farmer@agriflow.com', pass: 'farmer123', role: 'FARMER' },
-  { email: 'gov@agriflow.com', pass: 'gov123', role: 'GOVERNMENT' },
-  { email: 'bumdes@agriflow.com', pass: 'bumdes123', role: 'BUMDES' },
-  { email: 'buyer.local@agriflow.com', pass: 'buyer123', role: 'BUYER_LOCAL' },
-  { email: 'buyer.export@agriflow.com', pass: 'export123', role: 'BUYER_EXPORT' },
-  { email: 'data@agriflow.com', pass: 'data123', role: 'DATA_SUBSCRIBER' },
+  { email: 'admin@agriflow.gov.id', pass: 'admin2026', role: 'ADMIN' },
+  { email: 'petani@agriflow.id', pass: 'farmer123', role: 'FARMER' },
+  { email: 'gov@pertanian.go.id', pass: 'gov123', role: 'GOVERNMENT' },
+  { email: 'bumdes@desa.id', pass: 'bumdes123', role: 'BUMDES' },
+  { email: 'buyer@market.id', pass: 'buyer123', role: 'BUYER_LOCAL' },
 ];
 
 export default function LoginPage() {
@@ -39,12 +38,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [scanMode, setScanMode] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login logic
     const account = DEMO_CREDENTIALS.find(acc => acc.email === email && acc.pass === password);
     
     setTimeout(() => {
@@ -52,10 +51,10 @@ export default function LoginPage() {
         document.cookie = `agriflow_role=${account.role}; path=/`;
         router.push('/dashboard');
       } else {
-        alert("Invalid email or password. Use demo credentials shown below.");
+        alert("Autentikasi gagal. Silakan gunakan kredensial demo.");
         setIsLoading(false);
       }
-    }, 1000);
+    }, 1500);
   };
 
   const quickFill = (acc: typeof DEMO_CREDENTIALS[0]) => {
@@ -64,124 +63,166 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen mesh-gradient flex items-center justify-center p-8 selection:bg-stripe-violet selection:text-white">
-      <div className="max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div className="min-h-screen bg-[#0A0D14] flex items-center justify-center p-4 lg:p-8 selection:bg-[#14b850] selection:text-white font-sans overflow-hidden">
+      {/* Dynamic Background Effects */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#14b850]/10 blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#0ea5e9]/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+      </div>
+
+      <div className="max-w-[1400px] w-full h-[85vh] min-h-[700px] bg-white/[0.02] backdrop-blur-3xl border border-white/[0.05] rounded-[40px] flex overflow-hidden z-10 shadow-2xl shadow-black/50">
         
-        {/* Left Side: Branding (Consistent with previous high-end style) */}
-        <div className="hidden lg:block space-y-12 pr-12">
-            <div className="flex items-center space-x-4 mb-20 animate-in fade-in slide-in-from-left-10 duration-700">
-               <div className="w-16 h-16 bg-stripe-violet rounded-[24px] shadow-2xl shadow-stripe-violet/30 flex items-center justify-center text-white">
-                  <Leaf size={36} weight="fill" />
-               </div>
-               <div>
-                  <h1 className="text-4xl font-black text-stripe-indigo tracking-tighter">AgriFlow</h1>
-                  <p className="text-[10px] font-black text-stripe-emerald uppercase tracking-[0.4em]">Digital Infrastructure</p>
-               </div>
+        {/* Left Side: Brand & Visual Context */}
+        <div className="hidden lg:flex flex-col justify-between w-[45%] p-16 relative overflow-hidden bg-gradient-to-br from-[#14b850]/10 to-transparent border-r border-white/[0.05]">
+          <div className="relative z-10">
+            <div className="flex items-center space-x-4 mb-16">
+              <div className="w-14 h-14 bg-[#14b850] rounded-2xl flex items-center justify-center text-[#0A0D14] shadow-[0_0_40px_rgba(20,184,80,0.4)]">
+                <Leaf size={32} weight="fill" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white tracking-tight">AgriFlow</h1>
+                <div className="flex items-center space-x-2 mt-1">
+                  <span className="w-2 h-2 rounded-full bg-[#14b850] animate-pulse" />
+                  <p className="text-[10px] font-bold text-[#14b850] uppercase tracking-widest">Sistem Aktif</p>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-[72px] font-black text-stripe-indigo leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-left-10 delay-100 duration-700">
-               Securing the <br />
-               <span className="text-gradient">national</span> <br />
-               food supply.
+            <h2 className="text-5xl font-semibold text-white leading-[1.1] tracking-tight mb-6">
+              Sistem <span className="text-[#14b850]">Ketahanan</span><br /> Pangan Nasional.
             </h2>
-
-            <p className="text-xl font-bold text-stripe-slate opacity-60 leading-relaxed max-w-md animate-in fade-in slide-in-from-left-10 delay-200 duration-700">
-               Please authenticate to access the National Command Center and all 14 ecosystem modules.
+            <p className="text-white/50 text-lg leading-relaxed max-w-md font-light">
+              Portal autentikasi terpusat untuk verifikasi ID digital petani, distributor, dan instansi pemerintah.
             </p>
+          </div>
 
-            <div className="flex items-center space-x-4 animate-in fade-in slide-in-from-left-10 delay-300 duration-700">
-               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
-                  <ShieldCheck size={20} className="text-stripe-emerald" />
-               </div>
-               <p className="text-sm font-black text-stripe-indigo uppercase tracking-wider">Verified System v2.4.0</p>
+          <div className="relative z-10 grid grid-cols-2 gap-4 mt-12">
+            <div className="bg-white/[0.03] border border-white/[0.05] p-5 rounded-2xl">
+              <ShieldCheck size={24} className="text-[#14b850] mb-3" />
+              <p className="text-white font-medium text-sm">Enkripsi E2E</p>
+              <p className="text-white/40 text-xs mt-1">Data tersertifikasi BSSN</p>
             </div>
+            <div className="bg-white/[0.03] border border-white/[0.05] p-5 rounded-2xl">
+              <Cpu size={24} className="text-[#0ea5e9] mb-3" />
+              <p className="text-white font-medium text-sm">AI Matching</p>
+              <p className="text-white/40 text-xs mt-1">Algoritma prediktif cerdas</p>
+            </div>
+          </div>
         </div>
 
-        {/* Right Side: Normal Login Form */}
-        <div className="glass-card-premium rounded-[60px] p-12 lg:p-20 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in duration-700">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-stripe-violet/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-          
-          <div className="relative z-10 h-full flex flex-col">
-            <div className="mb-14">
-               <h3 className="text-4xl font-black text-stripe-indigo tracking-tight mb-2">Login</h3>
-               <p className="text-[12px] font-black text-stripe-slate/40 uppercase tracking-widest">Digital ID Verification Portal</p>
+        {/* Right Side: Login Panel */}
+        <div className="w-full lg:w-[55%] p-10 lg:p-20 flex flex-col justify-center relative bg-[#0A0D14]/50">
+          <div className="max-w-md w-full mx-auto">
+            
+            <div className="mb-10 text-center lg:text-left">
+              <div className="inline-flex items-center justify-center space-x-2 bg-[#14b850]/10 text-[#14b850] px-4 py-2 rounded-full mb-6 border border-[#14b850]/20">
+                <Fingerprint size={16} weight="bold" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Verifikasi ID Digital</span>
+              </div>
+              <h3 className="text-3xl font-semibold text-white tracking-tight mb-2">Selamat Datang</h3>
+              <p className="text-white/50 text-sm">Masuk menggunakan ID AgriFlow Anda.</p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-8">
-               <div className="space-y-2">
-                  <label className="text-[10px] font-black text-stripe-indigo uppercase tracking-widest ml-1">Email Address</label>
-                  <div className="relative">
-                     <EnvelopeSimple size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-stripe-slate opacity-30" />
-                     <input 
-                        type="email" 
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="name@agency.gov.id"
-                        className="w-full bg-slate-50 border border-slate-100 px-16 py-5 rounded-[24px] font-bold text-stripe-indigo focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 transition-all"
-                     />
-                  </div>
-               </div>
+            {/* Toggle Login Method */}
+            <div className="flex p-1 bg-white/[0.03] rounded-2xl mb-8 border border-white/[0.05]">
+              <button 
+                onClick={() => setScanMode(false)}
+                className={`flex-1 py-3 text-sm font-medium rounded-xl transition-all ${!scanMode ? 'bg-white/10 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+              >
+                Gunakan Email
+              </button>
+              <button 
+                onClick={() => setScanMode(true)}
+                className={`flex-1 py-3 text-sm font-medium rounded-xl transition-all ${scanMode ? 'bg-[#14b850]/20 text-[#14b850] shadow-lg' : 'text-white/40 hover:text-white'}`}
+              >
+                Biometrik / Scan
+              </button>
+            </div>
 
-               <div className="space-y-2">
+            {!scanMode ? (
+              <form onSubmit={handleLogin} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-[11px] font-semibold text-white/60 uppercase tracking-wider ml-1">Email / ID Pengguna</label>
+                  <div className="relative">
+                    <input 
+                      type="email" 
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="nama@pertanian.go.id"
+                      className="w-full bg-white/[0.03] border border-white/[0.1] text-white px-5 py-4 rounded-2xl font-medium focus:outline-none focus:border-[#14b850] focus:bg-[#14b850]/5 transition-all placeholder:text-white/20"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
                   <div className="flex justify-between items-center px-1">
-                     <label className="text-[10px] font-black text-stripe-indigo uppercase tracking-widest">Password</label>
-                     <a href="#" className="text-[10px] font-black text-stripe-violet uppercase tracking-widest hover:underline">Forgot?</a>
+                    <label className="text-[11px] font-semibold text-white/60 uppercase tracking-wider">Kata Sandi</label>
+                    <a href="#" className="text-[11px] font-semibold text-[#14b850] hover:underline">Lupa Sandi?</a>
                   </div>
                   <div className="relative">
-                     <Fingerprint size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-stripe-slate opacity-30" />
-                     <input 
-                        type={showPass ? "text" : "password"} 
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="w-full bg-slate-50 border border-slate-100 px-16 py-5 rounded-[24px] font-bold text-stripe-indigo focus:outline-none focus:ring-4 focus:ring-stripe-indigo/5 transition-all"
-                     />
-                     <button 
-                        type="button"
-                        onClick={() => setShowPass(!showPass)}
-                        className="absolute right-6 top-1/2 -translate-y-1/2 text-stripe-slate hover:text-stripe-indigo transition-colors"
-                     >
-                        {showPass ? <EyeSlash size={20} /> : <Eye size={20} />}
-                     </button>
+                    <input 
+                      type={showPass ? "text" : "password"} 
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full bg-white/[0.03] border border-white/[0.1] text-white px-5 py-4 rounded-2xl font-medium focus:outline-none focus:border-[#14b850] focus:bg-[#14b850]/5 transition-all placeholder:text-white/20"
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => setShowPass(!showPass)}
+                      className="absolute right-5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                    >
+                      {showPass ? <EyeSlash size={20} /> : <Eye size={20} />}
+                    </button>
                   </div>
-               </div>
+                </div>
 
-               <button 
+                <button 
                   type="submit" 
                   disabled={isLoading}
-                  className="w-full bg-stripe-indigo text-white py-6 rounded-[28px] font-black text-lg shadow-2xl shadow-stripe-indigo/20 hover:bg-black hover:-translate-y-1 transition-all flex items-center justify-center group disabled:opacity-50"
-               >
+                  className="w-full bg-[#14b850] text-[#0A0D14] py-4 rounded-2xl font-bold text-base shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:shadow-[0_0_30px_rgba(20,184,80,0.5)] hover:-translate-y-0.5 transition-all flex items-center justify-center group disabled:opacity-50 disabled:hover:translate-y-0 mt-4"
+                >
                   {isLoading ? (
-                     <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-[#0A0D14]/30 border-t-[#0A0D14] rounded-full animate-spin"></div>
                   ) : (
-                     <>
-                        <span>Continue to Command Center</span>
-                        <ArrowRight size={22} className="ml-3 group-hover:translate-x-2 transition-transform" />
-                     </>
+                    <>
+                      <span>Autentikasi Sekarang</span>
+                      <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    </>
                   )}
-               </button>
-            </form>
+                </button>
+              </form>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-10 bg-white/[0.02] border border-white/[0.05] rounded-3xl border-dashed">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-[#14b850]/20 rounded-full blur-2xl animate-pulse" />
+                  <Scan size={80} weight="light" className="text-[#14b850] relative z-10" />
+                </div>
+                <p className="text-white font-medium mt-6">Pindai Wajah atau Sidik Jari</p>
+                <p className="text-white/40 text-sm mt-2 text-center px-8">Gunakan aplikasi AgriFlow Mobile untuk scan QR atau masuk dengan biometrik.</p>
+              </div>
+            )}
 
-            <div className="mt-14 pt-8 border-t border-slate-100/50">
-               <p className="text-[10px] font-black text-stripe-slate/50 uppercase tracking-[0.2em] mb-6">Demo Access (One-Click Fill)</p>
-               <div className="grid grid-cols-2 gap-3">
-                  {DEMO_CREDENTIALS.map((acc) => (
-                     <button 
-                        key={acc.role}
-                        onClick={() => quickFill(acc)}
-                        className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 hover:bg-stripe-indigo hover:text-white transition-all text-left group"
-                     >
-                        <UserCircle size={20} weight="fill" className="text-stripe-indigo/20 group-hover:text-white/40" />
-                        <div>
-                           <p className="text-[10px] font-black leading-none mb-1">{acc.role.replace('_', ' ')}</p>
-                           <p className="text-[8px] font-bold opacity-40">{acc.email}</p>
-                        </div>
-                     </button>
-                  ))}
-               </div>
+            {/* Quick Login Demo */}
+            <div className="mt-12 pt-8 border-t border-white/[0.05]">
+              <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-4">Akses Cepat (Demo Mode)</p>
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                {DEMO_CREDENTIALS.map((acc) => (
+                  <button 
+                    key={acc.role}
+                    onClick={() => quickFill(acc)}
+                    className="flex flex-col items-start p-3 rounded-xl bg-white/[0.03] hover:bg-[#14b850]/10 border border-transparent hover:border-[#14b850]/30 transition-all group"
+                  >
+                    <p className="text-[11px] font-bold text-white/80 group-hover:text-[#14b850] mb-1">{acc.role}</p>
+                    <p className="text-[9px] text-white/40 truncate w-full text-left">{acc.email}</p>
+                  </button>
+                ))}
+              </div>
             </div>
+
           </div>
         </div>
       </div>

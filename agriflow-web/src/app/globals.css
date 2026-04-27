@@ -3,55 +3,54 @@
 
 @theme {
   /* AgriFlow Premium Palette */
-  --color-primary: #1B4D1B;
-  --color-secondary: #00D924;
-  --color-accent: #635BFF;
-  
-  /* Custom Stripe Colors */
-  --color-stripe-violet: #635bff;
-  --color-stripe-indigo: #0a2540;
-  --color-stripe-emerald: #00d924;
-  --color-stripe-slate: #2D3748;
+  --color-primary: #0A0D14;
+  --color-secondary: #14b850;
+  --color-accent: #0ea5e9;
+  --color-emerald: #14b850;
 }
 
 :root {
-  --background: #FFFFFF; /* Brighter, simpler background */
-  --foreground: #0A2540;
+  --background: #0A0D14;
+  --foreground: #FFFFFF;
 }
 
 /* SUPER FAST BACKGROUND (Solid) */
 .mesh-gradient {
   background-color: var(--background);
   position: relative;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(20, 184, 80, 0.05), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.05), transparent 25%);
 }
 
-/* NO BLUR CARDS (Super Enteng) */
+/* BLUR CARDS */
 .glass-card {
-  background: white;
-  border: 1px solid rgba(10, 37, 64, 0.08);
-  box-shadow: 0 4px 12px -4px rgba(50, 50, 93, 0.05);
-  border-radius: 20px;
-}
-
-.glass-card-premium {
-  background: white;
-  border: 1px solid rgba(10, 37, 64, 0.15);
-  box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 32px;
 }
 
-/* High Contrast Nav */
-.bg-stripe-indigo { background-color: var(--color-stripe-indigo); }
-.text-white { color: white; }
+.glass-card-premium {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+}
 
 /* Transitions */
 .btn-premium {
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-premium:hover {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(20, 184, 80, 0.4);
 }
 
 body {
@@ -110,16 +109,19 @@ body {
 
 .hover-lift:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 40px 80px -20px rgba(10, 37, 64, 0.15);
+  box-shadow: 0 40px 80px -20px rgba(20, 184, 80, 0.15);
 }
 
 /* ---- Mapbox GL Premium Overrides ---- */
 .mapboxgl-popup-content {
+  background: rgba(10, 13, 20, 0.95) !important;
+  color: white !important;
   border-radius: 20px !important;
-  box-shadow: 0 20px 40px -12px rgba(10, 37, 64, 0.15) !important;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5) !important;
   padding: 0 !important;
   overflow: hidden;
-  border: 1px solid rgba(10, 37, 64, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
 }
 
 .mapboxgl-popup-tip {
@@ -127,19 +129,28 @@ body {
 }
 
 .mapboxgl-ctrl-group {
+  background: rgba(10, 13, 20, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 14px !important;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
 }
 
 .mapboxgl-ctrl-group button {
   border-radius: 0 !important;
-  border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+.mapboxgl-ctrl-icon {
+  filter: invert(1) !important;
 }
 
 .mapboxgl-ctrl-attrib {
   font-size: 9px !important;
   opacity: 0.5 !important;
+  background: transparent !important;
+  color: rgba(255,255,255,0.5) !important;
 }
 
 /* Scrollbar hide utility */

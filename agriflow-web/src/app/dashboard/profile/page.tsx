@@ -5,91 +5,91 @@ import { ShieldCheck, MapPin, Phone, Envelope, Gear, PencilSimple, Wallet, Bank 
 
 export default function ProfilePage() {
   return (
-    <div className="max-w-5xl mx-auto py-16 px-4">
-      <div className="glass-card rounded-[64px] border border-white/40 overflow-hidden shadow-[0_80px_160px_-30px_rgba(10,37,64,0.25)] group">
-        <div className="h-72 bg-[#0a2540] relative overflow-hidden">
+    <div className="max-w-5xl mx-auto py-12 px-4 animate-in slide-in-from-bottom-4 duration-700 text-white">
+      <div className="bg-white/[0.02] rounded-[48px] border border-white/[0.05] overflow-hidden shadow-2xl group backdrop-blur-xl">
+        <div className="h-72 bg-[#0A0D14] relative overflow-hidden border-b border-white/[0.05]">
            {/* Profile Mesh Gradient */}
-           <div className="absolute inset-0 bg-gradient-to-br from-[#635BFF]/30 via-transparent to-[#00D924]/20 opacity-60"></div>
-           <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
+           <div className="absolute inset-0 bg-gradient-to-br from-[#14b850]/20 via-transparent to-[#0ea5e9]/10 opacity-40"></div>
+           <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
            </div>
            
-           <div className="absolute -bottom-20 left-16 group-hover:scale-105 transition-transform duration-700">
-              <div className="w-48 h-48 bg-white/40 backdrop-blur-3xl rounded-[48px] p-3 shadow-2xl border border-white/60">
-                 <div className="w-full h-full bg-[#0a2540] rounded-[36px] flex items-center justify-center text-white text-6xl font-black shadow-2xl group-hover:rotate-12 transition-transform duration-500">
+           <div className="absolute -bottom-20 left-12 lg:left-16 group-hover:scale-105 transition-transform duration-700">
+              <div className="w-40 h-40 lg:w-48 lg:h-48 bg-[#0A0D14] rounded-[40px] p-2 shadow-2xl border border-white/[0.1]">
+                 <div className="w-full h-full bg-[#14b850]/10 border border-[#14b850]/20 rounded-[32px] flex items-center justify-center text-[#14b850] text-5xl lg:text-6xl font-semibold shadow-inner group-hover:bg-[#14b850] group-hover:text-[#0A0D14] transition-all duration-500">
                     B
                  </div>
               </div>
-              <button className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-full border border-white/60 shadow-2xl flex items-center justify-center text-[#0a2540] hover:bg-[#635BFF] hover:text-white transition-all transform hover:scale-110 active:scale-95">
-                 <PencilSimple size={24} weight="bold" />
+              <button className="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 w-10 h-10 lg:w-12 lg:h-12 bg-[#0A0D14] rounded-full border border-white/[0.1] shadow-2xl flex items-center justify-center text-white/50 hover:bg-[#14b850] hover:text-[#0A0D14] hover:border-[#14b850] transition-all transform hover:scale-110 active:scale-95">
+                 <PencilSimple size={20} weight="bold" />
               </button>
            </div>
         </div>
 
-        <div className="pt-28 px-16 pb-16 bg-white/40 backdrop-blur-3xl">
-           <div className="flex justify-between items-start mb-16">
+        <div className="pt-24 lg:pt-28 px-8 lg:px-16 pb-12 lg:pb-16 bg-white/[0.01]">
+           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 lg:mb-16 gap-6">
               <div>
-                 <h1 className="text-5xl font-black text-[#0a2540] mb-4 tracking-tight">Bulog Jawa Timur</h1>
-                 <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2 bg-[#00D924]/10 px-5 py-2 rounded-full border border-[#00D924]/20">
-                       <ShieldCheck size={20} className="text-[#00D924]" weight="fill" />
-                        <span className="text-[#00D924] font-black text-[11px] uppercase tracking-[0.2em]">Mitra Strategis Terverifikasi</span>
+                 <h1 className="text-3xl lg:text-5xl font-semibold text-white mb-3 tracking-tight">Bulog Jawa Timur</h1>
+                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:space-x-4">
+                    <div className="flex items-center space-x-2 bg-[#14b850]/10 px-4 py-1.5 rounded-md border border-[#14b850]/20 w-fit">
+                       <ShieldCheck size={18} className="text-[#14b850]" weight="fill" />
+                        <span className="text-[#14b850] font-bold text-[10px] uppercase tracking-widest">Mitra Strategis Terverifikasi</span>
                     </div>
-                    <span className="text-[#425466] text-sm font-bold opacity-40 uppercase tracking-widest">ID: B-JATIM-001</span>
+                    <span className="text-white/40 text-[11px] font-bold uppercase tracking-widest">ID: B-JATIM-001</span>
                  </div>
               </div>
-              <div className="flex space-x-6">
-                 <button className="p-5 bg-white/60 backdrop-blur-2xl rounded-[24px] text-[#425466] hover:bg-white hover:text-[#0a2540] transition-all border border-white/60 shadow-md">
-                   <Gear size={28} />
+              <div className="flex space-x-4 w-full md:w-auto">
+                 <button className="p-4 bg-white/[0.05] rounded-xl text-white/60 hover:bg-white/[0.1] hover:text-white transition-all border border-white/[0.1] shadow-md flex-none">
+                   <Gear size={24} />
                  </button>
-                 <button className="bg-[#635BFF] text-white px-12 py-5 rounded-[24px] font-black text-[13px] uppercase tracking-[0.2em] shadow-[0_20px_40px_-10px_rgba(99,91,255,0.4)] hover:bg-[#0a2540] hover:-translate-y-1 active:translate-y-0 transition-all">
+                 <button className="flex-1 md:flex-none bg-[#14b850] text-[#0A0D14] px-8 py-4 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-[0_0_20px_rgba(20,184,80,0.3)] hover:shadow-[0_0_30px_rgba(20,184,80,0.5)] transition-all">
                    Update Settings
                  </button>
               </div>
            </div>
 
-           <div className="grid grid-cols-2 gap-16">
-              <div className="space-y-10">
-                 <h3 className="font-black text-[#0a2540] text-xl border-b border-[#0a2540]/5 pb-5 flex items-center tracking-tight">
-                    <div className="w-2.5 h-6 bg-[#635BFF] rounded-full mr-4"></div>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+              <div className="space-y-8">
+                 <h3 className="font-semibold text-white text-xl border-b border-white/[0.05] pb-4 flex items-center tracking-tight">
+                    <div className="w-1.5 h-5 bg-[#0ea5e9] rounded-full mr-3 shadow-[0_0_10px_rgba(14,165,233,0.5)]"></div>
                     Organization Details
                  </h3>
-                 <div className="space-y-8">
+                 <div className="space-y-6">
                     <InfoItem icon={Phone} label="Contact Line" value="+62 812-3456-7890" />
                     <InfoItem icon={Envelope} label="Enterprise Email" value="procurement@bulog-jatim.go.id" />
                     <InfoItem icon={MapPin} label="Regional HQ" value="Jl. Jenderal Yani No. 1, Surabaya, Jawa Timur" />
                  </div>
               </div>
 
-              <div className="space-y-10">
-                 <h3 className="font-black text-[#0a2540] text-xl border-b border-[#00D924]/10 pb-5 flex items-center tracking-tight">
-                    <div className="w-2.5 h-6 bg-[#00D924] rounded-full mr-4"></div>
+              <div className="space-y-8">
+                 <h3 className="font-semibold text-white text-xl border-b border-white/[0.05] pb-4 flex items-center tracking-tight">
+                    <div className="w-1.5 h-5 bg-[#14b850] rounded-full mr-3 shadow-[0_0_10px_rgba(20,184,80,0.5)]"></div>
                      Ringkasan Aktivitas
                  </h3>
                  <div className="space-y-6">
-                    <div className="glass-card flex items-center justify-between p-8 rounded-[36px] border border-white/60 hover:bg-white hover:shadow-xl transition-all group/stat cursor-pointer">
+                    <div className="bg-[#0A0D14] flex items-center justify-between p-6 lg:p-8 rounded-[24px] border border-white/[0.05] hover:border-white/[0.15] hover:bg-white/[0.02] transition-all group/stat cursor-pointer shadow-lg">
                        <div className="flex items-center space-x-5">
-                          <div className="w-14 h-14 bg-[#635BFF]/10 rounded-2xl flex items-center justify-center text-[#635BFF]">
-                             <Wallet size={28} weight="bold" />
+                          <div className="w-12 h-12 bg-white/[0.05] border border-white/[0.1] rounded-xl flex items-center justify-center text-white/60 group-hover/stat:text-[#0ea5e9] group-hover/stat:border-[#0ea5e9]/30 transition-colors">
+                             <Wallet size={24} weight="bold" />
                           </div>
                           <div>
-                             <p className="text-[10px] font-black text-[#425466] uppercase tracking-[0.2em] mb-1 opacity-40 group-hover/stat:text-[#635BFF] transition-colors">YTD Volume</p>
-                             <span className="text-3xl font-black text-[#0a2540] tracking-tight">3,450 Tons</span>
+                             <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 group-hover/stat:text-white/60 transition-colors">YTD Volume</p>
+                             <span className="text-2xl font-semibold text-white tracking-tight">3,450 Tons</span>
                           </div>
                        </div>
-                       <div className="text-[#00D924] font-black text-xs bg-[#00D924]/10 px-4 py-1.5 rounded-full shadow-sm">+12.4%</div>
+                       <div className="text-[#14b850] font-bold text-[10px] bg-[#14b850]/10 px-3 py-1 rounded-md border border-[#14b850]/20">+12.4%</div>
                     </div>
-                    <div className="glass-card flex items-center justify-between p-8 rounded-[36px] border border-white/60 hover:bg-white hover:shadow-xl transition-all group/stat cursor-pointer">
+                    <div className="bg-[#0A0D14] flex items-center justify-between p-6 lg:p-8 rounded-[24px] border border-white/[0.05] hover:border-white/[0.15] hover:bg-white/[0.02] transition-all group/stat cursor-pointer shadow-lg">
                        <div className="flex items-center space-x-5">
-                          <div className="w-14 h-14 bg-[#0a2540]/5 rounded-2xl flex items-center justify-center text-[#0a2540]">
-                             <Bank size={28} weight="bold" />
+                          <div className="w-12 h-12 bg-white/[0.05] border border-white/[0.1] rounded-xl flex items-center justify-center text-white/60 group-hover/stat:text-[#14b850] group-hover/stat:border-[#14b850]/30 transition-colors">
+                             <Bank size={24} weight="bold" />
                           </div>
                           <div>
-                             <p className="text-[10px] font-black text-[#425466] uppercase tracking-[0.2em] mb-1 opacity-40 group-hover/stat:text-[#00D924] transition-colors">Closed Deals</p>
-                             <span className="text-3xl font-black text-[#0a2540] tracking-tight">1,240 Trans.</span>
+                             <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 group-hover/stat:text-white/60 transition-colors">Closed Deals</p>
+                             <span className="text-2xl font-semibold text-white tracking-tight">1,240 Trans.</span>
                           </div>
                        </div>
-                       <ShieldCheck size={36} className="text-[#0a2540] opacity-10 group-hover:rotate-12 transition-transform" />
+                       <ShieldCheck size={32} className="text-[#14b850] opacity-20 group-hover:rotate-12 transition-transform" />
                     </div>
                  </div>
               </div>
@@ -108,13 +108,13 @@ interface InfoItemProps {
 
 function InfoItem({ icon: Icon, label, value }: InfoItemProps) {
   return (
-    <div className="flex items-start space-x-6 group/info">
-       <div className="w-14 h-14 bg-white/60 backdrop-blur-2xl rounded-2xl text-[#425466] group-hover/info:bg-[#635BFF] group-hover/info:text-white transition-all border border-white/60 shadow-sm flex items-center justify-center group-hover/info:rotate-12 group-hover/info:scale-110">
-          <Icon size={24} weight="bold" />
+    <div className="flex items-start space-x-5 group/info p-4 -ml-4 rounded-2xl hover:bg-white/[0.02] transition-colors border border-transparent hover:border-white/[0.05] cursor-pointer">
+       <div className="w-12 h-12 bg-[#0A0D14] border border-white/[0.1] rounded-xl text-white/50 group-hover/info:bg-[#14b850]/10 group-hover/info:text-[#14b850] group-hover/info:border-[#14b850]/30 transition-all shadow-sm flex items-center justify-center group-hover/info:scale-105">
+          <Icon size={20} weight="bold" />
        </div>
        <div className="pt-1">
-          <p className="text-[11px] font-black text-[#425466] uppercase mb-1.5 tracking-[0.2em] opacity-40 group-hover/info:text-[#635BFF] transition-colors">{label}</p>
-          <p className="font-black text-[#0a2540] text-lg group-hover/info:opacity-100 tracking-tight transition-all">{value}</p>
+          <p className="text-[9px] font-bold text-white/40 uppercase mb-1 tracking-widest group-hover/info:text-white/60 transition-colors">{label}</p>
+          <p className="font-semibold text-white text-base tracking-tight transition-all">{value}</p>
        </div>
     </div>
   );
