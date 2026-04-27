@@ -5,135 +5,99 @@ import { Vault, ChartPieSlice, ArrowRight, ShieldCheck, WhatsappLogo, ChartLineU
 
 export default function SubsidyPage() {
   return (
-    <div className="space-y-12 py-8 animate-in slide-in-from-bottom-4 duration-700 text-[#1A2E1A]">
-      {/* Header Section */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/60 backdrop-blur-3xl p-10 rounded-[32px] border border-[#C7E0B0] shadow-sm">
+    <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700">
+      {/* Mini Header */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div>
-          <div className="flex items-center space-x-3 mb-4">
-             <div className="w-10 h-10 bg-[#4A9E3F]/10 border border-[#4A9E3F]/20 rounded-xl flex items-center justify-center text-[#4A9E3F] shadow-sm">
-                <Vault size={20} weight="fill" />
-             </div>
-             <span className="text-[10px] font-bold text-[#4A9E3F] uppercase tracking-[0.2em]">AgriFlow Precision Subsidy Control</span>
-          </div>
-          <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4 text-[#1B4D1B]">Subsidi Dashboard: <span className="text-[#4A9E3F]">Alokasi Presisi</span></h1>
-          <p className="text-[#1A2E1A]/50 text-sm font-medium max-w-2xl leading-relaxed">
-             Sistem monitoring alokasi subsidi pupuk dan benih nasional berbasis profil risiko dan produktivitas petani (AgriScore) secara transparan.
-          </p>
+           <h1 className="text-3xl font-bold tracking-tight text-slate-900">Precision Subsidy</h1>
+           <p className="text-slate-500 text-sm font-medium mt-1">National allocation tracking based on productivity and risk profiling.</p>
         </div>
-        <div className="flex space-x-4 w-full lg:w-auto">
-           <button className="flex-1 lg:flex-none bg-[#1B4D1B] text-white px-8 py-4 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-lg hover:bg-[#1B4D1B]/90 transition-all">
-              Audit Alokasi Bulanan
+        <div className="flex space-x-3">
+           <button className="btn-minimal btn-primary text-xs px-6 py-2.5">
+              Audit Allocation
            </button>
         </div>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Status - The Allocation Chart Simulation */}
-        <div className="lg:col-span-2 space-y-8">
-           {/* Allocation Visualization */}
-           <div className="bg-white/60 p-10 rounded-[32px] shadow-xl border border-[#C7E0B0] relative overflow-hidden backdrop-blur-xl">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#4A9E3F]/5 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b border-[#C7E0B0]/50 pb-6 relative z-10">
-                 <h2 className="text-xl font-bold text-[#1B4D1B] tracking-tight">Status Penyaluran Subsidi Nasional</h2>
-                 <div className="flex items-center space-x-2 bg-white border border-[#C7E0B0] px-4 py-2 rounded-lg mt-4 md:mt-0 shadow-sm">
-                    <span className="text-[9px] font-bold text-[#4A9E3F] uppercase tracking-widest">Real-time Allocation Tracking</span>
-                 </div>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Main Allocation View */}
+        <div className="lg:col-span-3 space-y-6">
+           <div className="card-clean p-8">
+              <div className="flex justify-between items-center mb-8 border-b border-slate-50 pb-6">
+                 <h2 className="text-lg font-bold text-slate-900 flex items-center">
+                    <Vault size={20} className="text-[#14b850] mr-3" />
+                    National Disbursement Status
+                 </h2>
+                 <span className="text-[10px] font-bold text-[#14b850] bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">Real-time Tracking</span>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                 <div className="p-8 bg-white rounded-3xl border border-[#C7E0B0] hover:border-[#4A9E3F]/20 transition-colors shadow-sm">
-                    <div className="flex items-center justify-between mb-8">
-                       <p className="text-[10px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest">Target Penyaluran</p>
-                       <ChartPieSlice size={24} className="text-[#1B4D1B]/20" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div className="p-6 bg-slate-50 rounded-2xl">
+                    <div className="flex justify-between items-center mb-6">
+                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Disbursement Target</p>
+                       <ChartPieSlice size={20} className="text-slate-400" />
                     </div>
-                    <p className="text-4xl font-bold text-[#1B4D1B] mb-2">Rp 12.8T</p>
-                    <div className="w-full h-2 bg-[#1B4D1B]/5 rounded-full overflow-hidden mt-6">
-                       <div className="h-full bg-[#4A9E3F] shadow-sm w-[68%]"></div>
+                    <p className="text-3xl font-bold text-slate-900 mb-2">Rp 12.8T</p>
+                    <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden mt-6">
+                       <div className="h-full bg-[#14b850] w-[68%]"></div>
                     </div>
-                    <p className="text-[10px] font-bold text-[#1A2E1A]/50 uppercase tracking-widest mt-4">68% Disbursed Successfully</p>
+                    <p className="text-[9px] font-bold text-slate-400 uppercase mt-4">68% Success Rate</p>
                  </div>
-                 <div className="p-8 bg-[#4A9E3F]/5 rounded-3xl border border-[#4A9E3F]/20 hover:border-[#4A9E3F]/40 transition-colors shadow-sm">
-                    <div className="flex items-center justify-between mb-8">
-                       <p className="text-[10px] font-bold text-[#4A9E3F] uppercase tracking-widest">Saving vs Anggaran</p>
-                       <ChartLineUp size={24} className="text-[#4A9E3F]/50" />
+                 <div className="p-6 bg-green-50 rounded-2xl border border-green-100">
+                    <div className="flex justify-between items-center mb-6">
+                       <p className="text-[10px] font-bold text-[#14b850] uppercase tracking-widest">Budget Efficiency</p>
+                       <ChartLineUp size={20} className="text-[#14b850]" />
                     </div>
-                    <p className="text-4xl font-bold text-[#4A9E3F] mb-2">Rp 842M</p>
-                    <p className="text-[10px] font-bold text-[#1A2E1A]/60 uppercase tracking-widest mt-4">Efisiensi via Targetting Presisi</p>
-                 </div>
-              </div>
-              
-              <div className="mt-8 bg-white p-8 rounded-2xl border border-[#C7E0B0] flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 items-start md:items-center relative z-10 group hover:border-[#4A9E3F]/30 transition-colors shadow-sm">
-                 <div className="w-16 h-16 bg-[#4A9E3F]/10 border border-[#4A9E3F]/20 rounded-xl flex items-center justify-center text-[#4A9E3F] group-hover:scale-110 transition-transform">
-                    <Target size={32} weight="fill" />
-                 </div>
-                 <div>
-                    <p className="font-bold text-[#1B4D1B] text-lg mb-2 tracking-tight">Targeting Berbasis AgriScore</p>
-                    <p className="text-sm font-medium text-[#1A2E1A]/60 max-w-lg leading-relaxed">
-                       Subsidi diprioritaskan untuk petani dengan AgriScore di atas 450 untuk memastikan output produktivitas yang maksimal bagi ketahanan pangan nasional.
-                    </p>
+                    <p className="text-3xl font-bold text-[#14b850] mb-2">Rp 842M</p>
+                    <p className="text-[9px] font-bold text-[#14b850] uppercase mt-4 italic">Targeted Precision Savings</p>
                  </div>
               </div>
            </div>
 
-           {/* Explanation Card */}
-           <div className="bg-[#4A9E3F]/5 rounded-[32px] p-10 shadow-sm border border-[#4A9E3F]/20 relative overflow-hidden">
-              <h3 className="text-lg font-bold text-[#1B4D1B] mb-6 tracking-tight relative z-10">Visi Alokasi Subsidi</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                 <div>
-                    <p className="text-[10px] font-bold text-[#4A9E3F] uppercase tracking-widest mb-2">Transparansi Penyaluran</p>
-                    <p className="text-sm font-medium text-[#1A2E1A]/70 leading-relaxed">
-                       Setiap gram pupuk yang terkirim dari gudang Pupuk Indonesia hingga ke pengecer/petani dimonitor secara real-time.
-                    </p>
-                 </div>
-                 <div>
-                    <p className="text-[10px] font-bold text-[#4A9E3F] uppercase tracking-widest mb-2">Dampak Anggaran Negara</p>
-                    <p className="text-sm font-medium text-[#1A2E1A]/70 leading-relaxed">
-                       Mengurangi potensi 'subsidi nyasar' melalui integrasi NIK petani dan validasi status lahan via satelit.
-                    </p>
-                 </div>
+           <div className="card-clean p-6 flex items-start space-x-4">
+              <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-900 shrink-0">
+                 <Target size={24} weight="fill" />
+              </div>
+              <div>
+                 <h4 className="text-base font-bold text-slate-900 mb-1">AgriScore Based Targeting</h4>
+                 <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Subsidies are prioritized for farmers with AgriScore {'>'}450 to ensure maximum output productivity for national food security.</p>
               </div>
            </div>
         </div>
 
-        {/* Right Sidebar - Gov Action Preview & Simulation */}
-        <div className="space-y-8">
-           <div className="bg-[#4A9E3F]/5 border border-[#4A9E3F]/20 rounded-[32px] p-8 text-[#1B4D1B] shadow-xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 opacity-5 rotate-12 transition-transform group-hover:rotate-0 duration-1000 pointer-events-none">
-                 <Bank size={180} weight="fill" className="text-[#4A9E3F]" />
+        {/* Admin Sidebar */}
+        <div className="lg:col-span-1 space-y-6">
+           <div className="card-clean p-6">
+              <div className="flex items-center space-x-2 mb-6">
+                 <ShieldCheck size={18} className="text-slate-400" />
+                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Control Plane</span>
               </div>
-              <h3 className="text-sm font-bold mb-8 relative z-10 flex items-center space-x-3 uppercase tracking-wide text-[#1B4D1B]/80">
-                 <ShieldCheck size={20} className="text-[#4A9E3F]" weight="bold" />
-                 <span>Admin Control Plane</span>
-              </h3>
-              <div className="bg-white border border-[#C7E0B0] rounded-2xl p-6 relative z-10 shadow-sm">
-                 <div className="flex items-center justify-between mb-6">
-                    <span className="bg-[#4A9E3F]/10 text-[#4A9E3F] px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest">Authorized Access</span>
-                 </div>
-                 <ul className="space-y-3 text-[13px] font-bold list-disc pl-4 text-[#1A2E1A]/80 marker:text-[#4A9E3F]">
-                    <li>Verifikasi NIK Petani Lintas Kementan</li>
-                    <li>Update Alokasi Kuota Pupuk Per Desa</li>
-                    <li>Audit Transaksi Subsidi Pengecer</li>
-                    <li>Freeze Alokasi Status Anomali</li>
-                 </ul>
-              </div>
+              <ul className="space-y-3">
+                 <AdminTask label="NIK Cross-Verification" />
+                 <AdminTask label="Village Quota Update" />
+                 <AdminTask label="Retailer Audit" />
+              </ul>
            </div>
 
-           <div className="bg-white/60 p-8 rounded-[32px] border border-[#C7E0B0] flex flex-col items-center text-center shadow-xl relative overflow-hidden backdrop-blur-xl">
-              <div className="w-16 h-16 bg-[#8b5cf6]/10 rounded-xl flex items-center justify-center text-[#8b5cf6] mb-6">
-                 <FileText size={32} weight="bold" />
+           <div className="card-clean p-6 text-center">
+              <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-900 mx-auto mb-4">
+                 <FileText size={24} weight="bold" />
               </div>
-              <h4 className="text-xl font-bold text-[#1B4D1B] mb-3 tracking-tight">Laporan Akuntabilitas</h4>
-              <p className="text-xs font-medium text-[#1A2E1A]/50 leading-relaxed mb-8 max-w-xs">
-                 Download laporan realisasi subsidi standar BPK untuk keperluan pelaporan tahunan instansi Anda.
-              </p>
-              <button className="w-full bg-white border border-[#C7E0B0] text-[#1B4D1B] py-4 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-[#1B4D1B] hover:text-white transition-all flex items-center justify-center space-x-2 shadow-sm">
-                 <span>Unduh Laporan XLSX</span>
-                 <ArrowRight size={14} weight="bold" />
-              </button>
+              <h4 className="text-base font-bold text-slate-900 mb-2">Accountability</h4>
+              <p className="text-[11px] text-slate-500 mb-6 font-medium">Download real-time audit reports for compliance reporting.</p>
+              <button className="w-full btn-minimal btn-secondary py-2 text-[10px]">Download XLSX</button>
            </div>
         </div>
       </div>
     </div>
   );
+}
+
+function AdminTask({ label }: { label: string }) {
+   return (
+      <li className="flex items-center space-x-2 text-[11px] font-bold text-slate-700">
+         <div className="w-1 h-1 bg-[#14b850] rounded-full"></div>
+         <span>{label}</span>
+      </li>
+   );
 }

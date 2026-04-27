@@ -12,9 +12,6 @@ import {
   Bell, 
   UserCircle,
   MagnifyingGlass,
-  Sparkle,
-  CaretRight,
-  MagicWand,
   QrCode,
   ShieldCheck,
   Cube,
@@ -24,7 +21,8 @@ import {
   Leaf,
   Users,
   Database,
-  Vault
+  Vault,
+  List
 } from '@phosphor-icons/react';
 import { useAuth, SignInButton } from "@clerk/nextjs";
 import { PremiumUserButton } from './auth/user-button';
@@ -42,52 +40,51 @@ interface SidebarItemProps {
 const SidebarItem = ({ icon: Icon, label, href, active = false }: SidebarItemProps) => (
   <Link 
     href={href}
-    className={`flex items-center justify-between px-6 py-3 rounded-[16px] transition-all duration-300 group ${
+    className={`flex items-center justify-between px-4 py-2 rounded-lg transition-all duration-200 group ${
       active 
-      ? 'bg-[#1B4D1B] text-white border border-[#1B4D1B] shadow-md' 
-      : 'text-[#1B4D1B]/60 border border-transparent hover:bg-[#1B4D1B]/5 hover:text-[#1B4D1B] hover:border-[#C7E0B0]'
+      ? 'bg-[#14b850] text-white shadow-sm' 
+      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
     }`}
   >
     <div className="flex items-center space-x-3">
-      <Icon size={20} weight={active ? "fill" : "bold"} className={active ? "text-white" : "opacity-50 group-hover:opacity-100 transition-opacity"} />
-      <span className="font-bold text-[13px] tracking-tight">{label}</span>
+      <Icon size={18} weight={active ? "fill" : "regular"} className={active ? "text-white" : "opacity-70 group-hover:opacity-100"} />
+      <span className="font-semibold text-[13px] tracking-tight">{label}</span>
     </div>
-    {active && <CaretRight size={12} weight="bold" className="text-white/50" />}
   </Link>
 );
 
 type SidebarNavItem = (SidebarItemProps & { category?: never }) | { category: string; icon?: never; label?: never; href?: never; roles?: never; active?: never };
 
 const SIDEBAR_ITEMS: SidebarNavItem[] = [
-  { category: "Intelligence & Logistics" },
+  { category: "Intelligence" },
   { icon: House, label: "Overview", href: "/dashboard", roles: ['ADMIN', 'FARMER', 'BUYER', 'GOVERNMENT'] },
-  { icon: MapTrifold, label: "Intelligence Map", href: "/dashboard/supply-map", roles: ['ADMIN', 'FARMER', 'GOVERNMENT'] },
+  { icon: MapTrifold, label: "Global Map", href: "/dashboard/supply-map", roles: ['ADMIN', 'FARMER', 'GOVERNMENT'] },
   { icon: Storefront, label: "Marketplace", href: "/dashboard/marketplace", roles: ['ADMIN', 'BUYER'] },
-  { icon: Truck, label: "Smart Logistics", href: "/dashboard/logistics", roles: ['ADMIN', 'FARMER', 'BUYER'] },
-  { icon: ChartLineUp, label: "Harga Prediktif", href: "/dashboard/analytics", roles: ['ADMIN', 'BUYER', 'GOVERNMENT'] },
   
-  { category: "Financial Services" },
-  { icon: QrCode, label: "QRIS & Tabungan", href: "/dashboard/payments", roles: ['FARMER', 'BUYER'] },
-  { icon: ShieldCheck, label: "Asuransi Mikro", href: "/dashboard/insurance", roles: ['FARMER'] },
+  { category: "Operations" },
+  { icon: Truck, label: "Logistics", href: "/dashboard/logistics", roles: ['ADMIN', 'FARMER', 'BUYER'] },
+  { icon: ChartLineUp, label: "Analytics", href: "/dashboard/analytics", roles: ['ADMIN', 'BUYER', 'GOVERNMENT'] },
+  { icon: QrCode, label: "Payments", href: "/dashboard/payments", roles: ['FARMER', 'BUYER'] },
+  { icon: ShieldCheck, label: "Insurance", href: "/dashboard/insurance", roles: ['FARMER'] },
+  
+  { category: "Compliance" },
   { icon: Star, label: "AgriScore", href: "/dashboard/score", roles: ['FARMER', 'ADMIN'] },
   { icon: Globe, label: "Export Gateway", href: "/dashboard/export", roles: ['ADMIN', 'BUYER'] },
-
-  { category: "Transparency & Food Security" },
-  { icon: Cube, label: "Blockchain Trace", href: "/dashboard/trace", roles: ['BUYER', 'GOVERNMENT', 'ADMIN'] },
+  { icon: Cube, label: "Traceability", href: "/dashboard/trace", roles: ['BUYER', 'GOVERNMENT', 'ADMIN'] },
   { icon: Warning, label: "Early Warning", href: "/dashboard/ews", roles: ['GOVERNMENT', 'ADMIN'] },
-  { icon: Leaf, label: "Disease Detector", href: "/dashboard/disease", roles: ['FARMER'] },
+  { icon: Leaf, label: "Disease Detect", href: "/dashboard/disease", roles: ['FARMER'] },
   { icon: Database, label: "Data Market", href: "/dashboard/data", roles: ['ADMIN', 'GOVERNMENT'] },
 
-  { category: "Governance & Community" },
-  { icon: Vault, label: "Subsidi Dashboard", href: "/dashboard/subsidy", roles: ['GOVERNMENT', 'ADMIN'] },
-  { icon: Users, label: "BUMDes Network", href: "/dashboard/bumdes", roles: ['GOVERNMENT', 'ADMIN', 'FARMER'] },
+  { category: "Governance" },
+  { icon: Vault, label: "Subsidy", href: "/dashboard/subsidy", roles: ['GOVERNMENT', 'ADMIN'] },
+  { icon: Users, label: "BUMDes", href: "/dashboard/bumdes", roles: ['GOVERNMENT', 'ADMIN', 'FARMER'] },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { isSignedIn } = useAuth();
   
-  // Simulated Role - Set to ADMIN for the current user session
+  // Simulated Role
   const userRole: UserRole = 'ADMIN';
 
   const filteredSidebarItems = SIDEBAR_ITEMS.filter(item => 
@@ -95,23 +92,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="flex h-screen bg-[#F4FAF0] mesh-gradient font-sans overflow-hidden selection:bg-[#1B4D1B]/10 selection:text-[#1B4D1B] text-[#1A2E1A]">
-      {/* Premium Sidebar */}
-      <aside className="w-[320px] bg-white/60 backdrop-blur-3xl border border-[#C7E0B0] m-6 rounded-[32px] p-8 flex flex-col h-[calc(100vh-48px)] z-50 shadow-xl">
-        <div className="flex items-center space-x-4 mb-10 px-4 group cursor-pointer">
-          <div className="w-14 h-14 bg-[#1B4D1B] rounded-[22px] flex items-center justify-center border border-[#1B4D1B]/30 shadow-lg group-hover:rotate-[10deg] transition-all duration-500">
-            <span className="text-white font-black text-[28px] tracking-tighter">A</span>
+    <div className="flex h-screen bg-white font-sans overflow-hidden text-slate-900">
+      {/* Minimalist Sidebar */}
+      <aside className="w-64 border-r border-slate-100 flex flex-col h-full z-50">
+        <div className="p-6 flex items-center space-x-3">
+          <div className="w-8 h-8 bg-[#14b850] rounded-lg flex items-center justify-center shadow-sm">
+            <span className="text-white font-bold text-lg">A</span>
           </div>
-          <div>
-            <span className="text-[24px] font-black text-[#1B4D1B] tracking-tighter block leading-none">AgriFlow</span>
-            <span className="text-[10px] font-black text-[#4A9E3F] uppercase tracking-[0.3em] mt-1 block">Command Center</span>
-          </div>
+          <span className="text-lg font-bold text-slate-900 tracking-tight">AgriFlow</span>
         </div>
 
-        <nav className="flex-1 space-y-2 px-2 overflow-y-auto no-scrollbar scroll-smooth">
+        <nav className="flex-1 space-y-1 px-3 overflow-y-auto no-scrollbar">
           {filteredSidebarItems.map((item, index) => (
             'category' in item ? (
-              <p key={`cat-${index}`} className="text-[10px] font-black text-[#1B4D1B]/30 uppercase tracking-[0.2em] px-4 pt-5 pb-2 mt-2 border-t border-[#C7E0B0]/30 first:border-0 first:mt-0">
+              <p key={`cat-${index}`} className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-4 pt-6 pb-2">
                 {item.category}
               </p>
             ) : (
@@ -126,62 +120,53 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-[#C7E0B0]/30 space-y-4">
-           <div className="bg-[#4A9E3F]/10 p-6 rounded-[24px] border border-[#4A9E3F]/20 relative overflow-hidden group/upgrade cursor-pointer hover:bg-[#4A9E3F]/20 transition-all">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-[#4A9E3F]/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
-              <div className="flex items-center space-x-2 mb-3">
-                  <Sparkle size={14} weight="fill" className="text-[#1B4D1B]" />
-                  <p className="text-[10px] font-black text-[#1B4D1B] uppercase tracking-[0.2em]">Scale Up</p>
-              </div>
-              <p className="text-[12px] font-bold text-[#1B4D1B]/70 leading-relaxed">Early Access: Quantum AI Analysis.</p>
-           </div>
-          <SidebarItem icon={UserCircle} label="Profile" href="/dashboard/profile" active={pathname === '/dashboard/profile'} />
+        <div className="p-4 border-t border-slate-50">
+          <SidebarItem icon={UserCircle} label="My Account" href="/dashboard/profile" active={pathname === '/dashboard/profile'} />
         </div>
       </aside>
 
       {/* Main Content Viewport */}
-      <div className="flex-1 flex flex-col overflow-hidden relative">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header Bar */}
-        <header className="h-24 bg-transparent flex items-center justify-between px-14 z-50 shrink-0 mt-6">
-          <div className="relative w-[560px] group">
-            <MagnifyingGlass className="absolute left-8 top-1/2 -translate-y-1/2 text-[#1B4D1B]/30 group-focus-within:opacity-100 group-focus-within:text-[#1B4D1B] transition-all" size={24} />
+        <header className="h-14 border-b border-slate-100 flex items-center justify-between px-8 z-50 shrink-0">
+          <div className="relative w-80 group">
+            <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input 
               type="text" 
-              placeholder="Search farmers, regions, or commodities..."
-              className="w-full bg-white/40 backdrop-blur-xl border border-[#C7E0B0] group-hover:bg-white/60 rounded-[24px] py-5 pl-20 pr-10 focus:outline-none focus:ring-2 focus:ring-[#1B4D1B]/10 transition-all focus:border-[#1B4D1B]/50 font-bold text-[16px] placeholder:text-[#1B4D1B]/30 text-[#1B4D1B]"
+              placeholder="Search data..."
+              className="w-full bg-slate-50 border-none rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-[#14b850]/20 transition-all text-sm placeholder:text-slate-400"
             />
           </div>
 
-          <div className="flex items-center space-x-6">
-            <button className="relative p-4 bg-white/40 backdrop-blur-xl rounded-[20px] border border-[#C7E0B0] hover:bg-white/60 hover:border-[#1B4D1B]/20 transition-all text-[#1B4D1B]/60 hover:text-[#1B4D1B] group">
-              <Bell size={28} weight="bold" className="group-hover:scale-110 transition-transform" />
-              <span className="absolute top-4 right-4 w-3 h-3 bg-[#B91C1C] rounded-full border-2 border-[#F4FAF0] shadow-sm animate-pulse"></span>
+          <div className="flex items-center space-x-4">
+            <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all relative">
+              <Bell size={20} />
+              <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-red-500 rounded-full border border-white"></span>
             </button>
             
+            <div className="h-6 w-px bg-slate-100 mx-1"></div>
+            
             {isSignedIn ? (
-              <div className="flex items-center space-x-5 bg-white/40 backdrop-blur-xl p-3 pr-8 rounded-[24px] border border-[#C7E0B0] hover:bg-white/60 transition-all cursor-pointer group shadow-sm">
-                <PremiumUserButton />
-                <div className="text-left hidden xl:block">
-                  <p className="text-[15px] font-black text-[#1B4D1B] tracking-tight mb-0.5 whitespace-nowrap">Wildan (Admin)</p>
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 bg-[#4A9E3F] rounded-full mr-2 shadow-sm"></div>
-                    <p className="text-[10px] font-black text-[#4A9E3F] uppercase tracking-widest leading-none opacity-80">Superuser Access</p>
-                  </div>
+              <div className="flex items-center space-x-3">
+                <div className="text-right hidden sm:block">
+                  <p className="text-xs font-bold text-slate-900 leading-none">Wildan</p>
+                  <p className="text-[10px] text-slate-400 font-medium">Admin Mode</p>
                 </div>
+                <PremiumUserButton />
               </div>
             ) : (
               <SignInButton mode="modal">
-                <button className="px-10 py-4 bg-[#1B4D1B] text-white rounded-[20px] font-black shadow-lg hover:bg-[#1B4D1B]/90 transition-all active:scale-95">
-                  Secure Sign In
+                <button className="btn-minimal btn-primary py-1.5 px-4 text-xs">
+                  Sign In
                 </button>
               </SignInButton>
             )}
           </div>
         </header>
 
-        {/* Dynamic Scrollable Content */}
-        <main className="flex-1 overflow-y-auto px-14 pb-14 pt-4 scroll-smooth">
-          <div className="max-w-[1600px] mx-auto">
+        {/* Dynamic Content */}
+        <main className="flex-1 overflow-y-auto bg-white">
+          <div className="p-8 max-w-7xl mx-auto">
             {children}
           </div>
         </main>

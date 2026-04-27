@@ -26,16 +26,15 @@ import {
 const MapboxMap = dynamic(() => import('@/components/MapboxMap'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full bg-[#F4FAF0] flex items-center justify-center rounded-[32px] border border-[#C7E0B0]">
+    <div className="w-full h-full bg-gray-50 flex items-center justify-center rounded-3xl border border-gray-100">
       <div className="text-center">
-        <Globe size={48} weight="thin" className="text-[#4A9E3F] opacity-50 mx-auto mb-4 animate-pulse" />
-        <p className="text-[10px] font-bold text-[#1B4D1B]/40 uppercase tracking-widest">Memuat Peta Risiko…</p>
+        <Globe size={48} className="text-[#14b850] opacity-20 mx-auto mb-4 animate-pulse" />
+        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Loading Risk Map…</p>
       </div>
     </div>
   ),
 });
 
-// Koordinat per kabupaten/provinsi berdasarkan data EWS
 const REGION_COORDS: Record<string, [number, number]> = {
   'Purbalingga':          [109.3641, -7.3966],
   'Brebes':               [109.0317, -6.8726],
@@ -43,19 +42,6 @@ const REGION_COORDS: Record<string, [number, number]> = {
   'Cilacap':              [109.0000, -7.7199],
   'Sragen':               [111.0280, -7.4250],
   'Deli Serdang':         [98.7600,  3.5270],
-  'Langkat':              [98.1200,  3.9500],
-  'Kutai Kartanegara':    [117.0000, -0.5000],
-  'Penajam Paser Utara':  [116.5900, -1.1400],
-  'Bojonegoro':           [111.8816, -7.1509],
-  'Lamongan':             [112.4167, -7.1167],
-};
-
-const STATUS_STYLE: Record<string, { dot: string; glow: string; text: string; badge: string }> = {
-  'Kritis':  { dot: '#f43f5e', glow: 'rgba(244,63,94,0.3)',  text: '#1B4D1B', badge: 'bg-rose-500/10 text-rose-600 border border-rose-500/30' },
-  'Tinggi':  { dot: '#f97316', glow: 'rgba(249,115,22,0.3)', text: '#1B4D1B', badge: 'bg-orange-500/10 text-orange-600 border border-orange-500/30' },
-  'Sedang':  { dot: '#f59e0b', glow: 'rgba(245,158,11,0.3)', text: '#1B4D1B', badge: 'bg-amber-400/10 text-amber-600 border border-amber-400/30' },
-  'Aman':    { dot: '#4A9E3F', glow: 'rgba(74,158,63,0.3)', text: '#1B4D1B', badge: 'bg-[#4A9E3F]/10 text-[#4A9E3F] border border-[#4A9E3F]/30' },
-  'Waspada': { dot: '#f59e0b', glow: 'rgba(245,158,11,0.3)', text: '#1B4D1B', badge: 'bg-amber-400/10 text-amber-600 border border-amber-400/30' },
 };
 
 export default function EWSPage() {
@@ -63,21 +49,13 @@ export default function EWSPage() {
   const [mapStyle, setMapStyle] = React.useState('mapbox://styles/mapbox/light-v11');
   const [selectedEWS, setSelectedEWS] = React.useState<any>(null);
 
-  const displayRegions = ewsData.regions.slice(0, 5);
-
-  const getStatusColor = (status: string) => {
-    if (status === 'Kritis') return 'bg-rose-500';
-    if (status === 'Tinggi' || status === 'Waspada' || status === 'Sedang') return 'bg-amber-400';
-    return 'bg-[#4A9E3F]';
-  };
-
   const handleMapLoad = useCallback((map: mapboxgl.Map) => {
     const addLayers = () => {
       ewsData.regions.forEach((region) => {
         const coords = REGION_COORDS[region.region];
         if (!coords) return;
 
-        const style = STATUS_STYLE[region.status] ?? STATUS_STYLE['Aman'];
+        const color = region.status === 'Kritis' ? '#ef4444' : region.status === 'Tinggi' ? '#f59e0b' : '#14b850';
         const sourceId = `ews-${region.region_id}`;
 
         if (!map.getSource(sourceId)) {
@@ -86,35 +64,11 @@ export default function EWSPage() {
             data: {
               type: 'Feature',
               geometry: { type: 'Point', coordinates: coords },
-              properties: {
-                id: region.region_id,
-                name: region.region,
-                province: region.province,
-                status: region.status,
-                risk_score: region.risk_score,
-                description: region.description,
-                recommended_action: region.recommended_action,
-              },
+              properties: { name: region.region },
             },
           });
         }
 
-        // Outer glow
-        if (!map.getLayer(`${sourceId}-glow`)) {
-          map.addLayer({
-            id: `${sourceId}-glow`,
-            type: 'circle',
-            source: sourceId,
-            paint: {
-              'circle-radius': 30 + region.risk_score / 5,
-              'circle-color': style.dot,
-              'circle-opacity': 0.15,
-              'circle-blur': 1.0,
-            },
-          });
-        }
-
-        // Main marker
         if (!map.getLayer(`${sourceId}-dot`)) {
           map.addLayer({
             id: `${sourceId}-dot`,
@@ -122,43 +76,17 @@ export default function EWSPage() {
             source: sourceId,
             paint: {
               'circle-radius': 8,
-              'circle-color': style.dot,
-              'circle-opacity': 1.0,
+              'circle-color': color,
               'circle-stroke-width': 2,
               'circle-stroke-color': '#FFFFFF',
             },
           });
         }
 
-        // Label
-        if (!map.getLayer(`${sourceId}-label`)) {
-          map.addLayer({
-            id: `${sourceId}-label`,
-            type: 'symbol',
-            source: sourceId,
-            layout: {
-              'text-field': '{name}',
-              'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-              'text-size': 11,
-              'text-offset': [0, 1.5],
-              'text-anchor': 'top',
-            },
-            paint: {
-              'text-color': style.text,
-              'text-halo-color': '#FFFFFF',
-              'text-halo-width': 2,
-            },
-          });
-        }
-
-        // Selection Logic (No Popup)
         map.on('click', `${sourceId}-dot`, () => {
           setSelectedEWS(region);
           map.flyTo({ center: coords, zoom: 7, duration: 1500 });
         });
-
-        map.on('mouseenter', `${sourceId}-dot`, () => (map.getCanvas().style.cursor = 'pointer'));
-        map.on('mouseleave', `${sourceId}-dot`, () => (map.getCanvas().style.cursor = ''));
       });
     };
 
@@ -170,353 +98,113 @@ export default function EWSPage() {
   }, []);
 
   return (
-    <div className="space-y-12 animate-in slide-in-from-bottom-4 duration-700 text-[#1A2E1A]">
-      {/* Premium EWS Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-white/60 backdrop-blur-3xl p-10 rounded-[32px] border border-[#C7E0B0] shadow-sm">
+    <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700">
+      {/* Mini Header */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div>
-           <div className="flex items-center space-x-2 mb-4">
-             <Warning size={20} className="text-rose-500 animate-pulse" />
-             <span className="text-[10px] font-bold text-rose-500 uppercase tracking-[0.3em]">AI Anomaly Detection Aktif</span>
-           </div>
-           <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4 text-[#1B4D1B]">Early Warning System <span className="text-rose-600">Nasional</span></h1>
-           <p className="text-[#1A2E1A]/50 text-sm max-w-xl font-medium leading-relaxed">Pemantauan risiko krisis pangan berbasis kecerdasan buatan, deteksi anomali cuaca, dan manajemen pasokan.</p>
+           <h1 className="text-3xl font-bold tracking-tight text-slate-900">Early Warning System</h1>
+           <p className="text-slate-500 text-sm font-medium mt-1">AI-driven anomaly detection and crisis mitigation.</p>
         </div>
-        <div className="flex w-full lg:w-auto">
+        <div className="flex space-x-3">
            <button 
              onClick={() => setIsBroadcastOpen(true)}
-             className="w-full lg:w-auto bg-rose-500/10 text-rose-600 border border-rose-500/30 px-8 py-3.5 rounded-xl font-bold text-[11px] uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-all flex items-center justify-center space-x-3 group"
+             className="btn-minimal bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-600 hover:text-white text-xs px-6 py-2.5"
            >
-              <BellRinging size={20} weight="fill" className="group-hover:animate-ping" />
-              <span>Simulasi Broadcast Darurat</span>
+              <BellRinging size={18} />
+              <span>Simulate Broadcast</span>
            </button>
         </div>
       </div>
 
-      <div className="space-y-8">
-         {/* Top Area: Full Width Map */}
-         <div className="h-[500px] rounded-[32px] overflow-hidden border border-[#C7E0B0] shadow-xl relative">
-            <MapboxMap
-              style={mapStyle}
-              center={[113.9213, -0.7893]}
-              zoom={4.8}
-              onMapLoad={handleMapLoad}
-            />
-            
-            {/* Style Switcher Top Right */}
-            <div className="absolute top-6 right-6 z-20 flex bg-white/80 backdrop-blur-xl p-1.5 rounded-xl border border-[#C7E0B0] shadow-xl">
-               {[
-                 { id: 'mapbox://styles/mapbox/light-v11', label: 'LIGHT' },
-                 { id: 'mapbox://styles/mapbox/satellite-v9', label: 'SAT' },
-                 { id: 'mapbox://styles/mapbox/dark-v11', label: 'DARK' }
-               ].map(s => (
-                 <button
-                   key={s.id}
-                   onClick={() => setMapStyle(s.id)}
-                   className={`px-4 py-2 rounded-lg transition-all text-[9px] font-bold uppercase tracking-widest ${mapStyle === s.id ? 'bg-[#1B4D1B] text-white' : 'text-[#1B4D1B]/40 hover:text-[#1B4D1B]'}`}
-                 >
-                   {s.label}
-                 </button>
-               ))}
-            </div>
-         </div>
-
-         {/* Bottom Data Grid */}
-         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Side: Risk Index & Details Panel */}
-            <div className="lg:col-span-1 flex flex-col gap-6">
-            <div className="flex-1 bg-white/60 p-8 rounded-[32px] border border-[#C7E0B0] shadow-xl backdrop-blur-xl overflow-y-auto no-scrollbar flex flex-col min-h-[500px]">
-               {selectedEWS ? (
-                 <div className="animate-in slide-in-from-left duration-500 h-full flex flex-col">
-                    <button 
-                      onClick={() => setSelectedEWS(null)}
-                      className="mb-8 text-[10px] font-bold text-[#1B4D1B]/50 uppercase tracking-widest flex items-center space-x-2 hover:text-[#1B4D1B] transition-colors w-fit"
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+         {/* Map Viewport */}
+         <div className="lg:col-span-3 space-y-6">
+            <div className="h-[500px] rounded-3xl overflow-hidden border border-slate-100 shadow-sm relative group">
+               <MapboxMap
+                 style={mapStyle}
+                 center={[113.9213, -0.7893]}
+                 zoom={4.8}
+                 onMapLoad={handleMapLoad}
+               />
+               <div className="absolute top-4 right-4 z-20 flex bg-white/90 backdrop-blur-md p-1 rounded-lg border border-slate-200 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                  {['LIGHT', 'SAT', 'DARK'].map(label => (
+                    <button
+                      key={label}
+                      onClick={() => setMapStyle(`mapbox://styles/mapbox/${label.toLowerCase()}-v11`)}
+                      className={`px-3 py-1.5 rounded-md text-[9px] font-bold transition-all ${mapStyle.includes(label.toLowerCase()) ? 'bg-slate-900 text-white' : 'text-slate-400 hover:text-slate-600'}`}
                     >
-                       <ArrowRight size={14} className="rotate-180" />
-                       <span>Kembali ke Ringkasan Risiko</span>
+                      {label}
                     </button>
-                    
-                    <div className="mb-8 flex-1">
-                       <span className={`text-[9px] font-bold px-3 py-1.5 rounded-md uppercase tracking-widest mb-4 inline-block ${STATUS_STYLE[selectedEWS.status]?.badge || 'bg-[#1B4D1B]/10 text-[#1B4D1B]'}`}>
-                          {selectedEWS.status} ALERT
-                       </span>
-                       <h3 className="text-3xl font-semibold text-[#1B4D1B] tracking-tight mb-2">{selectedEWS.region}</h3>
-                       <p className="text-[11px] font-bold text-[#4A9E3F] uppercase tracking-widest mb-6">{selectedEWS.province}</p>
-                       
-                       <div className="p-5 bg-rose-500/5 rounded-2xl border border-rose-500/20 mb-6 relative overflow-hidden">
-                          <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 blur-2xl rounded-full -mr-10 -mt-10"></div>
-                          <p className="text-xs font-medium text-rose-800 leading-relaxed relative z-10">{selectedEWS.description}</p>
-                       </div>
-
-                       <div className="grid grid-cols-2 gap-4 mb-6">
-                          <div className="bg-white p-4 rounded-2xl border border-[#C7E0B0]">
-                             <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-1">Skor Risiko AI</p>
-                             <p className="text-2xl font-bold text-[#1B4D1B]">{selectedEWS.risk_score}<span className="text-xs text-[#1A2E1A]/30 font-normal">/100</span></p>
-                          </div>
-                          <div className="bg-white p-4 rounded-2xl border border-[#C7E0B0]">
-                             <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-1">Status</p>
-                             <p className={`text-xl font-bold ${getStatusColor(selectedEWS.status).replace('bg-', 'text-')}`}>Aktif</p>
-                          </div>
-                       </div>
-
-                       <div className="p-5 bg-[#0D7A6B]/5 rounded-2xl border border-[#0D7A6B]/20 mb-6">
-                          <p className="text-[9px] font-bold text-[#0D7A6B] uppercase tracking-widest mb-3">Tindakan Rekomendasi AI</p>
-                          <p className="text-sm font-semibold text-[#0D7A6B] leading-relaxed">{selectedEWS.recommended_action}</p>
-                       </div>
-                    </div>
-
-                    <div className="space-y-3 mt-auto">
-                        <Link href="/dashboard/insurance" className="block w-full">
-                           <button className="w-full bg-white text-[#1B4D1B] py-3.5 rounded-xl font-bold text-[11px] uppercase tracking-widest border border-[#C7E0B0] hover:bg-[#1B4D1B]/5 transition-all flex items-center justify-center space-x-2">
-                              <ShieldCheck size={18} weight="fill" />
-                              <span>Validasi Klaim Asuransi</span>
-                           </button>
-                        </Link>
-                        <button className="w-full bg-rose-600 text-white py-3.5 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-lg hover:bg-rose-700 transition-all flex items-center justify-center space-x-2">
-                           <Warning size={18} weight="bold" />
-                           <span>Kirim Tim Mitigasi</span>
-                        </button>
-                    </div>
-                 </div>
-               ) : (
-                 <div className="animate-in fade-in duration-500">
-                    <div className="flex justify-between items-center mb-8">
-                       <h3 className="text-[11px] font-bold text-[#1B4D1B]/70 uppercase tracking-[0.2em] flex items-center">
-                         <div className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping mr-2"></div>
-                         Titik Panas Kritis
-                       </h3>
-                       <span className="bg-rose-500/10 text-rose-600 border border-rose-500/30 px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest">{ewsData.statistik.Kritis} ZONA</span>
-                    </div>
-                    
-                    <div className="space-y-3">
-                       {ewsData.regions.slice(0, 6).map((r) => (
-                         <div 
-                           key={r.region_id} 
-                           onClick={() => setSelectedEWS(r)}
-                           className="p-4 rounded-2xl bg-white/40 border border-[#C7E0B0] hover:border-[#4A9E3F]/40 transition-all cursor-pointer group flex items-center space-x-4"
-                         >
-                            <div className={`w-1.5 h-10 rounded-full ${getStatusColor(r.status)} shadow-sm`}></div>
-                            <div className="flex-1">
-                               <div className="flex justify-between items-start mb-1">
-                                  <h4 className="text-sm font-semibold text-[#1B4D1B] tracking-tight">{r.region}</h4>
-                                  <span className={`text-[8px] font-bold uppercase ${getStatusColor(r.status).replace('bg-', 'text-')}`}>{r.status}</span>
-                               </div>
-                               <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest leading-none">Skor Risiko: {r.risk_score}</p>
-                            </div>
-                            <CaretRight size={16} className="text-[#1B4D1B]/20 group-hover:text-[#1B4D1B]/60 transition-colors" />
-                         </div>
-                       ))}
-                    </div>
-
-                    <div className="mt-8 p-6 rounded-2xl bg-[#0D7A6B]/5 border border-[#0D7A6B]/20 relative overflow-hidden">
-                       <div className="absolute top-0 right-0 w-20 h-20 bg-[#0D7A6B]/10 blur-xl rounded-full -mr-10 -mt-10"></div>
-                       <div className="flex items-center space-x-3 mb-4 text-[#0D7A6B]">
-                          <ShieldCheck size={24} weight="fill" />
-                          <p className="font-bold text-[10px] uppercase tracking-widest">Rencana Aksi AI</p>
-                       </div>
-                       <p className="text-xs font-semibold text-[#0D7A6B] leading-relaxed relative z-10">
-                         Operasi pasar disarankan di Jabar & DKI dalam 72 jam ke depan untuk stabilisasi harga.
-                       </p>
-                    </div>
-                 </div>
-               )}
-            </div>
-
-            {/* Legend Area (Integrated into Sidebar) */}
-            <div className="bg-white/60 p-6 rounded-[32px] border border-[#C7E0B0] backdrop-blur-xl">
-               <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-6 text-center">Indeks Skala Risiko</p>
-               <div className="flex justify-between px-4">
-                  {[
-                    { color: 'bg-rose-500', label: 'Kritis' },
-                    { color: 'bg-orange-500', label: 'Tinggi' },
-                    { color: 'bg-amber-400', label: 'Waspada' },
-                    { color: 'bg-[#4A9E3F]', label: 'Aman' },
-                  ].map(l => (
-                    <div key={l.label} className="text-center flex flex-col items-center">
-                       <div className={`w-3 h-3 rounded-full ${l.color} shadow-sm mb-2`} />
-                       <p className="text-[8px] font-bold text-[#1A2E1A]/70 uppercase tracking-widest">{l.label}</p>
-                    </div>
                   ))}
                </div>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div className="card-clean p-6 flex items-center space-x-5">
+                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                     <CloudRain size={24} weight="fill" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Weather Anomaly</p>
+                     <p className="text-xl font-bold text-slate-900">+42% Rainfall</p>
+                  </div>
+               </div>
+               <div className="card-clean p-6 flex items-center space-x-5">
+                  <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600">
+                     <ChartLineUp size={24} weight="fill" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Market Divergence</p>
+                     <p className="text-xl font-bold text-slate-900">Rp 18.4k <span className="text-xs font-normal text-slate-400">/avg</span></p>
+                  </div>
+               </div>
+            </div>
          </div>
 
-            {/* Right Side Bottom: Metrics & Strategy */}
-            <div className="lg:col-span-2 flex flex-col gap-8">
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white/60 p-6 rounded-[32px] flex items-center space-x-5 border border-[#C7E0B0] border-l-4 border-l-[#0D7A6B] hover:bg-white/80 transition-colors group shadow-sm">
-                     <div className="w-14 h-14 bg-[#0D7A6B]/10 rounded-2xl flex items-center justify-center text-[#0D7A6B] border border-[#0D7A6B]/20 group-hover:scale-110 transition-transform">
-                        <CloudRain size={28} weight="fill" />
-                     </div>
-                     <div>
-                        <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest leading-none mb-1.5">Anomali Iklim</p>
-                        <p className="text-2xl font-bold text-[#1B4D1B] tracking-tight leading-none">+42% Curah Hujan</p>
-                     </div>
-                  </div>
-                  
-                  <div className="bg-white/60 p-6 rounded-[32px] flex items-center space-x-5 border border-[#C7E0B0] border-l-4 border-l-amber-600 hover:bg-white/80 transition-colors group shadow-sm">
-                     <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-amber-600 border border-amber-500/20 group-hover:scale-110 transition-transform">
-                        <ChartLineUp size={28} weight="fill" />
-                     </div>
-                     <div>
-                        <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest leading-none mb-1.5">Divergensi Harga Pasar</p>
-                        <p className="text-2xl font-bold text-[#1B4D1B] tracking-tight leading-none">Rp 18.4K <span className="text-sm font-normal text-[#1A2E1A]/40">/kg Rata-rata</span></p>
-                     </div>
-                  </div>
+         {/* Risk Panel */}
+         <div className="lg:col-span-1 space-y-6">
+            <div className="card-clean p-6 h-[650px] flex flex-col">
+               <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6">Hot Zones</h3>
+               <div className="space-y-3 flex-1 overflow-y-auto no-scrollbar">
+                  {ewsData.regions.slice(0, 8).map((r) => (
+                    <div 
+                      key={r.region_id} 
+                      onClick={() => setSelectedEWS(r)}
+                      className={`p-4 rounded-xl border transition-all cursor-pointer ${selectedEWS?.region_id === r.region_id ? 'bg-slate-50 border-slate-200' : 'bg-white border-transparent hover:border-slate-100'}`}
+                    >
+                       <div className="flex justify-between items-center mb-1">
+                          <h4 className="text-xs font-bold text-slate-900">{r.region}</h4>
+                          <span className={`text-[8px] font-bold uppercase px-1.5 py-0.5 rounded ${r.status === 'Kritis' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>{r.status}</span>
+                       </div>
+                       <p className="text-[10px] text-slate-500 font-medium">Risk Score: {r.risk_score}</p>
+                    </div>
+                  ))}
                </div>
-
-               <div className="bg-white/60 p-10 rounded-[40px] border border-[#C7E0B0] relative overflow-hidden group flex-1 min-h-[300px] shadow-sm">
-                  <div className="absolute top-0 right-0 opacity-[0.03] rotate-[15deg] group-hover:rotate-0 transition-transform duration-1000 pointer-events-none">
-                     <Warning size={300} weight="fill" className="text-rose-500" />
-                  </div>
-                  <div className="relative z-10 h-full flex flex-col">
-                     <div className="flex justify-between items-start mb-8">
-                        <div>
-                           <p className="text-[9px] font-bold text-[#4A9E3F] uppercase tracking-widest mb-3 flex items-center">
-                             <ShieldCheck size={14} className="mr-1.5" />
-                             Keamanan Pangan Terjamin
-                           </p>
-                           <h4 className="text-3xl font-bold text-[#1B4D1B] tracking-tight">Mitigasi Risiko Otomatis</h4>
-                        </div>
-                        <div className="px-4 py-2 bg-rose-500/10 rounded-xl text-rose-600 border border-rose-500/20 shadow-sm flex items-center space-x-2">
-                           <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></div>
-                           <span className="text-[10px] font-bold uppercase tracking-widest">Sistem Siaga</span>
-                        </div>
-                     </div>
-                     <p className="text-sm font-medium text-[#1A2E1A]/60 mb-10 max-w-2xl leading-relaxed">
-                        Anomali curah hujan ekstrem terdeteksi di koordinat satelit Jawa Barat. 
-                        Sistem merekomendasikan aktivasi penyaluran cadangan pangan pemerintah (CPP) sebesar 12% untuk wilayah Jabodetabek dalam 48 jam ke depan guna mencegah lonjakan harga.
-                     </p>
-                     <div className="mt-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-white p-6 rounded-2xl border border-[#C7E0B0] flex flex-col justify-center">
-                           <p className="text-[9px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-1.5">Estimasi Penduduk Terdampak</p>
-                           <p className="text-2xl font-bold text-[#1B4D1B] tracking-tight">12,410,230 <span className="text-sm font-normal text-[#1A2E1A]/40">Jiwa</span></p>
-                        </div>
-                        <div className="bg-rose-500/10 p-6 rounded-2xl border border-rose-500/30 flex flex-col justify-center relative overflow-hidden">
-                           <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-rose-500/10 to-transparent"></div>
-                           <p className="text-[9px] font-bold text-rose-600 uppercase tracking-widest mb-1.5 relative z-10">Tingkat Kewaspadaan</p>
-                           <p className="text-2xl font-bold text-rose-600 tracking-tight relative z-10">HIGH ALERT</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               
+               {selectedEWS && (
+                 <div className="mt-6 pt-6 border-t border-slate-100 animate-in fade-in">
+                    <button className="w-full btn-minimal btn-primary py-3 text-[10px]">Authorize Mitigation</button>
+                 </div>
+               )}
             </div>
          </div>
       </div>
 
       {isBroadcastOpen && (
-        <BroadcastModal onClose={() => setIsBroadcastOpen(false)} />
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] flex items-center justify-center p-6 animate-in fade-in">
+           <div className="bg-white w-full max-w-md rounded-3xl p-10 relative shadow-2xl">
+              <button onClick={() => setIsBroadcastOpen(false)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
+                 <X size={20} />
+              </button>
+              <div className="text-center">
+                 <Warning size={48} className="text-rose-500 mx-auto mb-6" weight="fill" />
+                 <h2 className="text-2xl font-bold text-slate-900 mb-2">Emergency Alert</h2>
+                 <p className="text-sm text-slate-500 mb-8 leading-relaxed">Send a high-priority warning to 12.4k farmers and logistics nodes via WhatsApp & Push Notification.</p>
+                 <button onClick={() => setIsBroadcastOpen(false)} className="w-full btn-minimal bg-rose-600 text-white py-3">Deploy Alert</button>
+              </div>
+           </div>
+        </div>
       )}
     </div>
   );
 }
-
-function BroadcastModal({ onClose }: { onClose: () => void }) {
-  const [step, setStep] = React.useState<'CONFIG' | 'SENDING' | 'DONE'>('CONFIG');
-
-  return (
-    <div className="fixed inset-0 bg-[#1A2E1A]/80 backdrop-blur-md z-[100] flex items-center justify-center p-6 animate-in fade-in duration-300">
-      <div className="bg-white w-full max-w-2xl rounded-[40px] border border-[#C7E0B0] shadow-2xl overflow-hidden relative animate-in zoom-in-95 duration-500 text-[#1A2E1A]">
-        
-        <button onClick={onClose} className="absolute top-6 right-6 p-3 bg-[#1B4D1B]/5 rounded-full hover:bg-rose-500 hover:text-white transition-all z-20 border border-[#C7E0B0]">
-          <X size={20} weight="bold" />
-        </button>
-
-        <div className="p-12">
-          <div className="mb-10 text-center">
-             <div className="w-16 h-16 mx-auto bg-rose-500/10 rounded-2xl flex items-center justify-center text-rose-600 border border-rose-500/20 mb-6">
-                <Warning size={32} weight="fill" />
-             </div>
-             <h2 className="text-3xl font-semibold tracking-tight mb-2 text-[#1B4D1B]">
-              {step === 'CONFIG' && "Sistem Peringatan Dini"}
-              {step === 'SENDING' && "Menyebarkan Peringatan..."}
-              {step === 'DONE' && "Peringatan Berhasil Terkirim"}
-             </h2>
-             <p className="text-[#4A9E3F] font-bold uppercase tracking-widest text-[9px] flex items-center justify-center">
-                <ShieldCheck size={12} className="mr-1.5" />
-                Jalur Komunikasi Enkripsi Aktif
-             </p>
-          </div>
-
-          {step === 'CONFIG' && (
-            <div className="space-y-6">
-               <div className="bg-white p-6 rounded-3xl border border-[#C7E0B0]">
-                  <div className="flex items-center justify-between mb-4">
-                     <span className="text-[10px] font-bold text-[#1A2E1A]/50 uppercase tracking-widest">Pesan Siaran Nasional</span>
-                     <span className="text-[9px] px-2 py-1 bg-rose-500/10 text-rose-600 rounded-md font-bold uppercase border border-rose-500/20">Darurat Level 1</span>
-                  </div>
-                  <textarea 
-                    className="w-full bg-[#1B4D1B]/5 border border-[#C7E0B0] rounded-2xl p-4 text-sm text-[#1B4D1B] focus:outline-none focus:border-[#4A9E3F] min-h-[100px] shadow-inner resize-none font-medium leading-relaxed"
-                    defaultValue="WASPADA: Curah hujan ekstrem di Jawa Barat 48 jam ke depan. Potensi gagal panen tinggi. Segera aktivasi proteksi Modul 7."
-                  />
-               </div>
-
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#4A9E3F]/5 p-4 rounded-2xl border border-[#4A9E3F]/20 flex items-center space-x-3">
-                     <WhatsappLogo size={24} weight="fill" className="text-[#4A9E3F]" />
-                     <div>
-                        <p className="text-[10px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-0.5">Penerima Langsung</p>
-                        <p className="text-sm font-bold text-[#1B4D1B]">12.4K WhatsApp</p>
-                     </div>
-                  </div>
-                  <div className="bg-[#0D7A6B]/5 p-4 rounded-2xl border border-[#0D7A6B]/20 flex items-center space-x-3">
-                     <DeviceMobile size={24} weight="fill" className="text-[#0D7A6B]" />
-                     <div>
-                        <p className="text-[10px] font-bold text-[#1A2E1A]/40 uppercase tracking-widest mb-0.5">Notifikasi Aplikasi</p>
-                        <p className="text-sm font-bold text-[#1B4D1B]">Push & SMS Alert</p>
-                     </div>
-                  </div>
-               </div>
-
-               <div className="bg-amber-500/5 p-5 rounded-2xl border border-amber-500/20 flex items-start space-x-3">
-                  <ShieldCheck size={20} weight="fill" className="text-amber-600 shrink-0 mt-0.5" />
-                  <p className="text-[10px] text-amber-800 leading-relaxed">
-                     <strong className="font-bold text-amber-700 block mb-1 uppercase tracking-widest">Integrasi Smart Contract:</strong>
-                     Penyebaran peringatan ini akan secara otomatis memicu protokol validasi klaim asuransi parametrik untuk area yang berada dalam zona merah.
-                  </p>
-               </div>
-
-               <button onClick={() => setStep('SENDING')} className="w-full bg-rose-600 text-white py-4 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-lg hover:bg-rose-700 transition-all flex items-center justify-center space-x-3 mt-4 group">
-                  <PaperPlaneTilt size={20} weight="fill" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  <span>Kirim Peringatan Darurat</span>
-               </button>
-            </div>
-          )}
-
-          {step === 'SENDING' && (
-            <div className="h-[300px] flex flex-col items-center justify-center text-center">
-               <div className="w-24 h-24 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-600 mb-6 border border-rose-500/30 relative">
-                  <div className="absolute inset-0 bg-rose-500/20 rounded-full animate-ping"></div>
-                  <BellRinging size={40} weight="fill" className="relative z-10" />
-               </div>
-               <p className="text-sm font-bold text-[#1B4D1B]/70 animate-pulse">Menghubungkan ke Gateway Nasional...</p>
-               <button onClick={() => setStep('DONE')} className="mt-8 text-[9px] font-bold text-[#1A2E1A]/30 hover:text-rose-600 uppercase tracking-widest transition-colors border border-[#C7E0B0] px-4 py-2 rounded-lg">Batalkan (Hanya Admin)</button>
-            </div>
-          )}
-
-          {step === 'DONE' && (
-            <div className="h-[300px] flex flex-col items-center justify-center text-center">
-               <div className="w-24 h-24 bg-[#4A9E3F]/10 rounded-full flex items-center justify-center text-[#4A9E3F] mb-6 border border-[#4A9E3F]/30 shadow-xl">
-                  <CheckCircle size={48} weight="fill" />
-               </div>
-               <h3 className="text-xl font-bold text-[#1B4D1B] mb-3">Distribusi Peringatan Selesai</h3>
-               <p className="text-[11px] text-[#1A2E1A]/50 mb-8 max-w-sm leading-relaxed font-medium">
-                  Seluruh pihak terkait telah menerima notifikasi. Pencairan dana asuransi Modul 7 telah dijadwalkan secara otomatis oleh smart contract.
-               </p>
-               <div className="w-full space-y-3 flex flex-col px-8">
-                  <Link href="/dashboard/insurance" className="w-full bg-[#4A9E3F] text-white py-3.5 rounded-xl font-bold text-[11px] uppercase tracking-widest shadow-lg hover:bg-[#4A9E3F]/90 transition-all flex items-center justify-center">
-                     Lihat Klaim Asuransi
-                  </Link>
-                  <button onClick={onClose} className="w-full py-3 bg-[#1B4D1B]/5 border border-[#C7E0B0] rounded-xl font-bold text-[11px] text-[#1B4D1B]/60 hover:text-[#1B4D1B] hover:bg-[#1B4D1B]/10 uppercase tracking-widest transition-all">
-                     Kembali ke Dashboard
-                  </button>
-               </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Suppress unused import warning
-const _unused = { ChartLineUp, CloudRain, Globe, MapTrifold, CaretRight, ShieldCheck, FileText };

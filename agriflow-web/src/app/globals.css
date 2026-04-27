@@ -2,59 +2,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* AgriFlow Nature Palette (Stitch Unified) */
-  --color-primary: #1B4D1B;
-  --color-secondary: #4A9E3F;
-  --color-accent: #0D7A6B;
-  --color-emerald: #14b850;
-  --color-warning: #C45C0A;
-  --color-danger: #B91C1C;
-  --color-surface: #F4FAF0;
-  --color-border-nature: #C7E0B0;
+  /* AgriFlow Stitch-Aligned Professional Palette */
+  /* Primary Green from Stitch: #14b850 */
+  --color-primary: #14b850;      
+  --color-primary-dark: #0f913f;
+  --color-secondary: #64748b;    /* Slate for neutral feel */
+  --color-accent: #14b850;
+  --color-surface: #FFFFFF;      
+  --color-background: #FFFFFF;   /* Pure White for maximum professionalism */
+  --color-border-clean: #F1F5F9; /* Very soft slate */
+  --color-text-main: #0F172A;    /* Slate 900 */
+  --color-text-muted: #64748B;   /* Slate 500 */
 }
 
 :root {
-  --background: #F4FAF0;
-  --foreground: #1A2E1A;
-}
-
-/* PREMIUM NATURE BACKGROUND */
-.mesh-gradient {
-  background-color: var(--background);
-  position: relative;
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(27, 77, 27, 0.03), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(74, 158, 63, 0.03), transparent 25%);
-}
-
-/* BLUR CARDS (Adapted for Light Mode) */
-.glass-card {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #C7E0B0;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(27, 77, 27, 0.05);
-  border-radius: 32px;
-}
-
-.glass-card-premium {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #C7E0B0;
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  box-shadow: 0 30px 60px -12px rgba(27, 77, 27, 0.1);
-  border-radius: 40px;
-}
-
-/* Transitions */
-.btn-premium {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-premium:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(20, 184, 80, 0.4);
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --font-sans: 'Public Sans', 'Inter', system-ui, sans-serif;
 }
 
 body {
@@ -64,99 +28,59 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Premium Micro-Animations */
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ULTIMATE MINIMALIST CARDS */
+.card-clean {
+  @apply bg-white border border-slate-100 shadow-[0_1px_3px_0_rgba(0,0,0,0.02),0_1px_2px_-1px_rgba(0,0,0,0.02)] rounded-2xl transition-all duration-200;
 }
 
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+.card-clean:hover {
+  @apply border-slate-200 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-2px_rgba(0,0,0,0.05)];
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+/* PREMIUM BUTTONS (Stitch Style) */
+.btn-minimal {
+  @apply px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 outline-none;
 }
 
-@keyframes pulse-gentle {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+.btn-primary {
+  @apply bg-[#14b850] text-white hover:bg-[#0f913f] shadow-sm;
 }
 
-.animate-in {
-  animation: fade-in 0.5s ease-out forwards;
+.btn-secondary {
+  @apply bg-white border border-slate-200 text-slate-600 hover:bg-slate-50;
 }
 
-.animate-slide-up {
-  animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.btn-ghost {
+  @apply text-slate-500 hover:bg-slate-50 hover:text-slate-900;
 }
 
-.animate-scale-in {
-  animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-gentle {
-  animation: pulse-gentle 3s ease-in-out infinite;
-}
-
-.hover-lift {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hover-lift:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 40px 80px -20px rgba(20, 184, 80, 0.15);
-}
-
-/* ---- Mapbox GL Premium Overrides ---- */
+/* ---- Mapbox GL Professional Overrides ---- */
 .mapboxgl-popup-content {
-  background: rgba(10, 13, 20, 0.95) !important;
-  color: white !important;
-  border-radius: 20px !important;
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5) !important;
-  padding: 0 !important;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px);
-}
-
-.mapboxgl-popup-tip {
-  display: none !important;
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  padding: 12px !important;
+  border: 1px solid #F1F5F9 !important;
+  font-family: var(--font-sans) !important;
 }
 
 .mapboxgl-ctrl-group {
-  background: rgba(10, 13, 20, 0.8) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 14px !important;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+  background: #FFFFFF !important;
+  border: 1px solid #F1F5F9 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
-.mapboxgl-ctrl-group button {
-  border-radius: 0 !important;
-  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-}
-
-.mapboxgl-ctrl-icon {
-  filter: invert(1) !important;
-}
-
-.mapboxgl-ctrl-attrib {
-  font-size: 9px !important;
-  opacity: 0.5 !important;
-  background: transparent !important;
-  color: rgba(255,255,255,0.5) !important;
-}
-
-/* Scrollbar hide utility */
+/* SCROLLBARS */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* UTILS */
+.text-label {
+  @apply text-[10px] font-bold text-slate-400 uppercase tracking-widest;
+}
+
+.section-container {
+  @apply space-y-6 max-w-6xl mx-auto;
+}
