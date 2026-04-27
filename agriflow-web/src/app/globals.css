@@ -2,43 +2,47 @@
 @import "tailwindcss";
 
 @theme {
-  /* AgriFlow Premium Palette */
-  --color-primary: #0A0D14;
-  --color-secondary: #14b850;
-  --color-accent: #0ea5e9;
+  /* AgriFlow Nature Palette (Stitch Unified) */
+  --color-primary: #1B4D1B;
+  --color-secondary: #4A9E3F;
+  --color-accent: #0D7A6B;
   --color-emerald: #14b850;
+  --color-warning: #C45C0A;
+  --color-danger: #B91C1C;
+  --color-surface: #F4FAF0;
+  --color-border-nature: #C7E0B0;
 }
 
 :root {
-  --background: #0A0D14;
-  --foreground: #FFFFFF;
+  --background: #F4FAF0;
+  --foreground: #1A2E1A;
 }
 
-/* SUPER FAST BACKGROUND (Solid) */
+/* PREMIUM NATURE BACKGROUND */
 .mesh-gradient {
   background-color: var(--background);
   position: relative;
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(20, 184, 80, 0.05), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.05), transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(27, 77, 27, 0.03), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(74, 158, 63, 0.03), transparent 25%);
 }
 
-/* BLUR CARDS */
+/* BLUR CARDS (Adapted for Light Mode) */
 .glass-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #C7E0B0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(27, 77, 27, 0.05);
   border-radius: 32px;
 }
 
 .glass-card-premium {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #C7E0B0;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow: 0 30px 60px -12px rgba(27, 77, 27, 0.1);
   border-radius: 40px;
 }
 
