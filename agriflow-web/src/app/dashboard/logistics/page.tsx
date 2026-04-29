@@ -18,6 +18,7 @@ import {
   ArrowRight,
   Cube,
   Pulse,
+  ArrowsMerge,
 } from "@phosphor-icons/react";
 
 // Dynamically import Leaflet components to avoid SSR issues
