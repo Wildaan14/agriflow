@@ -18,7 +18,7 @@ import {
   ChartLineUp,
   Clock,
   Package,
-  Activity,
+  Pulse,
   ArrowRight,
   Cube,
 } from "@phosphor-icons/react";
@@ -192,7 +192,7 @@ export default function LogisticsPage() {
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#14b850]/20 flex items-center justify-center border border-[#14b850]/30 shadow-[0_0_20px_rgba(20,184,80,0.2)]">
-              <Activity size={24} className="text-[#14b850]" />
+              <Pulse size={24} className="text-[#14b850]" />
             </div>
             <h1 className="text-3xl font-bold tracking-tight text-white font-outfit">Smart Logistics <span className="text-[#14b850]">Command</span></h1>
           </div>
@@ -287,7 +287,7 @@ export default function LogisticsPage() {
               <div className="bg-slate-900/80 backdrop-blur-2xl border border-white/10 p-5 rounded-3xl shadow-2xl">
                 <div className="flex justify-between items-center mb-4">
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Cold Chain Monitor</p>
-                  <Activity size={16} className="text-[#14b850] animate-pulse" />
+                  <Pulse size={16} className="text-[#14b850] animate-pulse" />
                 </div>
                 
                 <div className="flex items-end gap-4 mb-4">
