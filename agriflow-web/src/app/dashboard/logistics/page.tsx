@@ -1,15 +1,12 @@
 "use client";
 
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import mapboxgl from "mapbox-gl";
 import {
   Truck,
   MapTrifold,
   Thermometer,
   ShieldCheck,
-  Tree,
-  ArrowsMerge,
   Signature,
   Globe,
   Warning,
@@ -18,22 +15,17 @@ import {
   ChartLineUp,
   Clock,
   Package,
-  Pulse,
   ArrowRight,
   Cube,
+  Pulse,
 } from "@phosphor-icons/react";
 
-const MapboxMap = dynamic(() => import("@/components/MapboxMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full bg-[#020617] flex items-center justify-center rounded-3xl border border-white/5">
-      <div className="text-center">
-        <Globe size={48} className="text-[#14b850] opacity-20 mx-auto mb-4 animate-pulse" />
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Initialising Command Map…</p>
-      </div>
-    </div>
-  ),
-});
+// Dynamically import Leaflet components to avoid SSR issues
+const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false });
+const Polyline = dynamic(() => import("react-leaflet").then((mod) => mod.Polyline), { ssr: false });
+const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false });
 
 const SHIPMENTS = [
   {
@@ -46,11 +38,12 @@ const SHIPMENTS = [
     eta: "18m",
     co2Saved: "145kg",
     efficiency: "32%",
+    // Coordinates in [lat, lng] for Leaflet
     routeCoords: [
-      [112.0086, -7.8172], 
-      [112.1936, -8.1003], 
-      [112.6304, -7.9797], 
-      [112.7520, -7.2575], 
+      [-7.8172, 112.0086],
+      [-8.1003, 112.1936],
+      [-7.9797, 112.6304],
+      [-7.2575, 112.7520],
     ] as [number, number][],
   },
   {
@@ -64,8 +57,8 @@ const SHIPMENTS = [
     co2Saved: "68kg",
     efficiency: "24%",
     routeCoords: [
-      [107.6186, -6.9175], 
-      [106.8456, -6.2088], 
+      [-6.9175, 107.6186],
+      [-6.2088, 106.8456],
     ] as [number, number][],
   },
   {
@@ -78,7 +71,7 @@ const SHIPMENTS = [
     eta: "--",
     co2Saved: "0kg",
     efficiency: "0%",
-    routeCoords: [[110.3695, -7.7956]] as [number, number][],
+    routeCoords: [[-7.7956, 110.3695]] as [number, number][],
   },
 ];
 
@@ -91,99 +84,40 @@ const STATUS_CONFIG = {
 export default function LogisticsPage() {
   const [activeShipment, setActiveShipment] = useState(SHIPMENTS[0]);
   const [isAuthorized, setIsAuthorized] = useState(false);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
+  const [L, setL] = useState<any>(null);
 
-  const handleMapLoad = useCallback((map: mapboxgl.Map) => {
-    mapRef.current = map;
-    SHIPMENTS.forEach((ship) => {
-      const config = STATUS_CONFIG[ship.status as keyof typeof STATUS_CONFIG];
-      const sourceId = `route-${ship.id}`;
-
-      if (ship.routeCoords.length > 1) {
-        if (!map.getSource(sourceId)) {
-          map.addSource(sourceId, {
-            type: "geojson",
-            data: {
-              type: "Feature",
-              geometry: { type: "LineString", coordinates: ship.routeCoords },
-              properties: {},
-            },
-          });
-        }
-
-        if (!map.getLayer(`${sourceId}-line`)) {
-          map.addLayer({
-            id: `${sourceId}-line`,
-            type: "line",
-            source: sourceId,
-            layout: { "line-join": "round", "line-cap": "round" },
-            paint: {
-              "line-color": config.color,
-              "line-width": 3,
-              "line-opacity": 0.6,
-              "line-dasharray": ship.status === "IN_TRANSIT" ? [1, 0] : [2, 2],
-            },
-          });
-        }
-      }
-
-      ship.routeCoords.forEach((coord, idx) => {
-        const isStart = idx === 0;
-        const isEnd = idx === ship.routeCoords.length - 1;
-        const isVehicle = ship.status === "IN_TRANSIT" && idx === 1;
-        
-        const el = document.createElement('div');
-        el.className = `relative flex items-center justify-center cursor-pointer`;
-        
-        if (isVehicle) {
-          el.innerHTML = `
-            <div class="absolute w-10 h-10 bg-[#3b82f6]/20 rounded-full animate-ping"></div>
-            <div class="relative w-6 h-6 bg-[#3b82f6] rounded-full border-2 border-white shadow-[0_0_20px_rgba(59,130,246,0.8)] flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#ffffff" viewBox="0 0 256 256"><path d="M232,120H214.39L184.79,46a15.91,15.91,0,0,0-14.79-10H86A15.91,15.91,0,0,0,71.21,46L41.61,120H24a8,8,0,0,0,0,16h8v64a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h16a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM86,52h84l27.2,68H58.8ZM64,200H48V184H64Zm144,0H192V184h16Z"></path></svg>
-            </div>
-          `;
-        } else {
-          el.innerHTML = `
-            <div class="w-4 h-4 rounded-full border-2 border-white shadow-xl ${isEnd ? 'bg-rose-500 scale-125' : isStart ? 'bg-blue-500' : 'bg-[#14b850]' }"></div>
-          `;
-        }
-        
-        const popup = new mapboxgl.Popup({ offset: 15, closeButton: false })
-          .setHTML(`
-            <div class="p-3 min-w-[140px] bg-white rounded-xl shadow-2xl border border-slate-100">
-              <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">${isVehicle ? 'Live Fleet' : isEnd ? 'Destination' : isStart ? 'Origin' : 'Collection Node'}</p>
-              <p class="text-xs font-bold text-slate-900">${isVehicle ? ship.name : isEnd ? 'Central Market JKT' : isStart ? 'Subang Farmer Collective' : 'Node #' + idx}</p>
-              <div class="mt-2 pt-2 border-t border-slate-50 flex flex-col gap-1">
-                <span class="text-[10px] text-slate-600 font-bold">Load: ${ship.weight}</span>
-                <span class="text-[10px] text-slate-400 font-medium">${ship.temp}°C • Sensor Active</span>
-              </div>
-            </div>
-          `);
-
-        new mapboxgl.Marker(el)
-          .setLngLat(coord as [number, number])
-          .setPopup(popup)
-          .addTo(map);
-
-        el.addEventListener('mouseenter', () => popup.addTo(map));
-        el.addEventListener('mouseleave', () => popup.remove());
-      });
+  useEffect(() => {
+    // Import Leaflet directly for icon creation
+    import("leaflet").then((leaflet) => {
+      setL(leaflet.default);
     });
   }, []);
 
-  useEffect(() => {
-    if (!mapRef.current) return;
-    const coords = activeShipment.routeCoords;
-    if (coords.length > 1) {
-      const bounds = coords.reduce(
-        (b, c) => b.extend(c as mapboxgl.LngLatLike),
-        new mapboxgl.LngLatBounds(coords[0], coords[0])
-      );
-      mapRef.current.fitBounds(bounds, { padding: 120, duration: 1200 });
+  const getCustomIcon = (type: "START" | "END" | "NODE" | "VEHICLE", color: string) => {
+    if (!L) return null;
+    
+    let html = "";
+    if (type === "VEHICLE") {
+      html = `
+        <div class="relative flex items-center justify-center">
+          <div class="absolute w-10 h-10 bg-[#3b82f6]/20 rounded-full animate-ping"></div>
+          <div class="relative w-6 h-6 bg-[#3b82f6] rounded-full border-2 border-white shadow-[0_0_20px_rgba(59,130,246,0.8)] flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#ffffff" viewBox="0 0 256 256"><path d="M232,120H214.39L184.79,46a15.91,15.91,0,0,0-14.79-10H86A15.91,15.91,0,0,0,71.21,46L41.61,120H24a8,8,0,0,0,0,16h8v64a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h16a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM86,52h84l27.2,68H58.8ZM64,200H48V184H64Zm144,0H192V184h16Z"></path></svg>
+          </div>
+        </div>
+      `;
     } else {
-      mapRef.current.flyTo({ center: coords[0] as [number, number], zoom: 14, speed: 0.8 });
+      const scale = type === "END" ? "scale-125" : "scale-100";
+      html = `<div class="w-4 h-4 rounded-full border-2 border-white shadow-xl ${color} ${scale}"></div>`;
     }
-  }, [activeShipment]);
+
+    return L.divIcon({
+      html,
+      className: "custom-div-icon",
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#020617] text-white p-4 lg:p-8 space-y-8 animate-in fade-in duration-1000">
@@ -274,16 +208,67 @@ export default function LogisticsPage() {
 
         {/* Central Intelligence: Map & Real-time Overlays */}
         <div className="lg:col-span-9 flex flex-col gap-6 h-full relative">
-          <div className="flex-1 rounded-[32px] overflow-hidden border border-white/10 shadow-3xl relative">
-            <MapboxMap
-              style="mapbox://styles/mapbox/dark-v11"
-              center={[112.0086, -7.5]}
-              zoom={7}
-              onMapLoad={handleMapLoad}
-            />
+          <div className="flex-1 rounded-[32px] overflow-hidden border border-white/10 shadow-3xl relative z-0">
+            {typeof window !== "undefined" && (
+              <MapContainer 
+                center={activeShipment.routeCoords[0]} 
+                zoom={8} 
+                style={{ height: "100%", width: "100%", background: "#020617" }}
+                zoomControl={false}
+              >
+                <TileLayer
+                  url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                />
+                
+                {activeShipment.routeCoords.length > 1 && (
+                  <Polyline 
+                    positions={activeShipment.routeCoords} 
+                    pathOptions={{ 
+                      color: STATUS_CONFIG[activeShipment.status as keyof typeof STATUS_CONFIG].color, 
+                      weight: 3, 
+                      dashArray: activeShipment.status === "AGGREGATING" ? "5, 10" : "0",
+                      opacity: 0.6 
+                    }} 
+                  />
+                )}
+
+                {activeShipment.routeCoords.map((coord, idx) => {
+                  const isStart = idx === 0;
+                  const isEnd = idx === activeShipment.routeCoords.length - 1;
+                  const isVehicle = activeShipment.status === "IN_TRANSIT" && idx === 1;
+                  
+                  const icon = getCustomIcon(
+                    isVehicle ? "VEHICLE" : isEnd ? "END" : isStart ? "START" : "NODE",
+                    isEnd ? "bg-rose-500" : isStart ? "bg-blue-500" : "bg-[#14b850]"
+                  );
+
+                  if (!icon) return null;
+
+                  return (
+                    <Marker key={idx} position={coord} icon={icon}>
+                      <Popup>
+                        <div className="p-1 min-w-[140px] bg-white rounded-xl">
+                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                            {isVehicle ? 'Live Fleet' : isEnd ? 'Destination' : isStart ? 'Origin' : 'Collection Node'}
+                          </p>
+                          <p className="text-xs font-bold text-slate-900">
+                            {isVehicle ? activeShipment.name : isEnd ? 'Central Market JKT' : isStart ? 'Subang Farmer Collective' : 'Node #' + idx}
+                          </p>
+                          <div className="mt-1 pt-1 border-t border-slate-50 flex flex-col gap-1">
+                            <span className="text-[10px] text-slate-600 font-bold">Load: {activeShipment.weight}</span>
+                            <span className="text-[10px] text-slate-400 font-medium">{activeShipment.temp}°C • Sensor Active</span>
+                          </div>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  );
+                })}
+              </MapContainer>
+            )}
             
             {/* Overlay: Cold Chain Intelligence */}
-            <div className="absolute top-6 left-6 z-10 w-64">
+            <div className="absolute top-6 left-6 z-[1000] w-64 pointer-events-auto">
               <div className="bg-slate-900/80 backdrop-blur-2xl border border-white/10 p-5 rounded-3xl shadow-2xl">
                 <div className="flex justify-between items-center mb-4">
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Cold Chain Monitor</p>
@@ -322,7 +307,7 @@ export default function LogisticsPage() {
             </div>
 
             {/* Overlay: Sustainability Metrics */}
-            <div className="absolute top-6 right-6 z-10 flex flex-col gap-4">
+            <div className="absolute top-6 right-6 z-[1000] flex flex-col gap-4 pointer-events-auto">
                <div className="bg-[#14b850]/10 backdrop-blur-2xl border border-[#14b850]/20 p-4 rounded-3xl flex items-center gap-4 shadow-xl">
                   <div className="w-12 h-12 rounded-2xl bg-[#14b850] flex items-center justify-center text-white shadow-[0_0_15px_rgba(20,184,80,0.5)]">
                      <Leaf size={24} weight="fill" />
@@ -345,7 +330,7 @@ export default function LogisticsPage() {
             </div>
 
             {/* Overlay: Digital Manifest Action */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-full max-w-lg px-6">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] w-full max-w-lg px-6 pointer-events-auto">
                <div className="bg-slate-900/60 backdrop-blur-3xl border border-white/10 p-6 rounded-[32px] shadow-3xl flex flex-col sm:flex-row items-center justify-between gap-6 overflow-hidden relative group">
                   <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#14b850] to-transparent w-full h-1 rotate-45 translate-y-[-100%] group-hover:translate-y-[200%] transition-transform duration-[2000ms] ease-in-out" />
@@ -410,14 +395,24 @@ export default function LogisticsPage() {
         .ml-13 {
           margin-left: 3.25rem;
         }
-        .mapboxgl-popup-content {
-          padding: 0 !important;
-          background: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
+        .leaflet-container {
+          background-color: #020617 !important;
         }
-        .mapboxgl-popup-tip {
-          border-top-color: white !important;
+        .leaflet-popup-content-wrapper {
+          background: white;
+          color: #333;
+          border-radius: 12px;
+          padding: 0;
+        }
+        .leaflet-popup-content {
+          margin: 0;
+        }
+        .leaflet-popup-tip-container {
+          display: none;
+        }
+        .custom-div-icon {
+          background: none;
+          border: none;
         }
       `}</style>
     </div>
