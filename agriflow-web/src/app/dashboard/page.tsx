@@ -32,7 +32,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-transparent">
         <div className="text-center">
-           <div className="w-16 h-16 border-4 border-[#4A9E3F]/20 border-t-[#4A9E3F] rounded-full animate-spin mx-auto mb-6 shadow-sm"></div>
+           <div className="w-16 h-16 border-4 border-[#14b850]/20 border-t-[#14b850] rounded-full animate-spin mx-auto mb-6 shadow-sm"></div>
            <p className="text-[#1B4D1B] font-bold uppercase tracking-[0.3em] text-xs animate-pulse">Menghubungkan ke Command Center...</p>
         </div>
       </div>
